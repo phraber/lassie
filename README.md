@@ -1,5 +1,5 @@
 # lassie
-coming very soon
+Coming very soon!
 
 An R Package
 To install type R CMD BUILD lassie then R CMD INSTALL lassie.
