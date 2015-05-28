@@ -1,0 +1,1 @@
+aa_colors <- read.csv("color-lut-for-freqs.csv", header=T, stringsAsFactors=F)
