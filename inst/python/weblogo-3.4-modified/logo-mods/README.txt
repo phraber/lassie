@@ -11,7 +11,7 @@ TO BUILD AND INSTALL weblogo, cd to its subdirectory and run
 "./setup.py build; ./setup.py install" 
 (You may need administrative privileges or an alternative install path.)
 
- diff colorscheme.py colorscheme.py-safe 
+ diff colorscheme.py colorscheme.py-original
 124,126d123
 <     ColorGroup( "O",   "magenta", "PNGsite"  ), # pth
 <     ColorGroup( "-*#",     "grey",   "unknown"), # pth
