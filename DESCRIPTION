@@ -6,9 +6,9 @@ Description: LASSIE is an acronym for "longitudinal antigenic sites and sequence
 Depends: R (>= 3.1.1)
 License: GPL2
 LazyData: true
+Imports: seqinr
 Suggests: knitr,
     testthat,
-    seqinr,
     devtools,
     binom
 VignetteBuilder: knitr
