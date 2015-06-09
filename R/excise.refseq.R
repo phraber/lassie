@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 excise.refseq <- function(refseq_row, aas_aln) {
 

@@ -4,10 +4,10 @@
 \alias{summary.swarmtools}
 \title{Summarize selected sites.}
 \usage{
-\method{summary}{swarmtools}(S)
+\method{summary}{swarmtools}(object)
 }
 \arguments{
-\item{Swarmtools}{object}
+\item{object}{Swarmtools object}
 }
 \value{
 A data frame of selected sites, with one row per ?

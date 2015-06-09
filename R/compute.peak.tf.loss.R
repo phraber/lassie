@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 compute.peak.tf.loss <- function(tf_loss_matrix) {
 

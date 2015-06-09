@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 add.clone <- function(new_clone, WS, criterion=NULL, is_verbose) {
 

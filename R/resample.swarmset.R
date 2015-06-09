@@ -3,7 +3,7 @@
 #' @param SST swarmset object
 #' @param n_replicates number of replicates
 #' @family swarmset methods
-#' @seealso \code{\link{swarmset.default}}
+#' @seealso \code{\link{swarmset}}
 #' @export
 resample.swarmset <- function(SST, n_replicates=100) {
 

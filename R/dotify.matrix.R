@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 
@@ -9,7 +7,7 @@ dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 
     if (as_logical) {
 
-	out_matrix <- matrix(NA, nr=nrow(aln_mat), nc=ncol(aln_mat))
+	out_matrix <- matrix(NA, nrow=nrow(aln_mat), ncol=ncol(aln_mat))
 
 	for (i in 1:ncol(aln_mat)) {
 

@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 create_sequence_subset <- function(seq_ids, working_swarm) {
 

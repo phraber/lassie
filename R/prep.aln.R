@@ -1,4 +1,5 @@
 #' Prepare input data for analysis after defining refseq, running read.alignment.file and set.tf if needed
+#'
 #' @keywords internal
 prep.aln <- function(S) {
 

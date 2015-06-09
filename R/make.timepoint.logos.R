@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 make.timepoint.logos <- function(ST, SST, filename_prefix=NULL,
 	stratify=T, dotify=F, stack_width=18, aspect_ratio=3) {

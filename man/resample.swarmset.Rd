@@ -15,11 +15,10 @@ resample.swarmset(SST, n_replicates = 100)
 Randomly sample as many sequences as are in the given working swarmset, using the same inclusion/exclusion constraints, for a fair comparison.
 }
 \seealso{
-\code{\link{swarmset.default}}
+\code{\link{swarmset}}
 
 Other swarmset.methods: \code{\link{plot.swarmset}};
   \code{\link{print.swarmset}};
-  \code{\link{summary.swarmset}};
-  \code{\link{swarmset.default}}
+  \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

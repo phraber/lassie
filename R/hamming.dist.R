@@ -1,4 +1,3 @@
-
 #' @keywords internal
 hamming.dist = function(a, b) {
 

@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 vgrepl <- function(patterns, x) {
     # search a vector for multiple patterns at once

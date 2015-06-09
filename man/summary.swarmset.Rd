@@ -4,20 +4,19 @@
 \alias{summary.swarmset}
 \title{List names of sequences in working_swarm of swarmset.}
 \usage{
-\method{summary}{swarmset}(S)
+\method{summary}{swarmset}(object)
 }
 \arguments{
-\item{S}{swarmset}
+\item{object}{swarmset}
 }
 \description{
 List names of sequences in working_swarm of swarmset.
 }
 \seealso{
-\code{\link{swarmset.default}}
+\code{\link{swarmset}}
 
 Other swarmset.methods: \code{\link{plot.swarmset}};
   \code{\link{print.swarmset}};
-  \code{\link{resample.swarmset}};
-  \code{\link{swarmset.default}}
+  \code{\link{resample.swarmset}}; \code{\link{swarmset}}
 }
 

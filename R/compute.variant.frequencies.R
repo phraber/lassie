@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F, 
     aa_colors=NULL, col_min=NULL, tf_loss_cutoff=NULL, is_time_in_weeks=T) {
@@ -10,8 +8,8 @@ compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
         stop("ERROR: Please pass a swarmtools object to compute.variant.frequencies()")
 
     # if the package is not installed, simply ignore the argument and proceed
-    if (conf_int) 
-	conf_int = require(binom)
+#    if (conf_int) 
+#	conf_int = require(binom)
 
     # site_ns is the denominator for computing frequencies.
     # this does not equal the sum of each variant frequency, particularly
@@ -24,7 +22,7 @@ compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
 
 	stop("Sorry, this feature is broken - think about how to tabulate variants given sequence multiplicities")
 
-	site_ns <- as.matrix(rep(0, length(unique(S$seq_prefixes))), nc=1)
+	site_ns <- as.matrix(rep(0, length(unique(S$seq_prefixes))), ncol=1)
 	rownames(site_ns) <- unique(S$seq_prefixes)
 
 	for (i in 1:length(S$seq_prefixes))
@@ -33,7 +31,7 @@ compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
 
     } else {
 	tps_mult <- NULL
-	site_ns <- as.matrix(table(S$seq_prefixes), nc=1)
+	site_ns <- as.matrix(table(S$seq_prefixes), ncol=1)
     }
 
     # slice through alignment, one column (selected site) at a time

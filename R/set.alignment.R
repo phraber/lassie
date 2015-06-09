@@ -1,5 +1,7 @@
 #' Defines alignment file but does not read it.  After setting it, call prep.aln.
+#'
 #' Reading the alignment file is done by prep.aln for control of excise.refseq status.
+#'
 #' @param S swarmtools object
 #' @param aln_file alignment file
 #' @param alignment_format Alignment format

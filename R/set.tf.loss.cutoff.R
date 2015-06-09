@@ -1,5 +1,5 @@
 #' Define the threshold value, above which sites are considered selected
-
+#'
 #' @param S swarmtools object
 #' @param c cutoff threshold value, from 0 to 100
 #' @return swarmtools object with list of sites in selected_sites if possible

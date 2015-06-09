@@ -4,7 +4,7 @@
 \alias{plot.swarmset}
 \title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
-\method{plot}{swarmset}(SST, format = "png", aspect_ratio = 3, ...)
+\method{plot}{swarmset}(SST, format = "png", aspect_ratio = 3)
 }
 \arguments{
 \item{SST}{A swarmset object populated with working_swarm.}
@@ -22,7 +22,6 @@ Render a logo plot of concatamer forms of clones in working_swarm
 \seealso{
 Other swarmset.methods: \code{\link{print.swarmset}};
   \code{\link{resample.swarmset}};
-  \code{\link{summary.swarmset}};
-  \code{\link{swarmset.default}}
+  \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

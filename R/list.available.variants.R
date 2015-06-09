@@ -1,4 +1,3 @@
-
 #' @keywords internal
 list.available.variants <- function(working_swarm, site, is_verbose) {
 

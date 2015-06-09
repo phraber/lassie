@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 compute.whenup <- function(tf_loss_matrix, how.far.up = 33) {
 

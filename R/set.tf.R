@@ -1,9 +1,10 @@
 #' Accessor method to update tf-derived variables (tf_loss, is_tf, peak_tf_loss) when set.
+#'
 #' @keywords internal
 set.tf <- function(S) {
 
     if (class(S) != "swarmtools")
-        stop("ERROR: Please pass a swarmtools object to set.tf.index()")
+        stop("ERROR: Please pass a swarmtools object to set.tf()")
 
     # This is all needlessly touchy if tf_index=1 is the default, due to confusion about refseq order
 

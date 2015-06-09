@@ -9,7 +9,6 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-
 # Phase I: Select Sites
 
 This phase of analysis requires:
@@ -29,54 +28,43 @@ A vector of cutoff values shows how many sites result from
 multiple settings.  Note that the default values work for these data.
 
 In practice, you will not need to use `system.file()` unless you are 
-referring to an example alignment included with the `lassie` package.
+referring to an example alignment included with the `swarmtools` package.
 
 ```{r, fig.show='hold'}
     library(lassie)
     alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    a <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=0:5*20)
-    summary(a)
-    plot(a)
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    plot(eg.swarmtools)
+    print(eg.swarmtools)
 ```
 
 The 80% cutoff value gives 35 sites.  Let's go with that.
 
-### Having Chosen a Cutoff Setting, List the Selected Sites
-
-```{r echo=FALSE}
-    library(lassie)
-    alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    A <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
-    print(A)
-```
-
-
 # Phase II: Select Clones
 
-This phase of analysis requires a `swarmtools` object created in Phase I.  
-The `swarmtools` object must have a list of selected sites, which happens only 
+This phase of analysis requires a SwarmTools object created in Phase I.  
+The SwarmTools object must have a list of selected sites, which happens only 
 when it was created using a single `tf_loss_cutoff` value.
-
 Let's just go with the defaults.
 
-    B <- swarmset(A, is_verbose=F)
-
+    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=F)
 
 # All Together Now
 
-Here's the whole workflow:
+Got that?  Here's the whole workflow:
 
-```{r, fig.show='hold'}
+```{r}
     library(lassie)
     alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    a <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=0:5*20)
-    summary(a)
-    A <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
-    print(A)
-    B <- swarmset(A)
-    summary(B)
-    print(B)
-    b.plot <- plot(B)
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    print(eg.swarmtools)
+    eg.swarmset <- swarmset(eg.swarmtools)
+    summary(eg.swarmset)
+    print(eg.swarmset)
+    plot(eg.swarmset)
 ```
+
 
 ***

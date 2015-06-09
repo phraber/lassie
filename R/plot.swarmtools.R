@@ -1,6 +1,6 @@
 #' Plot a cumulative distribution function of number of sites selected vs. TF loss cutoff.
 #'
-#' @param Swarmtools object
+#' @param S Swarmtools object
 #' @export
 plot.swarmtools <- function(S) {
 

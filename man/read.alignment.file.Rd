@@ -11,6 +11,8 @@ read.alignment.file(aas_file = NULL, aas_prefix = NULL,
 \item{aas_file}{File containing aligned protein sequences}
 
 \item{aas_prefix}{Optional alternative to specify input alignment (see examples)}
+
+\item{alignment_format}{Format of alignment file/s; must be one of these: \code{fasta}, \code{clustal}, \code{phylip}, \code{msf}, or \code{mase}.}
 }
 \value{
 A matrix that contains the alignment.

@@ -1,21 +1,20 @@
-### LICENSING INFO GOES HERE
-
 #' Print a table of the selected sites.
 #'
-#' @param Swarmtools object
+#' @param x Swarmtools object
+#'
 #' @export
-print.swarmtools <- function(S) {
+print.swarmtools <- function(x) {
 
-    if (class(S) != "swarmtools")
+    if (class(x) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to print.swarmtools()")
 
-    if (length(S$tf_loss_cutoff) > 1) {
-	cat(paste(summary(S), collapse='\n'))
+    if (length(x$tf_loss_cutoff) > 1) {
+	cat(paste(summary(x), collapse='\n'))
     } else {
         # if tf_loss_cutoff is a vector: 
-        cat(paste0("Loss cutoff = ", S$tf_loss_cutoff, "%.\n"))
-        cat(paste0("Selected ", nrow(S$selected_sites), " sites:\n"))
-	print(S$selected_sites, quote=F)
+        cat(paste0("Loss cutoff = ", x$tf_loss_cutoff, "%.\n"))
+        cat(paste0("Selected ", nrow(x$selected_sites), " sites:\n"))
+	print(x$selected_sites, quote=F)
     }
 }
 

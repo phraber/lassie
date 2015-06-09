@@ -1,25 +1,19 @@
 ## ---- fig.show='hold'----------------------------------------------------
     library(lassie)
     alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    a <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=0:5*20)
-    summary(a)
-    plot(a)
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    plot(eg.swarmtools)
+    print(eg.swarmtools)
 
-## ----echo=FALSE----------------------------------------------------------
+## ------------------------------------------------------------------------
     library(lassie)
     alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    A <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
-    print(A)
-
-## ---- fig.show='hold'----------------------------------------------------
-    library(lassie)
-    alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
-    a <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=0:5*20)
-    summary(a)
-    A <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
-    print(A)
-    B <- swarmset(A)
-    summary(B)
-    print(B)
-    b.plot <- plot(B)
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    print(eg.swarmtools)
+    eg.swarmset <- swarmset(eg.swarmtools)
+    summary(eg.swarmset)
+    print(eg.swarmset)
+    plot(eg.swarmset)
 

@@ -1,10 +1,8 @@
-swarmtools <- function(...) UseMethod("swarmtools")
-
 #' Analyze sites a protein sequence alignment for loss of the reference form.
 #'
 #' @param aas_aln Alignment matrix.
 #' @param aas_file Alignment file.
-#' @param alignment_format Alignment format
+#' @param alignment_format Format of alignment file/s; must be one of these: \code{"fasta"}, \code{"clustal"}, \code{"phylip"}, \code{"msf"}, or \code{"mase"}.
 #' @param tf_index TF index
 #' @param tf_name TF name
 #' @param timepoints_parser Timepoints parsing function
@@ -14,12 +12,18 @@ swarmtools <- function(...) UseMethod("swarmtools")
 #' @param tf_loss_cutoff Threshold value (or vector of values) for including a site
 #' @param included_sites List of included sites
 #' @param excluded_sites List of excluded sites
+#'
 #' @return swarmtools object
+#'
 #' @examples
-#' A <- swarmtools(aas_file=system.file("extdata", "CH505-gp160.fasta", package="swarmtools"), tf_loss_cutoff=80)
+#' \dontrun{
+#'   A <- lassie::swarmtools(aas_file=system.file("extdata", "CH505-gp160.fasta", 
+#'             package="lassie"), tf_loss_cutoff=80)
+#'   B <- lassie::swarmset(A)
+#' }
 #' @export
-swarmtools.default <- function(
-    aas_prefix=NULL, 
+
+swarmtools <- function(
     aas_aln=NULL,
     aas_file=NULL, 
     alignment_format="fasta", 
@@ -37,7 +41,6 @@ swarmtools.default <- function(
 	timepoints_parser <- create.timepoint.parser(".", 1)
 
     retval <- list(aas_aln=NULL,
-	aas_prefix=aas_prefix, ### ?
 	aas_file=NULL, # this gets set below and triggers prep.aln
 	alignment_format=alignment_format,
 	n_per_timepoint=NULL,

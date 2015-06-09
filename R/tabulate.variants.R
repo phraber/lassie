@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 tabulate.variants <- function(seqs, sequence_multiplicity, 
     omit_singletons, min_counts, aa_alphabet, is_verbose) {
@@ -27,7 +25,7 @@ tabulate.variants <- function(seqs, sequence_multiplicity,
 #    	rev(sort(aa_counts[[names(aa_counts)[i]]])))
 #    aa_counts <- aas_sorted
 
-    variant_counts <- matrix(0, nc=ncol(seqs), nr=length(aa_alphabet))
+    variant_counts <- matrix(0, ncol=ncol(seqs), nrow=length(aa_alphabet))
     rownames(variant_counts) <- aa_alphabet    # rows are amino acids
     colnames(variant_counts) <- colnames(seqs) # columns are selected sites
 

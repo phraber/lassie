@@ -1,4 +1,3 @@
-
 #' @keywords internal
 make.logoplot <- function(selected_sites, working_swarm, included, 
     results_prefix, 

@@ -1,7 +1,3 @@
-### LICENSING INFO GOES HERE
-
-
-
 #' @keywords internal
 select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
     is_included, is_also_included, is_excluded, min_counts, 

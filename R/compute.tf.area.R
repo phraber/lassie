@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 compute.tf.area <- function(tf_loss_matrix, invert=FALSE) {
 

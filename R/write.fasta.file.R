@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 write.fasta.file <- function(filename, selected_sequences, multiplicity) {
 

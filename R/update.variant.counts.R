@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 update.variant.counts <- function(new_clone, WS) {
 

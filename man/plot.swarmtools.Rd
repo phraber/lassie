@@ -7,7 +7,7 @@
 \method{plot}{swarmtools}(S)
 }
 \arguments{
-\item{Swarmtools}{object}
+\item{S}{Swarmtools object}
 }
 \description{
 Plot a cumulative distribution function of number of sites selected vs. TF loss cutoff.

@@ -1,4 +1,3 @@
-
 #' @keywords internal
 make.swarm.logos <- function(SST) {
 

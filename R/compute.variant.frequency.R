@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes, 
     min_variant_count=2, conf_int=F, aa_colors=NULL, col_min=NULL, 
@@ -36,7 +34,7 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes,
 
     if (ncol(site_counts) > 1) { # polymorphic?
 
-#	site_freqs <- matrix(NA, nc=ncol(site_counts), nr=nrow(site_counts))
+#	site_freqs <- matrix(NA, nc=ncol(site_counts), nrow=nrow(site_counts))
 
 #	for (i in 1:ncol(site_counts))
 #	    site_freqs[, i] = 100*round(site_counts[, i] / site_ns, 4)

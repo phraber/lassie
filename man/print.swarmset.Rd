@@ -4,20 +4,19 @@
 \alias{print.swarmset}
 \title{List concatamers of selected sites for all working_swarm sequences in swarmset.}
 \usage{
-\method{print}{swarmset}(S)
+\method{print}{swarmset}(x)
 }
 \arguments{
-\item{S}{swarmset}
+\item{x}{swarmset}
 }
 \description{
 List concatamers of selected sites for all working_swarm sequences in swarmset.
 }
 \seealso{
-\code{\link{swarmset.default}}
+\code{\link{swarmset}}
 
 Other swarmset.methods: \code{\link{plot.swarmset}};
   \code{\link{resample.swarmset}};
-  \code{\link{summary.swarmset}};
-  \code{\link{swarmset.default}}
+  \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

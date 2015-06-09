@@ -2,21 +2,21 @@
 % Please edit documentation in R/set.alignment.file.R
 \name{set.alignment.file}
 \alias{set.alignment.file}
-\title{Defines alignment file but does not read it, then call prep.aln.
-Reading the alignment file is done by prep.aln for control of excise.refseq status.}
+\title{Defines alignment file but does not read it, then call prep.aln.}
 \usage{
 set.alignment.file(S, f, alignment_format = "fasta")
 }
 \arguments{
 \item{S}{swarmtools object}
 
-\item{aln_file}{alignment file}
+\item{f}{alignment file}
+
+\item{alignment_format}{Format of alignment file/s; must be one of these: \code{"fasta"}, \code{"clustal"}, \code{"phylip"}, \code{"msf"}, or \code{"mase"}.}
 }
 \value{
 swarmtools object with defined aas_aln, refseq_lut, and tf_loss if possible
 }
 \description{
-Defines alignment file but does not read it, then call prep.aln.
 Reading the alignment file is done by prep.aln for control of excise.refseq status.
 }
 

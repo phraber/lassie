@@ -20,14 +20,14 @@
 #' time-point sampled, to select sites of interest where TF loss exceeds a 
 #' threshold.  Sites that lose the ancestral TF amino acids are likely under 
 #' positive selection and merit further investigation.  
-#' @seealso \code{\link{swarmtools.default}}
+#' @seealso \code{\link{swarmtools}}
 #'
 #' @section Step 2. Select sequences:
 #'
 #' The second phase selects a set of sequences with mutations among selected 
 #' sites.  A swarm of sequences represents diversity in the population sampled
 #' and can subsequently be used to study developing immune responses.  
-#' @seealso \code{\link{swarmset.default}}
+#' @seealso \code{\link{swarmset}}
 #'
 #' @section Tutorial:
 #'

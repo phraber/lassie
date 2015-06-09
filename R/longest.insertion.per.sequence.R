@@ -1,4 +1,3 @@
-
 ### TO DO: Make this friendly as a helper function
 #' @keywords internal
 longest.insertion.per.sequence <- function(aln_allcolumns, tf_index=1) {

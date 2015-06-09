@@ -6,7 +6,7 @@
 #' @return An explicit path to the file generated, located in a directory removed at the end of the R session.
 #' @family swarmset methods
 #' @export
-plot.swarmset <- function(SST, format="png", aspect_ratio=3, ...) {
+plot.swarmset <- function(SST, format="png", aspect_ratio=3) {
 
 ### TO DO: parse and match whatever is in ...?
 

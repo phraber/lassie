@@ -1,5 +1,3 @@
-swarmset <- function(...) UseMethod("swarmset")
-
 #' Analyze longitudinal protein sequences for variants among selected sites.
 #'
 #' @param ST swarmtools object, with list of selected sites.
@@ -10,14 +8,24 @@ swarmset <- function(...) UseMethod("swarmset")
 #' @param is_verbose Boolean switch to enable verbose output.
 #' @param min_counts Variants that occur less often than this number in the 
 #' entire alignment are not included in swarms.
+#'
 #' @return A swarmset object with selected sequences in a slot called 
 #' \code{working_swarm} with values \code{is_included==T}, 
 #' i.e. \code{names(which(B$working_swarm$is_included))}.
-#' @examples B <- swarmset(A)
+#'
+#' @examples
+#' \dontrun{
+#'   A <- lassie::swarmtools(aas_file=system.file("extdata", "CH505-gp160.fasta", 
+#'             package="lassie"), tf_loss_cutoff=80)
+#'   B <- lassie::swarmset(A)
+#' }
+#'
 #' @seealso \code{\link{swarmtools}}
+#'
 #' @family swarmset methods
+#'
 #' @export
-swarmset.default <- function(ST,
+swarmset <- function(ST,
     maxtol_deletion=NULL, # maximum tolerated, i.e. longest allowed
     maxtol_insertion=NULL,
     included_clone_names=NULL,
@@ -47,7 +55,7 @@ swarmset.default <- function(ST,
 
 	if (length(which(!included_clone_names %in% ST$original_seqnames)) > 0)
 	    stop(paste(
-     "ERROR in swarmset.default()! Unidentified clone/s named for inclusion: ",
+     "ERROR in swarmset()! Unidentified clone/s named for inclusion: ",
 	        which(!included_clone_names %in% ST$original_seqnames)))
 
 	is_also_included[which(ST$original_seqnames %in% 
@@ -58,7 +66,7 @@ swarmset.default <- function(ST,
 
 	if (length(which(!excluded_clone_names %in% ST$original_seqnames)) > 0)
 	    stop(paste(
-     "ERROR in swarmset.default()! Unidentified clone/s named for exclusion: ",
+     "ERROR in swarmset()! Unidentified clone/s named for exclusion: ",
 	        which(!excluded_clone_names %in% ST$original_seqnames)))
 
 	is_excluded[which(ST$original_seqnames %in% excluded_clone_names)] = T

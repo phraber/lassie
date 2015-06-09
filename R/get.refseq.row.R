@@ -19,7 +19,7 @@ get.refseq.row <- function(aas_aln, refseq_name, ignore_case=F) {
 	}
 
     } else {
-	stop("swarmtools::get.refseq.row() ERROR: refseq_name found more than once in alignment.  To fix this, delete the extra entries.")
+	stop("lassie::get.refseq.row() ERROR: refseq_name found more than once in alignment.  To fix this, delete the extra entries.")
     }
 }
 

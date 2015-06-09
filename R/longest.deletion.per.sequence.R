@@ -1,5 +1,3 @@
-
-
 ### TO DO: Make this friendly as a helper function
 #' @keywords internal
 longest.deletion.per.sequence <- function(aln_allcolumns) {

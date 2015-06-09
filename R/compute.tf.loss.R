@@ -1,7 +1,7 @@
 #' @keywords internal
 compute.tf.loss <- function(is_tf, n_seqs_per_timepoint=NULL) {
 
-    tf_freqs <- matrix(NA, nc=length(n_seqs_per_timepoint), nr=ncol(is_tf))
+    tf_freqs <- matrix(NA, ncol=length(n_seqs_per_timepoint), nrow=ncol(is_tf))
 
     colnames(tf_freqs) <- names(n_seqs_per_timepoint)
     rownames(tf_freqs) <- colnames(is_tf)

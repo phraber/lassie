@@ -4,10 +4,10 @@
 \alias{print.swarmtools}
 \title{Print a table of the selected sites.}
 \usage{
-\method{print}{swarmtools}(S)
+\method{print}{swarmtools}(x)
 }
 \arguments{
-\item{Swarmtools}{object}
+\item{x}{Swarmtools object}
 }
 \description{
 Print a table of the selected sites.

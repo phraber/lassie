@@ -1,5 +1,3 @@
-
-
 #' @keywords internal
 plot.tf.loss.vector <- function(tf_loss_vector, 
     peak_tf_loss,
@@ -10,7 +8,7 @@ plot.tf.loss.vector <- function(tf_loss_vector,
     show_marginal_annotation=FALSE,
 #    tf_loss_cutoff=NULL,
     my_timepoint=NULL, 
-    x_lim=c(1, nrow(tf_loss)), 
+    x_lim=c(1, length(tf_loss_vector)), 
     y_lim=c(0,100),
     n_sequences=NULL) {
 
@@ -40,7 +38,7 @@ plot.tf.loss.vector <- function(tf_loss_vector,
     plot(c(1:length(tf_loss_vector)), tf_loss_vector, xlab='', ylab='', 
 	type='n', xlim=x_lim, ylim=y_lim, frame.plot=F, yaxt='n')
 
-    swarmtools::plot.annotation(tf_loss_cutoff=tf_loss_cutoff, 
+    lassie::plot.annotation(tf_loss_cutoff=tf_loss_cutoff, 
 	refseq_lut=refseq_lut, 
 	ptid=ptid, 
 	region=region, 

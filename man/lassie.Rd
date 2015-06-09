@@ -48,8 +48,8 @@ broadly neutralizing antibody response. To review the tutorial, run
 \code{vignette(package="lassie")}
 }
 \seealso{
-\code{\link{swarmtools.default}}
+\code{\link{swarmtools}}
 
-\code{\link{swarmset.default}}
+\code{\link{swarmset}}
 }
 

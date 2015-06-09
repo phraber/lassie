@@ -2,8 +2,7 @@
 % Please edit documentation in R/set.alignment.R
 \name{set.alignment}
 \alias{set.alignment}
-\title{Defines alignment file but does not read it.  After setting it, call prep.aln.
-Reading the alignment file is done by prep.aln for control of excise.refseq status.}
+\title{Defines alignment file but does not read it.  After setting it, call prep.aln.}
 \usage{
 set.alignment(S, a, f)
 }
@@ -15,7 +14,6 @@ set.alignment(S, a, f)
 \item{alignment_format}{Alignment format}
 }
 \description{
-Defines alignment file but does not read it.  After setting it, call prep.aln.
 Reading the alignment file is done by prep.aln for control of excise.refseq status.
 }
 \keyword{internal}

@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 parse.timepoints <- function(seq_names=NULL, uniquify=T, timepoints_parser) {
 

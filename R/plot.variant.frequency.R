@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced, 
     site_name, label_axes, conf_int, aa_colors, tf_loss_cutoff, 

@@ -1,4 +1,3 @@
-
 #' @keywords internal
 concatamerize <- function(aln_allcolumns, selected_sites) {
 # despite the name this merely extracts columns of selected sites,

@@ -1,5 +1,3 @@
-### LICENSING INFO GOES HERE
-
 #' @keywords internal
 plot.tf.loss = function(S, 
     my_palette=NULL,
@@ -45,7 +43,7 @@ plot.tf.loss = function(S,
 		bg='white', horizontal=F)
 	}
 
-	layout(matrix(c(1:length(colnames(S$tf_loss)[-1])), nc=1))
+	layout(matrix(c(1:length(colnames(S$tf_loss)[-1])), ncol=1))
 
 	if (!is.null(my_palette))
 	    palette(my_palette)

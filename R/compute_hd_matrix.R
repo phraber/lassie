@@ -1,10 +1,8 @@
-
-
 #' @keywords internal
 compute_hd_matrix <- function(seqs_a, seqs_b) {
 
     # distance matrix is not square & symmetric but rather a rows x b columns
-    hds <- matrix(NA, nr=length(seqs_a), nc=length(seqs_b))
+    hds <- matrix(NA, nrow=length(seqs_a), ncol=length(seqs_b))
     rownames(hds) <- names(seqs_a)
     colnames(hds) <- names(seqs_b)
 

@@ -1,6 +1,8 @@
 #' Read a fasta-formatted alignment file
+#'
 #' @param aas_file File containing aligned protein sequences
 #' @param aas_prefix Optional alternative to specify input alignment (see examples)
+#' @param alignment_format Format of alignment file/s; must be one of these: \code{fasta}, \code{clustal}, \code{phylip}, \code{msf}, or \code{mase}.
 #' @inheritParams seqinr::read.alignment
 #' @return A matrix that contains the alignment.
 #' @examples
