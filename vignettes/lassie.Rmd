@@ -1,0 +1,70 @@
+---
+title: "Swarm Selection Tutorial"
+author: "Peter Hraber"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Phase I: Select Sites
+
+This phase of analysis requires:
+
+1. A protein alignment, provisionally assumed to be in FASTA format.
+1. A way to recognize how the longitudinal samples are labeled.  
+By default, sequence names are assumed to be dot-delimited,
+with the timepoint label in the first (left-most) field.
+1. An indication of which sequence is the reference/TF sequence.  
+By default, this is taken to be the first sequence in the alignment.
+
+### Choose a Cutoff Setting
+
+We need to choose a setting for the cutoff parameter value.
+Let's see how number of sites depends on cutoff threshold.
+A vector of cutoff values shows how many sites result from 
+multiple settings.  Note that the default values work for these data.
+
+In practice, you will not need to use `system.file()` unless you are 
+referring to an example alignment included with the `swarmtools` package.
+
+```{r, fig.show='hold'}
+    library(lassie)
+    alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    plot(eg.swarmtools)
+    print(eg.swarmtools)
+```
+
+The 80% cutoff value gives 35 sites.  Let's go with that.
+
+# Phase II: Select Clones
+
+This phase of analysis requires a SwarmTools object created in Phase I.  
+The SwarmTools object must have a list of selected sites, which happens only 
+when it was created using a single `tf_loss_cutoff` value.
+Let's just go with the defaults.
+
+    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=F)
+
+# All Together Now
+
+Got that?  Here's the whole workflow:
+
+```{r}
+    library(lassie)
+    alignment_file <- system.file("extdata", "CH505-gp160.fasta", package="lassie")
+    eg.swarmtools <- swarmtools(aas_file=alignment_file, tf_loss_cutoff=80)
+    summary(eg.swarmtools)
+    print(eg.swarmtools)
+    eg.swarmset <- swarmset(eg.swarmtools)
+    summary(eg.swarmset)
+    print(eg.swarmset)
+    plot(eg.swarmset)
+```
+
+
+***

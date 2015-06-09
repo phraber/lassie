@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="author" content="Peter Hraber" />
+
+<meta name="date" content="2015-04-30" />
+
+<title>Swarm Selection Tutorial</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div id="header">
+<h1 class="title">Swarm Selection Tutorial</h1>
+<h4 class="author"><em>Peter Hraber</em></h4>
+<h4 class="date"><em>2015-04-30</em></h4>
+</div>
+
+
+<div id="phase-i-select-sites" class="section level1">
+<h1>Phase I: Select Sites</h1>
+<p>This phase of analysis requires:</p>
+<ol style="list-style-type: decimal">
+<li>A protein alignment, provisionally assumed to be in FASTA format.</li>
+<li>A way to recognize how the longitudinal samples are labeled.<br />By default, sequence names are assumed to be dot-delimited, with the timepoint label in the first (left-most) field.</li>
+<li>An indication of which sequence is the reference/TF sequence.<br />By default, this is taken to be the first sequence in the alignment.</li>
+</ol>
+<div id="choose-a-cutoff-setting" class="section level3">
+<h3>Choose a Cutoff Setting</h3>
+<p>We need to choose a setting for the cutoff parameter value. Let’s see how number of sites depends on cutoff threshold. A vector of cutoff values shows how many sites result from multiple settings. Note that the default values work for these data.</p>
+<p>In practice, you will not need to use <code>system.file()</code> unless you are referring to an example alignment included with the <code>lassie</code> package.</p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">library</span>(lassie)
+    alignment_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;CH505-gp160.fasta&quot;</span>, <span class="dt">package=</span><span class="st">&quot;lassie&quot;</span>)
+    a &lt;-<span class="st"> </span><span class="kw">swarmtools</span>(<span class="dt">aas_file=</span>alignment_file, <span class="dt">tf_loss_cutoff=</span><span class="dv">0</span>:<span class="dv">5</span>*<span class="dv">20</span>)
+    <span class="kw">summary</span>(a)</code></pre>
+<pre><code>##   %TF Loss at least selected sites, n selected sites, %
+## 1                 0               953            100.00
+## 2                20                92              9.65
+## 3                40                79              8.29
+## 4                60                48              5.04
+## 5                80                35              3.67
+## 6               100                15              1.57</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">plot</span>(a)</code></pre>
+<p><img src="data:image/png;base64,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M844w6299tpadvfdd7uLL75Yt+1PDgL/8iLbamkIyMPukVT++OOPsof+/fff+zfeeMPLVMv/888/JZ8vj49+4ZMkoB9++MF/+OGHRdtsyhh++ukn/+233yb+aDeJttlmG72GqaaayjNWSKZhkeSy/vrrR6fTVrjmCy+8MDqeu3HNNdf46aef3stUy7/55pta/PXXX/upp55az6dPo8YIuMaH7EgtIsALIl9b/d1+++1+4MCBfo455tCHu127dn633XbzP//8c9Gh33DDDX7RRReNXipeLvmqe5EIGpwLAwn9nXzyyf7ZZ5/V/fAy8mJRPmLEiOi8SZMm+aWXXlpfQurNOuusnqnO77//HtVho9QxNDjpfzu9e/duMPYwnvh/0b3kOzU6tuSSS2obPXr0iI6xIZKLHmcaFaZMotOJ+nvssce8SDr+q6++anBe2IGRf/DBB2HXv/zyy9G5gwcPjo7bxr8IGAP6F4ua3nr77bejh7lz5866PddcczXQOeTTX8QvSqYWEXPgXJlOKZPg5eXL/eCDD0bVc3VAzzzzTNR//GU/99xz9RzORaIIZbPMMku0LVORqN1yxhCdFNuoBANaaaWVdGyLLLJIrGXvV1xxxWjMQYKDMYdrWmihhaLtpZZayoNJPuJDgN4s3CfOe++99/JVrftjxoBayCMQZ0BIH2KZ0ZFPnjxZRX9eEl6KJNpnn330BZp//vk90zcI6WSdddbxYs3xF1xwQXR6LgOi3pQpU6IXUPRDuv/dd9/5v//+W/tmDEgfSEtIEMOGDYvq33bbbdp2OWOIBhPbQCK5/vrrE3+33HJL7IzGm2EMjBf8IK4XJhyYzZNPPqnHkSzDMf5PO+200T6S56uvvqr14n+eeuqpqA5S4ltvvRUvtu0YAsaAYmDU8macAW2//fYNhookw8vBVCqJjjzyyOjFwJJ10kkn+ccff1wZSO55uQwolIeXMa4Dev3116N2DzrooFBVmdCcc86pZdttt50eL2cMUUMV3kAaESW7jmu66abzYn5vML3kGh9++GHt9cQTT/RITDBople//PKLR+oLOGDhyiUx2fttt93WL7DAAlqP/0ybjRojYAyoMSY1eSTOgI455pgGY+Tl4IVA55JESDBMvcLLE/7PPvvs/sADD/RffvlldHo5DAjpJrSFdIWOJfyQAChbddVVte1yxhANJrYB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nne35ZZbOskJ74499lj37bffRmX5NiTdrzvssMPc5ptv7kaMGOEkNbJW42U+6qijGpzCC8+UiReetqETTjjB3XfffbrNuUceeaSOjWnWPffco8f5w5hffPFFR3977723O+aYYxrsM50rRn///XeUPVVSNrsffvhBT2HcjL9Dhw7FmtDyQvjecsst7oorrtAsrfvuu6978skn87aXhDFTQRirpJx2G220kTv44IPdBx98oO2QoZRrnzJlimLLPTr11FO1v4kTJ7rttttO7zeMOtAFF1zgKEPK6dWrlzv66KOdpKgOxY3+I7lxTzbeeGNl1g888ECjOi3pgDGgjO/W7bff7tZcc019uZgKoC9aeuml3bvvvqsj2WmnndxDDz3kdtxxR9ejRw994ZnWQNdee63qRzgf5iR5zZ3kW9eyfH+efvppt/7662vbSCK8gPQJvfHGG44pT5yeffZZhxRC+uZll11WixjbvPPO65iSrbDCCu7OO+9UZiD55d1mm23mLr74Yq3HdG2WWWbRuiuttJKeH9+faqqp4l3l3e7du7cbN26cvsD33nuvSk8wIV7SUvU1SfgutNBCrmPHjppOmzHOOeecjcZRDGOYDtITuG6yySZ6D9Zbbz0HHqSf5oNBHa535ZVXVmYFsxg4cKBbbbXV3Ntvv60fkNAxTHy33XZzN910k9t+++112rnuuuu6Tz75JFSJ/vNh6N69u7vrrrvcFltsofcJpjVq1KioTovbaG5yeTu/IQJzzDGHFymi4cHYnrwAXphM7Ij3HNthhx30mOhOvOg7onJ5obxIJrq/zz77eJGavDzsuv/OO+94+XJ6Uf5G9eMba6yxhj/ggAOiQ1999ZWXh9vLF9ZfdtllfoEFFojK2JCX3MtLoseEISJ2eZmG6b5IPl6mLl4kAN3nD8ck37v/9ddf9ZhIbV4UyFF57n5UUGBDXjAvzNavtdZaXiQVvc4TTzzRH3HEEXoG1y0SQIGz/3u4GL6XX365X3DBBQu2kYTx119/7UXy8a+99lp0vjBkxenzzz/3v/32m26L9BeVc1/BUaRcPUY99kUK0n1huoqhSE/ROYsttpjff//9dT9+n4YMGeJnnHFGL1JyVJdj88wzT/RMRAUtZMMkoAw/GUgR77//vk6f4t3y5Uf6gLD0yMPnhHk4ebjcIossol87yvhCPvroo65Tp07u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" /></p>
+<p>The 80% cutoff value gives 35 sites. Let’s go with that.</p>
+</div>
+<div id="having-chosen-a-cutoff-setting-list-the-selected-sites" class="section level3">
+<h3>Having Chosen a Cutoff Setting, List the Selected Sites</h3>
+<pre><code>## Loss cutoff = 80%.
+## Selected 35 sites:
+##       aln   l   r aa peak_tf_loss when_up   tf_area
+## N279  357 279 279  D        95.83       4  3410.644
+## H417  499 417 417  P        91.18       7 10103.671
+## V281  359 281 281  A       100.00       9  1732.931
+## T413  495 413 413  T        88.24       9  6179.279
+## N332  412 332 332  N       100.00      20  1734.220
+## O334  414 334 334  S       100.00      20  1734.220
+## -144g 214 144 145  -       100.00      20  2093.700
+## -144h 215 144 145  -       100.00      20  2093.700
+## -144f 213 144 145  -       100.00      20  3408.520
+## V756  844 756 756  I        92.86      20  4903.194
+## A145  216 145 145  G        96.77      20  8750.560
+## D325  405 325 325  N        83.33      20 10922.040
+## Y330  410 330 330  H       100.00      22  2784.660
+## N300  379 300 300  N       100.00      30  2868.218
+## T234  312 234 234  N       100.00      30  2917.280
+## K302  381 302 302  N       100.00      30  2917.280
+## -465  552 465 465  S       100.00      30  3071.900
+## -464  551 464 464  E       100.00      30  3145.650
+## N462  544 462 462  N        89.29      30 11450.590
+## -463e 550 463 464  -       100.00      53  5433.226
+## K460  542 460 460  N       100.00      53  6272.314
+## O398  480 398 398  S        91.30      53  7020.274
+## K347  427 347 347  S        83.33      53  8187.620
+## I151  222 151 151  K        83.33      53  8298.458
+## H356  437 356 356  N       100.00      78  6617.376
+## E275  353 275 275  V        91.67      78  8185.790
+## G471  558 471 471  G        87.50      78  8966.026
+## O130  193 130 130  K        87.50      78  9129.296
+## O147  218 147 147  M        91.67      78  9312.777
+## E640  727 640 640  S        83.87      78  9441.390
+## T132  195 132 132  T        83.33      78  9724.856
+## D185  259 185 185  D        83.33      78 10942.110
+## M4      4   4   4  K        87.50     100 10805.110
+## G620  707 620 620  E        91.67     136 10612.342
+## R412  494 412 412  D        83.33     160 13949.102</code></pre>
+</div>
+</div>
+<div id="phase-ii-select-clones" class="section level1">
+<h1>Phase II: Select Clones</h1>
+<p>This phase of analysis requires a <code>swarmtools</code> object created in Phase I.<br />The <code>swarmtools</code> object must have a list of selected sites, which happens only when it was created using a single <code>tf_loss_cutoff</code> value.</p>
+<p>Let’s just go with the defaults.</p>
+<pre><code>B &lt;- swarmset(A, is_verbose=F)</code></pre>
+</div>
+<div id="all-together-now" class="section level1">
+<h1>All Together Now</h1>
+<p>Here’s the whole workflow:</p>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">library</span>(lassie)
+    alignment_file &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;CH505-gp160.fasta&quot;</span>, <span class="dt">package=</span><span class="st">&quot;lassie&quot;</span>)
+    a &lt;-<span class="st"> </span><span class="kw">swarmtools</span>(<span class="dt">aas_file=</span>alignment_file, <span class="dt">tf_loss_cutoff=</span><span class="dv">0</span>:<span class="dv">5</span>*<span class="dv">20</span>)
+    <span class="kw">summary</span>(a)</code></pre>
+<pre><code>##   %TF Loss at least selected sites, n selected sites, %
+## 1                 0               953            100.00
+## 2                20                92              9.65
+## 3                40                79              8.29
+## 4                60                48              5.04
+## 5                80                35              3.67
+## 6               100                15              1.57</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    A &lt;-<span class="st"> </span><span class="kw">swarmtools</span>(<span class="dt">aas_file=</span>alignment_file, <span class="dt">tf_loss_cutoff=</span><span class="dv">80</span>)
+    <span class="kw">print</span>(A)</code></pre>
+<pre><code>## Loss cutoff = 80%.
+## Selected 35 sites:
+##       aln   l   r aa peak_tf_loss when_up   tf_area
+## N279  357 279 279  D        95.83       4  3410.644
+## H417  499 417 417  P        91.18       7 10103.671
+## V281  359 281 281  A       100.00       9  1732.931
+## T413  495 413 413  T        88.24       9  6179.279
+## N332  412 332 332  N       100.00      20  1734.220
+## O334  414 334 334  S       100.00      20  1734.220
+## -144g 214 144 145  -       100.00      20  2093.700
+## -144h 215 144 145  -       100.00      20  2093.700
+## -144f 213 144 145  -       100.00      20  3408.520
+## V756  844 756 756  I        92.86      20  4903.194
+## A145  216 145 145  G        96.77      20  8750.560
+## D325  405 325 325  N        83.33      20 10922.040
+## Y330  410 330 330  H       100.00      22  2784.660
+## N300  379 300 300  N       100.00      30  2868.218
+## T234  312 234 234  N       100.00      30  2917.280
+## K302  381 302 302  N       100.00      30  2917.280
+## -465  552 465 465  S       100.00      30  3071.900
+## -464  551 464 464  E       100.00      30  3145.650
+## N462  544 462 462  N        89.29      30 11450.590
+## -463e 550 463 464  -       100.00      53  5433.226
+## K460  542 460 460  N       100.00      53  6272.314
+## O398  480 398 398  S        91.30      53  7020.274
+## K347  427 347 347  S        83.33      53  8187.620
+## I151  222 151 151  K        83.33      53  8298.458
+## H356  437 356 356  N       100.00      78  6617.376
+## E275  353 275 275  V        91.67      78  8185.790
+## G471  558 471 471  G        87.50      78  8966.026
+## O130  193 130 130  K        87.50      78  9129.296
+## O147  218 147 147  M        91.67      78  9312.777
+## E640  727 640 640  S        83.87      78  9441.390
+## T132  195 132 132  T        83.33      78  9724.856
+## D185  259 185 185  D        83.33      78 10942.110
+## M4      4   4   4  K        87.50     100 10805.110
+## G620  707 620 620  E        91.67     136 10612.342
+## R412  494 412 412  D        83.33     160 13949.102</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    B &lt;-<span class="st"> </span><span class="kw">swarmset</span>(A)</code></pre>
+<pre><code>##     TF w000.TF        NHVTNO---VADYNTK--N-KOKIHEGOOETDMGR
+## Number of mutations to be represented is now 92
+## t=w004, n=8 viable clones
+##   column  1: N357[KD]
+##     B1 w004.54        K..................................
+## Number of mutations to be represented is now 91
+##   column  3: V359[SGDA]
+##   column 22: O480[T-]
+##     B1 w004.31        .....................-.............
+## Number of mutations to be represented is now 90
+## t=w007, n=16 viable clones
+##   column  1: N357[D]
+##   column  2: H499[SRN]
+##     B1 w007.8         KR.................................
+## Number of mutations to be represented is now 89
+##   column  4: T495[OI]
+##     A0 w007.34        ...I...............................
+## Number of mutations to be represented is now 88
+##   column 29: O218[SNKD]
+##     A0 w007.25        ............................N......
+## Number of mutations to be represented is now 87
+##   column 35: R494[Q-]
+##     A0 w007.21        ..................................Q
+## Number of mutations to be represented is now 86
+## t=w008, n=12 viable clones
+##   column  1: N357[D]
+##   column  2: H499[SN]
+##   column  3: V359[SGDA]
+##     A0 w008.20        ..A................................
+## Number of mutations to be represented is now 85
+##   column 29: O218[SKD]
+##   column 35: R494[-]
+## t=w009, n=14 viable clones
+##   column  1: N357[D]
+##   column  2: H499[SN]
+##   column  3: V359[SGD]
+##     A1 w009.19        ..G................................
+## Number of mutations to be represented is now 84
+##   column  4: T495[O]
+##   column 35: R494[-]
+## t=w010, n=13 viable clones
+##   column  1: N357[D]
+##   column  2: H499[SN]
+##     A1 w010.7         .N.................................
+## Number of mutations to be represented is now 83
+##   column  3: V359[SD]
+##   column  4: T495[O]
+## t=w014, n=6 viable clones
+##   column  2: H499[S]
+##   column  3: V359[SD]
+##   column  4: T495[O]
+## t=w020, n=23 viable clones
+##   column  2: H499[S]
+##   column  3: V359[SD]
+##   column  4: T495[O]
+##   column  5: N412[O]
+##     B0 w020.15        ....OS....T........................
+## Number of mutations to be represented is now 80
+##   column  7: -214[TOIA]
+##     B1 w020.25        .R....ATO..........................
+## Number of mutations to be represented is now 77
+##   column  8: -215[VSKEA]
+##   column  9: -213[IA]
+##   column 10: V844[A]
+##     B0 w020.24        .RA......AT........................
+## Number of mutations to be represented is now 76
+##   column 11: A216[VSGD-]
+##   column 12: D405[N]
+##     C1 w020.11        ..........TN.......................
+## Number of mutations to be represented is now 75
+##   column 29: O218[SKD]
+## t=w022, n=15 viable clones
+##   column  2: H499[S]
+##   column  3: V359[SD]
+##   column  4: T495[O]
+##     A0 w022.22        ...O...............................
+## Number of mutations to be represented is now 74
+##   column  7: -214[TOI]
+##   column  8: -215[VSKEA]
+##   column  9: -213[IA]
+##   column 13: Y410[H]
+##     B1 w022.6         ..AIOSATO...H......................
+## Number of mutations to be represented is now 73
+##   column 14: N379[SG]
+##     A0 w022.5         .RA.OSATO....S.....................
+## Number of mutations to be represented is now 72
+##   column 24: I222[VL-]
+##     A0 w022.9         ..GIOS.................-...........
+## Number of mutations to be represented is now 71
+## t=w030, n=24 viable clones
+##   column  1: N357[D]
+##     A0 w030.17        D.GOOSATO.......TD.................
+## Number of mutations to be represented is now 68
+##   column  2: H499[S]
+##   column  3: V359[SD]
+##     A1 w030.13        ..DPOS.............................
+## Number of mutations to be represented is now 67
+##   column  7: -214[TOI]
+##   column  8: -215[VSKEA]
+##   column  9: -213[IA]
+##   column 11: A216[VSGD-]
+##     A0 w030.26        .RG.OS....-....NTD.................
+## Number of mutations to be represented is now 65
+##   column 14: N379[G]
+##   column 15: T312[O]
+##     A1 w030.36        ....OSATO.....O.TD.................
+## Number of mutations to be represented is now 64
+##   column 17: -552[PF]
+##   column 18: -551[TNGE]
+##     A0 w030.20        ..AIOSATOA......TNTO...............
+## Number of mutations to be represented is now 61
+##   column 19: N544[SOD-]
+##     A1 w030.32        .RG.OSATO.......TD-................
+## Number of mutations to be represented is now 60
+##   column 20: -550[TKE]
+##   column 21: K542[ONE-]
+##     B0 w030.21        .RA.OSATO...........E..............
+## Number of mutations to be represented is now 59
+## t=w053, n=21 viable clones
+##   column  2: H499[S]
+##   column  3: V359[S]
+##   column  7: -214[TOI]
+##     B1 w053.22        DRGIOSIEIAG.HSONFT.E.TE............
+## Number of mutations to be represented is now 50
+##   column  8: -215[VSKA]
+##   column  9: -213[A]
+##   column 11: A216[VSD]
+##   column 14: N379[G]
+##   column 17: -552[P]
+##   column 18: -551[GE]
+##   column 20: -550[TK]
+##   column 21: K542[ON-]
+##     A1 w053.31        DRGIOSAT....HSON....N-.............
+## Number of mutations to be represented is now 49
+##   column 24: I222[VL]
+##     B1 w053.15        D.G.OSATOA..HSONFT.E.-.L...........
+## Number of mutations to be represented is now 48
+##   column 25: H437[QONGD]
+##     A0 w053.8         DRGIOSATOA..HSONFT.E.T..Q..........
+## Number of mutations to be represented is now 47
+##   column 27: G558[VE]
+##     A0 w053.29        .RAIOSATOA..HSONFT.E.-....E........
+## Number of mutations to be represented is now 46
+##   column 28: O193[YSN]
+##     A0 w053.9         DRGIOSIEIAG.HSONFT.E.TE....N..I....
+## Number of mutations to be represented is now 44
+##   column 31: T195[A]
+## t=w078, n=33 viable clones
+##   column  2: H499[S]
+##   column  3: V359[S]
+##   column  7: -214[TO]
+##     A1 w078.9         DRG.OSTAA.S.HSONFT.E....QK..S......
+## Number of mutations to be represented is now 38
+##     B0 w078.6         DRGIOSOS.AS.HSONTN.OE-.............
+## Number of mutations to be represented is now 36
+##   column  8: -215[VK]
+##   column 11: A216[VD]
+##   column 14: N379[G]
+##   column 17: -552[P]
+##   column 18: -551[GE]
+##   column 19: N544[SOD]
+##     B0 w078.26        DRGIOSTAAAS.HSON..S.O.E.NK..S......
+## Number of mutations to be represented is now 33
+##     A0 w078.33        ..A.OSATOA..HSONT.O.N-.....N..I.T..
+## Number of mutations to be represented is now 31
+##     A1 w078.15        DRGIOSATOA..HSON..D..TEL.KES.......
+## Number of mutations to be represented is now 29
+##   column 20: -550[TK]
+##   column 21: K542[-]
+##     A1 w078.29        DRGIOSTAAAS.HSONTN..-..-L..NS.A....
+## Number of mutations to be represented is now 27
+##   column 24: I222[V]
+##   column 25: H437[OGD]
+##     B0 w078.17        DRG.OSATOA..HSONFT.EE..LDK.D..IG...
+## Number of mutations to be represented is now 25
+##   column 27: G558[V]
+##   column 28: O193[Y]
+##   column 29: O218[KD]
+##     A0 w078.30        ..A.OSATOA..HSON....N-......D......
+## Number of mutations to be represented is now 24
+##   column 30: E727[ND]
+##     A1 w078.36        DRGIOSTAAAS.HSON..S.O-.-....SD.....
+## Number of mutations to be represented is now 23
+##   column 33:   M4[R]
+##     A0 w078.27        DRGIOSATOA..HSONTDD..TEL.KES....R..
+## Number of mutations to be represented is now 22
+## t=w100, n=26 viable clones
+##   column  2: H499[S]
+##     A1 w100.B10       DSG.OSATOA..HSONTDD....LDKEN..I....
+## Number of mutations to be represented is now 21
+##   column  3: V359[S]
+##     B0 w100.A11       D.S.OSATOA..HSONTNTOE-..D.E.KD.....
+## Number of mutations to be represented is now 19
+##   column  8: -215[VK]
+##     A1 w100.B2        .RAIOSIK.AG.HSON....N...D.V........
+## Number of mutations to be represented is now 17
+##   column 11: A216[VD]
+##     B0 w100.A13       ..A.OSATOAV.HSONTNTOE-.......D.....
+## Number of mutations to be represented is now 16
+##   column 14: N379[G]
+##   column 17: -552[P]
+##   column 18: -551[GE]
+##   column 20: -550[TK]
+##   column 24: I222[V]
+##   column 25: H437[OG]
+##   column 28: O193[Y]
+##   column 30: E727[N]
+##   column 34: G707[SD]
+##     A0 w100.T3        DRGIOSATO..NHSONTDD.ETEL.KEN..I.RS.
+## Number of mutations to be represented is now 15
+##     A0 w100.B4        DRGIOSATO...HSON..S.O...DKE.K....D.
+## Number of mutations to be represented is now 14
+## t=w136, n=28 viable clones
+##   column  8: -215[V]
+##     A1 w136.B2        D.G.OSTVAA-.HGONIDOT--E.O.......RD.
+## Number of mutations to be represented is now 10
+##   column 11: A216[D]
+##     A1 w136.B10       D.GIOSATOADNHSONTD.E-TELDKES.DIY.S.
+## Number of mutations to be represented is now 9
+##   column 17: -552[P]
+##   column 18: -551[GE]
+##     B0 w136.B5        ..A.OSATOAV.HSONTESK-.E.O..Y.DI....
+## Number of mutations to be represented is now 6
+##   column 24: I222[V]
+##     B1 w136.B23       D.A.OSIK..G.HSONTEST-..VD....N...D.
+## Number of mutations to be represented is now 4
+##   column 25: H437[G]
+## t=w160, n=20 viable clones
+##   column 17: -552[P]
+##     A1 w160.T4        D.A.OSTVA.S.HSONPD..-...G...DN.....
+## Number of mutations to be represented is now 2
+##   column 18: -551[G]
+##     A1 w160.C1        ..A.OSVTOAV.HSONTGST-...D..Y.D..TV.
+## Number of mutations to be represented is now 1
+##   column 35: R494[-]
+##     C0 w160.T3        D.SIOSATOA.NHSONTD.E-TELDKVND.IGRD-
+## Number of mutations to be represented is now 0</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">summary</span>(B)</code></pre>
+<pre><code>## Selected n=54 sequences:
+## w000.TF 
+## w004.31, w004.54 
+## w007.8, w007.21, w007.25, w007.34 
+## w008.20 
+## w009.19 
+## w010.7 
+## w020.15, w020.11, w020.24, w020.25 
+## w022.6, w022.5, w022.9, w022.22 
+## w030.20, w030.17, w030.21, w030.36, w030.26, w030.13, w030.32 
+## w053.15, w053.29, w053.22, w053.8, w053.31, w053.9 
+## w078.6, w078.36, w078.9, w078.26, w078.29, w078.30, w078.33, w078.17, w078.15, w078.27 
+## w100.T3, w100.B10, w100.B2, w100.B4, w100.A11, w100.A13 
+## w136.B10, w136.B5, w136.B2, w136.B23 
+## w160.C1, w160.T3, w160.T4</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">print</span>(B)</code></pre>
+<pre><code>## w000.TF  NHVTNO---VADYNTK--N-KOKIHEGOOETDMGR 
+## w004.31  .....................-............. 
+## w004.54  K.................................. 
+## w007.8   KR................................. 
+## w007.21  ..................................Q 
+## w007.25  ............................N...... 
+## w007.34  ...I............................... 
+## w008.20  ..A................................ 
+## w009.19  ..G................................ 
+## w010.7   .N................................. 
+## w020.15  ....OS....T........................ 
+## w020.11  ..........TN....................... 
+## w020.24  .RA......AT........................ 
+## w020.25  .R....ATO.......................... 
+## w022.6   ..AIOSATO...H...................... 
+## w022.5   .RA.OSATO....S..................... 
+## w022.9   ..GIOS.................-........... 
+## w022.22  ...O............................... 
+## w030.20  ..AIOSATOA......TNTO............... 
+## w030.17  D.GOOSATO.......TD................. 
+## w030.21  .RA.OSATO...........E.............. 
+## w030.36  ....OSATO.....O.TD................. 
+## w030.26  .RG.OS....-....NTD................. 
+## w030.13  ..DPOS............................. 
+## w030.32  .RG.OSATO.......TD-................ 
+## w053.15  D.G.OSATOA..HSONFT.E.-.L........... 
+## w053.29  .RAIOSATOA..HSONFT.E.-....E........ 
+## w053.22  DRGIOSIEIAG.HSONFT.E.TE............ 
+## w053.8   DRGIOSATOA..HSONFT.E.T..Q.......... 
+## w053.31  DRGIOSAT....HSON....N-............. 
+## w053.9   DRGIOSIEIAG.HSONFT.E.TE....N..I.... 
+## w078.6   DRGIOSOS.AS.HSONTN.OE-............. 
+## w078.36  DRGIOSTAAAS.HSON..S.O-.-....SD..... 
+## w078.9   DRG.OSTAA.S.HSONFT.E....QK..S...... 
+## w078.26  DRGIOSTAAAS.HSON..S.O.E.NK..S...... 
+## w078.29  DRGIOSTAAAS.HSONTN..-..-L..NS.A.... 
+## w078.30  ..A.OSATOA..HSON....N-......D...... 
+## w078.33  ..A.OSATOA..HSONT.O.N-.....N..I.T.. 
+## w078.17  DRG.OSATOA..HSONFT.EE..LDK.D..IG... 
+## w078.15  DRGIOSATOA..HSON..D..TEL.KES....... 
+## w078.27  DRGIOSATOA..HSONTDD..TEL.KES....R.. 
+## w100.T3  DRGIOSATO..NHSONTDD.ETEL.KEN..I.RS. 
+## w100.B10 DSG.OSATOA..HSONTDD....LDKEN..I.... 
+## w100.B2  .RAIOSIK.AG.HSON....N...D.V........ 
+## w100.B4  DRGIOSATO...HSON..S.O...DKE.K....D. 
+## w100.A11 D.S.OSATOA..HSONTNTOE-..D.E.KD..... 
+## w100.A13 ..A.OSATOAV.HSONTNTOE-.......D..... 
+## w136.B10 D.GIOSATOADNHSONTD.E-TELDKES.DIY.S. 
+## w136.B5  ..A.OSATOAV.HSONTESK-.E.O..Y.DI.... 
+## w136.B2  D.G.OSTVAA-.HGONIDOT--E.O.......RD. 
+## w136.B23 D.A.OSIK..G.HSONTEST-..VD....N...D. 
+## w160.C1  ..A.OSVTOAV.HSONTGST-...D..Y.D..TV. 
+## w160.T3  D.SIOSATOA.NHSONTD.E-TELDKVND.IGRD- 
+## w160.T4  D.A.OSTVA.S.HSONPD..-...G...DN.....</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">    b.plot &lt;-<span class="st"> </span><span class="kw">plot</span>(B)</code></pre>
+<hr />
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
