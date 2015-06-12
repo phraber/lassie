@@ -1,9 +1,16 @@
-I changed two python files in weblogo-3.4/weblogolib, which are attached here.
+I changed two python files in weblogo-3.4/weblogolib, as described below.
+
+The changes are summarized as diff output files in weblogolib.
+To use them, simply change to that directory and edit the files using patch:
+  patch __init.py__ __init.py__-DIFF
+  patch colorscheme.py colorscheme.py-DIFF
 
 Note that you have to rebuild the library after modifying it; i.e. 
   (sudo?) weblogo-3.4/setup.py build
 
 I also changed template.eps but do not recall now whether the change is beneficial.
+
+---
 
 The file sourceme.txt runs weblogo on the file logo-test.fasta, as an example.
 
@@ -11,7 +18,9 @@ TO BUILD AND INSTALL weblogo, cd to its subdirectory and run
 "./setup.py build; ./setup.py install" 
 (You may need administrative privileges or an alternative install path.)
 
- diff colorscheme.py colorscheme.py-original
+
+
+diff colorscheme.py colorscheme.py-original
 124,126d123
 <     ColorGroup( "O",   "magenta", "PNGsite"  ), # pth
 <     ColorGroup( "-*#",     "grey",   "unknown"), # pth
@@ -64,4 +73,3 @@ diff __init__.py __init__.py-original
 <         seqs.alphabet = Alphabet(alphabet) 
 ---
 >         seqs.alphabet = alphabet 
-

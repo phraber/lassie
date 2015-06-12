@@ -1,10 +1,13 @@
 #' List names of sequences in working_swarm of swarmset.
 #'
-#' @param object swarmset
-#' @seealso \code{\link{swarmset}}
+#' @param object swarmset object
+#' @param ... not currently in use but should be soon
+#' #' @seealso \code{\link{swarmset}}
 #' @family swarmset methods
 #' @export
-summary.swarmset <- function(object) { 
+summary.swarmset <- function(object, ...) { 
+
+    dots = list(...)
 
     cat(paste0("Selected n=", 
 	length(which(object$working_swarm$is_included)), 

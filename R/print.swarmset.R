@@ -1,12 +1,17 @@
 #' List concatamers of selected sites for all working_swarm sequences in swarmset.
 #'
 #' @param x swarmset
+#' @param ... not currently used by could and should be soon
 #' @seealso \code{\link{swarmset}}
+#'
 #' @family swarmset methods
+#'
 #' @export
-print.swarmset <- function(x) { 
+print.swarmset <- function(x, ...) { 
 
-# output the TF concatamer sequence first
+    dots <- list(...)
+    
+    # output the TF concatamer sequence first
     i <- min(which(x$working_swarm$is_included == T))
     if (!is.null(x$tf_index) & x$working_swarm$is_included[x$tf_index] & 
 	    x$tf_index != i)

@@ -4,10 +4,12 @@
 \alias{plot.swarmtools}
 \title{Plot a cumulative distribution function of number of sites selected vs. TF loss cutoff.}
 \usage{
-\method{plot}{swarmtools}(S)
+\method{plot}{swarmtools}(x, ...)
 }
 \arguments{
-\item{S}{Swarmtools object}
+\item{x}{Swarmtools object}
+
+\item{...}{plot options, parsed and passed to plot(): cex, xlab, ylab, pch, lwd, main, tcl, oma, mar, mgp, xlim, ylim.  Defaults are set but you can over-write them to customize plot appearance.}
 }
 \description{
 Plot a cumulative distribution function of number of sites selected vs. TF loss cutoff.

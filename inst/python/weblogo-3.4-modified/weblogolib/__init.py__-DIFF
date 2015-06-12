@@ -1,0 +1,22 @@
+863,870c863,872
+<         # Sort by frequency. If equal frequency then reverse alphabetic
+<         # (So sort reverse alphabetic first, then frequencty)
+<         # TODO: doublecheck this actual works
+<         s = list(zip(logodata.counts[seq_index], logodata.alphabet))
+<         s.sort(key= lambda x: x[1])
+<         s.reverse()
+<         s.sort(key= lambda x: x[0])
+<         
+---
+>         s = zip(logodata.counts[seq_index], logodata.alphabet)
+>         def mycmp( c1, c2 ) :
+> #here: always place '-' and characters last
+>             if c1[1] == '-' : return -1
+>             if c2[1] == '-' : return 1
+>             if c1[1] == '#' : return -1
+>             if c2[1] == '#' : return 1
+>             # Sort by frequency. If equal frequency then reverse alphabetic
+>             if c1[0] == c2[0] : return cmp(c2[1], c1[1])
+>             return cmp(c1[0], c2[0])
+871a874
+>         s.sort(mycmp)

@@ -4,10 +4,12 @@
 \alias{print.swarmset}
 \title{List concatamers of selected sites for all working_swarm sequences in swarmset.}
 \usage{
-\method{print}{swarmset}(x)
+\method{print}{swarmset}(x, ...)
 }
 \arguments{
 \item{x}{swarmset}
+
+\item{...}{not currently used by could and should be soon}
 }
 \description{
 List concatamers of selected sites for all working_swarm sequences in swarmset.

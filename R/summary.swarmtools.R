@@ -1,17 +1,20 @@
 #' Summarize selected sites.
 #'
 #' @param object Swarmtools object
+#' @param ... not currently in use but should be soon
 #'
 #' @return A data frame of selected sites, with one row per ?
 #'
 #' @export
-summary.swarmtools <- function(object) {
+summary.swarmtools <- function(object, ...) {
 
 # TO DO: if tf_loss_cutoff is a scalar, list more info than if it is a vector
 
 # alignment contains sequences and sites
 # summarize tf loss distribution?
 #summary(S$peak_tf_loss)
+
+    dots <- list(...)
 
     if (class(object) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to summary.swarmtools()")

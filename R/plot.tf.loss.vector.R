@@ -38,12 +38,12 @@ plot.tf.loss.vector <- function(tf_loss_vector,
     plot(c(1:length(tf_loss_vector)), tf_loss_vector, xlab='', ylab='', 
 	type='n', xlim=x_lim, ylim=y_lim, frame.plot=F, yaxt='n')
 
-    lassie::plot.annotation(tf_loss_cutoff=tf_loss_cutoff, 
-	refseq_lut=refseq_lut, 
-	ptid=ptid, 
-	region=region, 
-	show_marginal_annotation=show_marginal_annotation,
-	y_lim=y_lim)
+ 	annotate.region(tf_loss_cutoff=tf_loss_cutoff, 
+                            refseq_lut=refseq_lut, 
+                            ptid=ptid, 
+                            region=region, 
+                            show_marginal_annotation=show_marginal_annotation,
+                            y_lim=y_lim)
 
     fin=par('fin')
 

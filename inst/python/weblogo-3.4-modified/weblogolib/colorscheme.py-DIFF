@@ -1,0 +1,34 @@
+123a124,126
+>     ColorGroup( "O",   "magenta", "PNGsite"  ), # pth
+>     ColorGroup( "-*#",     "grey",   "unknown"), # pth
+>     ColorGroup( ".",     "white",   "transmitted"), # pth
+125c128
+<     alphabet = seq.unambiguous_protein_alphabet
+---
+>     alphabet = seq.generic_alphabet
+132a136,138
+>   ColorGroup( "O",     "cyan",   "PNGsite"),
+>   ColorGroup( "-*#",     "grey",   "unknown"), # pth
+>   ColorGroup( ".",     "white",   "transmitted"), # pth
+135c141,142
+<   alphabet = seq.unambiguous_protein_alphabet
+---
+>   alphabet = seq.generic_alphabet # pth
+> #  alphabet = seq.unambiguous_protein_alphabet
+139a147,149
+>     ColorGroup( "-*#",     "grey",   "unknown"), # pth
+>     ColorGroup( ".",     "white",   "transmitted"), # pth
+>     ColorGroup( "O", "cyan", "PNGsite") , # pth
+141c151
+<     alphabet = seq.unambiguous_protein_alphabet
+---
+>     alphabet = seq.generic_alphabet
+145a156,157
+>     ColorGroup( "-*#",     "grey"), # pth
+>     ColorGroup( ".",     "white"), # pth
+157a170
+>     ColorGroup( 'O', '#00FFFF'), # pth
+168c181
+<     alphabet = seq.unambiguous_protein_alphabet
+---
+>     alphabet = seq.generic_alphabet

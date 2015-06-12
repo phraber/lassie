@@ -1,9 +1,12 @@
 #' Print a table of the selected sites.
 #'
 #' @param x Swarmtools object
+#' @param ... not currently in use but should be soon
 #'
 #' @export
-print.swarmtools <- function(x) {
+print.swarmtools <- function(x, ...) {
+
+    dots <- list(...)
 
     if (class(x) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to print.swarmtools()")
@@ -17,4 +20,3 @@ print.swarmtools <- function(x) {
 	print(x$selected_sites, quote=F)
     }
 }
-

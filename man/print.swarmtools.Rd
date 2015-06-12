@@ -4,10 +4,12 @@
 \alias{print.swarmtools}
 \title{Print a table of the selected sites.}
 \usage{
-\method{print}{swarmtools}(x)
+\method{print}{swarmtools}(x, ...)
 }
 \arguments{
 \item{x}{Swarmtools object}
+
+\item{...}{not currently in use but should be soon}
 }
 \description{
 Print a table of the selected sites.

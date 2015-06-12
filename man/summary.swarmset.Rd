@@ -4,10 +4,13 @@
 \alias{summary.swarmset}
 \title{List names of sequences in working_swarm of swarmset.}
 \usage{
-\method{summary}{swarmset}(object)
+\method{summary}{swarmset}(object, ...)
 }
 \arguments{
-\item{object}{swarmset}
+\item{object}{swarmset object}
+
+\item{...}{not currently in use but should be soon
+#'}
 }
 \description{
 List names of sequences in working_swarm of swarmset.

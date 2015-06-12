@@ -4,17 +4,15 @@
 \alias{plot.swarmset}
 \title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
-\method{plot}{swarmset}(SST, format = "png", aspect_ratio = 3)
+\method{plot}{swarmset}(x, ...)
 }
 \arguments{
-\item{SST}{A swarmset object populated with working_swarm.}
+\item{x}{A swarmset object populated with working_swarm.}
 
-\item{format}{Image format.}
-
-\item{aspect_ratio}{Aspect ratio (width to height) of image.}
+\item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').}
 }
 \value{
-An explicit path to the file generated, located in a directory removed at the end of the R session.
+An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else los it when the R session ends.
 }
 \description{
 Render a logo plot of concatamer forms of clones in working_swarm
