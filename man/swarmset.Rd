@@ -6,7 +6,7 @@
 \usage{
 swarmset(ST, maxtol_deletion = NULL, maxtol_insertion = NULL,
   included_clone_names = NULL, excluded_clone_names = NULL,
-  is_verbose = T, min_counts = 2)
+  min_counts = 2)
 }
 \arguments{
 \item{ST}{swarmtools object, with list of selected sites.}
@@ -18,8 +18,6 @@ swarmset(ST, maxtol_deletion = NULL, maxtol_insertion = NULL,
 \item{included_clone_names}{List of included clone names.}
 
 \item{excluded_clone_names}{List of excluded clone names.}
-
-\item{is_verbose}{Boolean switch to enable verbose output.}
 
 \item{min_counts}{Variants that occur less often than this number in the
 entire alignment are not included in swarms.}

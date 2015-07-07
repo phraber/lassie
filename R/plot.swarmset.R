@@ -1,13 +1,15 @@
 #' Render a logo plot of concatamer forms of clones in working_swarm
 #'
 #' @param x A swarmset object populated with working_swarm.
+#' @param sort If true, reorder sites from left to right.
+#' @param stacks_per_line If NULL, this is set to the number of selected sites; otherwise, it limits plot width.
 #' @param ... can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').
 #' 
 #' @return An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else los it when the R session ends.
 #' 
 #' @family swarmset methods
 #' @export
-plot.swarmset <- function(x, ...) {
+plot.swarmset <- function(x, sort=F, stacks_per_line=NULL, ...) {
 
     dots <- list(...)
 
@@ -21,10 +23,14 @@ plot.swarmset <- function(x, ...) {
 
 ### TO DO: parse and match whatever is in ...
 
+    if (sort)
+        x$selected_sites = x$selected_sites[order(x$selected_sites$aln), ]
+
     outfile <- make.logoplot(x$selected_sites, 
 	    x$working_swarm, 
 	    which(x$working_swarm$is_included), 
 	    paste0(x$results_prefix, "-swarm"), 
+	    stacks_per_line = stacks_per_line,
 	    dotify=F, aspect_ratio=aspect_ratio,
 	    logo_format=format)
 

@@ -1,6 +1,6 @@
 #' @keywords internal
 tabulate.variants <- function(seqs, sequence_multiplicity, 
-    omit_singletons, min_counts, aa_alphabet, is_verbose) {
+    omit_singletons, min_counts, aa_alphabet) {
 
 
 ## TO DO: for resampling, consider case where resampled aa_alphabet

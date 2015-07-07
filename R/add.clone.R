@@ -1,5 +1,5 @@
 #' @keywords internal
-add.clone <- function(new_clone, WS, criterion=NULL, is_verbose) {
+add.clone <- function(new_clone, WS, criterion=NULL) {
 
     if (length(new_clone) > 1) #{
 	stop(paste("ERROR in add.clone()! multiple new_clones passed:",
@@ -23,14 +23,14 @@ add.clone <- function(new_clone, WS, criterion=NULL, is_verbose) {
     # need to print undotified form
         if (criterion=="TF") {
 
-	    if.verbose.print(paste("   ", criterion, 
+	    message(paste("   ", criterion, 
 	    sprintf("%-12s", rownames(WS$aln_concatamer)[new_clone]), 
-	        '\t', seqinr::c2s(WS$aln_concatamer[new_clone, ])), is_verbose)
+	        '\t', seqinr::c2s(WS$aln_concatamer[new_clone, ])))
         } else {
 
-	    if.verbose.print(paste("   ", criterion, sprintf("%-12s", 
+	    message(paste("   ", criterion, sprintf("%-12s", 
 		new_clone),
-		'\t', seqinr::c2s(WS$dot_concatamer[new_clone, ])), is_verbose)
+		'\t', seqinr::c2s(WS$dot_concatamer[new_clone, ])))
         }
 
 # TO DO: validate new_clone argument - is new_clone_index a name or an integer?
@@ -40,9 +40,8 @@ add.clone <- function(new_clone, WS, criterion=NULL, is_verbose) {
     }
 
 #    if (omit_singletons) #{
-    if.verbose.print(paste0("Number of mutations to be represented is now ", 
-	length(which(c(WS$variant_counts) > 0))), is_verbose)
+    message(paste0("Number of mutations to be represented is now ", 
+	length(which(c(WS$variant_counts) > 0))))
 
     WS
 }
-

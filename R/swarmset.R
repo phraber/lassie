@@ -5,7 +5,6 @@
 #' @param maxtol_insertion Maximum tolerated insertion.
 #' @param included_clone_names List of included clone names.
 #' @param excluded_clone_names List of excluded clone names.
-#' @param is_verbose Boolean switch to enable verbose output.
 #' @param min_counts Variants that occur less often than this number in the 
 #' entire alignment are not included in swarms.
 #'
@@ -30,7 +29,6 @@ swarmset <- function(ST,
     maxtol_insertion=NULL,
     included_clone_names=NULL,
     excluded_clone_names=NULL,
-    is_verbose=T,
     min_counts=2 # variants with fewer than min_counts present are used to 
                  # compute TF loss but not included in swarms
     ) {
@@ -91,26 +89,26 @@ swarmset <- function(ST,
 
 	is_excluded[which(longest_insertion > maxtol_insertion)] = T
 
-	if.verbose.print(paste0("Excluding ", 
+	message(paste0("Excluding ", 
 		    length(which(longest_insertion > maxtol_insertion)),
 		    " sequences with insertions over ", maxtol_insertion, 
-		    " aas"), is_verbose)
+		    " aas"))
     }
 
     if (length(which(is_included) > 0))
-	if.verbose.print(paste("Including", 
-	    paste(names(which(is_included)), collapse=",")), is_verbose)
+	message(paste("Including", 
+	    paste(names(which(is_included)), collapse=",")))
 
     if (length(which(is_excluded) > 0))
-	if.verbose.print(paste("Excluding", 
-	    paste(names(which(is_excluded)), collapse=",")), is_verbose)
+	message(paste("Excluding", 
+	    paste(names(which(is_excluded)), collapse=",")))
 
     aln_concatamer <- concatamerize(ST$aas_aln, ST$selected_sites$aln)
 
     working_swarm <- select.clones(ST$aas_aln, ST$tf_index, 
 	aln_concatamer, is_included, is_also_included, 
 	is_excluded, min_counts, 
-	ST$sequence_multiplicity, ST$timepoints_parser, is_verbose)
+	ST$sequence_multiplicity, ST$timepoints_parser)
 
     retval <- list(
 	working_swarm=working_swarm,

@@ -3,6 +3,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     results_prefix, 
     dotify=T, hide_xlabels=F, 
     stack_width=18,
+    stacks_per_line=NULL,
     aspect_ratio=1.5, 
     y_label=NULL,
     sequence_multiplicity=NULL,
@@ -16,6 +17,9 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     # x-axis labels
     site_string <- paste(gsub("^[A-Z-]", "", rownames(selected_sites)), 
 	collapse=",")
+
+    if (is.null(stacks_per_line))
+        stacks_per_line = nrow(selected_sites)
 
     if (hide_xlabels)
 	site_string <- gsub(" ", "", seqinr::c2s(rep(",", -1+nrow(selected_sites))))
@@ -54,7 +58,7 @@ tail_of_results_prefix <- unlist(strsplit(results_prefix, "[/]"))[[last_field]]
 	    " --units 'probability'",
 	    " --errorbars NO --reverse-stacks NO --fineprint ''",
 	    " --format ", logo_format, 
-	    " --stacks-per-line ", nrow(selected_sites), 
+	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
 	    " --xlabel ''", 
 	    " --annotate '", site_string, "'",
@@ -74,7 +78,7 @@ tail_of_results_prefix <- unlist(strsplit(results_prefix, "[/]"))[[last_field]]
 	    " --errorbars NO --reverse-stacks NO --fineprint ",
 	    "'",  fine_print, "'",
 	    " --format ", logo_format, 
-	    " --stacks-per-line ", nrow(selected_sites), 
+	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
 #	    " --xlabel '", paste(my_region, "site'"),
 # TO DO: Pass xlabel and ylabel values

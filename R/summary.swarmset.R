@@ -25,4 +25,25 @@ summary.swarmset <- function(object, ...) {
 	    collapse=', '), '\n')
 
 #    cat(paste(names(object$working_swarm$is_included[ins]), collapse='\n'), '\n')
+
+    n.remaining = which(c(object$working_swarm$variant_counts) > 0)
+
+    message(paste("Covered", 
+        object$working_swarm$initial_n_variants-length(n.remaining), "of", 
+	object$working_swarm$initial_n_variants, "initial mutations."))
+
+    if (length(n.remaining > 0)) {
+
+        message(paste0("Number of mutations to be represented is now ", 
+	    length(which(c(object$working_swarm$variant_counts) > 0)),":"))
+
+        pos.counts <- apply(object$working_swarm$variant_counts, 2, max)
+	for (i in which(pos.counts > 0)) {
+
+            message(paste0("  column", sprintf("%3s", i), ":", 
+		sprintf("%5s", names(pos.counts)[i]), "[", 
+		paste(rownames(object$working_swarm$variant_counts)[which(object$working_swarm$variant_counts[, i] > 0)], collapse=""), "]"))
+
+	}
+    }
 }

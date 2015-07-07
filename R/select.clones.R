@@ -1,7 +1,7 @@
 #' @keywords internal
 select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
     is_included, is_also_included, is_excluded, min_counts, 
-    sequence_multiplicity, timepoints_parser, is_verbose) {
+    sequence_multiplicity, timepoints_parser) {
 
     dot_concatamer <- dotify.matrix(aln_concatamer, 
 	aln_concatamer[tf_index, ], as_logical=FALSE)
@@ -49,8 +49,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 			 sequence_multiplicity=sequence_multiplicity,
 			 omit_singletons=T, 
 			 min_counts=min_counts,
-			 aa_alphabet=aa_alphabet, 
-			 is_verbose=is_verbose)
+			 aa_alphabet=aa_alphabet)
 
     working_swarm <- list ( is_included = init.clone.list(aln_allcolumns),
 # start with all F and include is_included=T from userland below.
@@ -70,10 +69,10 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 		     initial_n_variants = 0)
 
     working_swarm$initial_n_variants = 
-        length(which(c(working_swarm$variant_counts) > 0))
+        length(which(c(working_swarm$initial_variant_counts) > 0))
 
     # force include TF sequence
-    working_swarm <- add.clone(tf_index, working_swarm, "TF", is_verbose)
+    working_swarm <- add.clone(tf_index, working_swarm, "TF")
 
 # TO DO: consider this in default behavior
 
@@ -91,8 +90,8 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 
 	if (length(t_rows) == 0) next
 
-	if.verbose.print(paste0("t=", curr_t, ", n=", 
-		    length(t_rows), " viable clones"), is_verbose)
+	message(paste0("t=", curr_t, ", n=", 
+		    length(t_rows), " viable clones"))
 	if (length(t_rows) == 1) t_rows <- rep(t_rows, 2) # note kludge 
                                                    # so table() calls will work
 
@@ -107,8 +106,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 	i <- names(which(is_also_included[t_rows]))
 	if (length(i) > 0)
 	    for (j in i)
-		working_swarm <- add.clone(j, working_swarm, "given", 
-		    is_verbose)
+		working_swarm <- add.clone(j, working_swarm, "given")
 
         # count variants available for curr.t, i.e. on the "supply" side
 	variant_supply <- 
@@ -116,8 +114,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 		sequence_multiplicity=trows_multiplicity,
 		omit_singletons=F, 
 		min_counts=min_counts,
-		aa_alphabet=aa_alphabet, 
-		is_verbose=is_verbose)
+		aa_alphabet=aa_alphabet)
 
 ### WHY DO SITE NAMES LOOK LIKE THIS:  column 28: G558[]
 
@@ -130,8 +127,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 		next
 
             # take first the most abundant variant from supply for site
-	    available_variants <- list.available.variants(working_swarm, site, 
-		is_verbose)
+	    available_variants <- list.available.variants(working_swarm, site)
 
 # sh/could this be more efficient where no available variants are present?
 	    if (is.null(available_variants) | length(available_variants) == 0)
@@ -149,8 +145,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
                     if (length(A0) == 1) {
 
                         # A0: Only one clone carries this mutation
-		        working_swarm <- add.clone(A0, working_swarm, "A0", 
-			    is_verbose)
+		        working_swarm <- add.clone(A0, working_swarm, "A0")
 
                     } else {
 
@@ -162,8 +157,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 
 			if (length(A1) == 1) {
 
-			    working_swarm <- add.clone(A1, working_swarm, "A1",
-				is_verbose)
+			    working_swarm <- add.clone(A1, working_swarm, "A1")
 
 			} else {
 
@@ -173,8 +167,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 
 			    if (length(B0) == 1) {
 
-				working_swarm <- add.clone(B0, working_swarm, 
-				    "B0", is_verbose)
+				working_swarm <- add.clone(B0, working_swarm, "B0")
 
 			    } else {
 
@@ -187,8 +180,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 
 			        if (length(table_allcolumns) == 1) {
 
-				    working_swarm <- add.clone(B0[1], 
-					working_swarm, "B1", is_verbose)
+				    working_swarm <- add.clone(B0[1], working_swarm, "B1")
 
 				} else {
 
@@ -221,7 +213,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 					    min(mean_hds))]
 
 				        working_swarm <- add.clone(C0, 
-					    working_swarm, "C0", is_verbose)
+					    working_swarm, "C0")
 
 				    } else if (length(min(which(mean_hds == 
 						       min(mean_hds))) == 1)) {
@@ -232,7 +224,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 				        C1 <- rownames(hds)[min(which(mean_hds
 						    == min(mean_hds)))]
 					working_swarm <- add.clone(C1, 
-					    working_swarm, "C1", is_verbose)
+					    working_swarm, "C1")
 
 				    } else {
 
@@ -257,6 +249,8 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
             } # for site.variant in available.variants
         } # for site in names_needed.sites
     } # for curr.t in all.timepoints
+
+   # after having completed iteration, list sites that remain to be covered
 
     working_swarm$dot_concatamer[tf_index, ] = keep_tf_dot_concatamer
     return (working_swarm)

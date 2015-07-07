@@ -41,7 +41,7 @@ resample.swarmset <- function(SST, n_replicates=100) {
 #	is_included[which(SST$is_also_included)] = T
 
 # sh/could test here for errors
-#    working_swarm <- add.clone(tf_index, working_swarm, "TF", is_verbose)
+#    working_swarm <- add.clone(tf_index, working_swarm, "TF")
     # copied from above
 
     aa_alphabet <- sort(unique(c(SST$working_swarm$dot_concatamer)))
@@ -51,8 +51,7 @@ resample.swarmset <- function(SST, n_replicates=100) {
 	sequence_multiplicity=SST$working_swarm$sequence_multiplicity,
 	omit_singletons=T, 
 	min_counts=SST$min_counts,
-	aa_alphabet=aa_alphabet, #SST$working_swarm$aa_alphabet, 
-	is_verbose=F)
+	aa_alphabet=aa_alphabet)
 
     random_swarm <- list ( is_included = is_included,
                      dot_concatamer = SST$working_swarm$dot_concatamer,
@@ -71,10 +70,10 @@ resample.swarmset <- function(SST, n_replicates=100) {
 
 #    if (length(force_includes) > 0)
 #	for (i in 1:force_includes)
-#	    random_swarm <- add.clone(force_includes[i], random_swarm, "a", F)
+#	    random_swarm <- add.clone(force_includes[i], random_swarm, "a")
 
     for (i in 1:length(resampled_set))
-	random_swarm <- add.clone(resampled_set[i], random_swarm, "b", F)
+	random_swarm <- add.clone(resampled_set[i], random_swarm, "b")
 
     random_swarm$initial_n_variants = 
         length(which(c(random_swarm$variant_counts) > 0))
