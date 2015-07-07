@@ -1,3 +1,5 @@
+#' Select sequences to represent mutations in selected sites.
+#' 
 #' Analyze longitudinal protein sequences for variants among selected sites.
 #'
 #' @param ST swarmtools object, with list of selected sites.
@@ -6,7 +8,8 @@
 #' @param included_clone_names List of included clone names.
 #' @param excluded_clone_names List of excluded clone names.
 #' @param min_counts Variants that occur less often than this number in the 
-#' entire alignment are not included in swarms.
+#' entire alignment are not included in swarms.  The default value (2) catches 
+#' all recurrent mutations.
 #'
 #' @return A swarmset object with selected sequences in a slot called 
 #' \code{working_swarm} with values \code{is_included==T}, 
