@@ -6,7 +6,7 @@
 #' @param dotify If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.
 #' @param ... can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').
 #'
-#' @return An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else los it when the R session ends.
+#' @return An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else lose it when the R session ends.
 #'
 #' @family swarmset methods
 #' @export
@@ -48,7 +48,7 @@ plot.swarmset <- function(x, sort_stacks=F, stacks_per_line=NULL, dotify=F, ...)
     outfile <- make.logoplot(x$selected_sites,
 	    x$working_swarm,
 	    which(x$working_swarm$is_included),
-	    paste0(x$results_prefix, "-swarm"),
+	    paste0("swarmset-n", length(which(x$working_swarm$is_included))),
 	    stacks_per_line = stacks_per_line,
 	    dotify=dotify, aspect_ratio=aspect_ratio,
 	    logo_format=format)

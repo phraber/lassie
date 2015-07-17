@@ -19,13 +19,14 @@
 \item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').}
 }
 \value{
-An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else los it when the R session ends.
+An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else lose it when the R session ends.
 }
 \description{
 Render a logo plot of concatamer forms of clones in working_swarm
 }
 \seealso{
-Other swarmset.methods: \code{\link{print.swarmset}};
+Other swarmset.methods: \code{\link{make.timepoint.logos}};
+  \code{\link{print.swarmset}};
   \code{\link{resample.swarmset}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }

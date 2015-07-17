@@ -41,7 +41,8 @@ Analyze longitudinal protein sequences for variants among selected sites.
 \seealso{
 \code{\link{swarmtools}}
 
-Other swarmset.methods: \code{\link{plot.swarmset}};
+Other swarmset.methods: \code{\link{make.timepoint.logos}};
+  \code{\link{plot.swarmset}};
   \code{\link{print.swarmset}};
   \code{\link{resample.swarmset}};
   \code{\link{summary.swarmset}}

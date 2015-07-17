@@ -39,7 +39,6 @@ swarmset <- function(ST,
     if (class(ST) != "swarmtools")
 	stop("swarmset ERROR: please provide a swarmtools object")
 
-## COMMENT
 # By keeping "this" here, rather than moving it into select.clones, it
 # is no longer necessary to pass around ST$selected_sites or the
 # swarmtools object until summarizing results

@@ -17,7 +17,8 @@ List concatamers of selected sites for all working_swarm sequences in swarmset.
 \seealso{
 \code{\link{swarmset}}
 
-Other swarmset.methods: \code{\link{plot.swarmset}};
+Other swarmset.methods: \code{\link{make.timepoint.logos}};
+  \code{\link{plot.swarmset}};
   \code{\link{resample.swarmset}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }

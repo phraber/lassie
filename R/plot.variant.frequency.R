@@ -1,7 +1,7 @@
 #' @keywords internal
 plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced, 
-    site_name, label_axes, conf_int, aa_colors, tf_loss_cutoff, 
-    is_time_in_weeks, site_num = NULL) {
+    site_name, label_axes, conf_int, tf_loss_cutoff, 
+    is_time_in_weeks, site_num = NULL, lut) {
 
     x_values <- as.numeric(gsub("^[A-Za-z]*", "", rownames(site_freqs)))
     my_xlim <- c(0, max(x_values))
@@ -11,17 +11,8 @@ plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced,
     if (ncol(site_freqs) < 2)
 	stop("WTF")
 
-    if (!is.null(aa_colors)) {
-
-	my_colors = sapply(1:ncol(site_freqs), function(i) 
-            aa_colors$aa_color[which(toupper(aa_colors$alphabet) == colnames(site_freqs)[i])])
-
-# cat(site_name, paste(my_colors, colnames(site_freqs), collapse=","), "\n")
-
-    } else {
-	# each panel uses different color scheme, by column-ordering criterion
-	my_colors = c(1:ncol(site_freqs))
-    }
+# each panel uses different color scheme, by column-ordering criterion
+    my_colors = aa.col[tolower(colnames(site_freqs)), lut]
 
     plot(0, 0, type='n', xlab='', ylab='', xlim=my_xlim, ylim=c(-2,102), frame.plot=F)
     abline(h=c(0:5*20), lwd=1/2, col=my_grey, lty=1)

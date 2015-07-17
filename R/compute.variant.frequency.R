@@ -1,20 +1,18 @@
 #' @keywords internal
 compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes, 
-    min_variant_count=2, conf_int=F, aa_colors=NULL, col_min=NULL, 
-    tf_loss_cutoff=NULL,  
-    is_time_in_weeks=is_time_in_weeks, site_num=site_num) {
+    min_variant_count, conf_int, col_min, is_time_in_weeks, site_num, lut) {
 
     if (class(S) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to compute.variant.frequency()")
 
     if (is.null(S$sequence_multiplicity)) {
 
-	site_counts <- table(S$seq_prefixes, S$aas_aln[, site], 
+	site_counts <- table(S$timepoint_per_sequence, S$aas_aln[, site], 
 	    exclude=c("Z", "X", "%", "*", "#"))
 	site_totals <- apply(site_counts, 2, sum)
 
 	# exclude rare variants on second pass
-	site_counts <- table(S$seq_prefixes, S$aas_aln[, site], 
+	site_counts <- table(S$timepoint_per_sequence, S$aas_aln[, site], 
 	    exclude=c("Z", "X", "%", "*", "#", 
 		colnames(site_counts)[which(site_totals < min_variant_count)]))
     } else {
@@ -89,8 +87,8 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes,
 #	gsub("^[A-Z-]", "", rownames(s))
 
 	    plot.variant.frequency(site_freqs, site_counts, site_ns, 
-		site_name, label_axes, conf_int, aa_colors, tf_loss_cutoff,
-		is_time_in_weeks=is_time_in_weeks, site_num=site_num)
+		site_name, label_axes, conf_int, S$tf_loss_cutoff,
+		is_time_in_weeks=is_time_in_weeks, site_num=site_num, lut)
 
 	}
     }

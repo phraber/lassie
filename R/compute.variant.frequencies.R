@@ -1,6 +1,6 @@
 #' @keywords internal
-compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F, 
-    aa_colors=NULL, col_min=NULL, tf_loss_cutoff=NULL, is_time_in_weeks=T) {
+compute.variant.frequencies <- function(S, min_variant_count, conf_int, 
+    col_min, is_time_in_weeks, color_lut) {
 
     #  iterate over selected_sites, calling compute.variant.frequency per site
 
@@ -22,16 +22,17 @@ compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
 
 	stop("Sorry, this feature is broken - think about how to tabulate variants given sequence multiplicities")
 
-	site_ns <- as.matrix(rep(0, length(unique(S$seq_prefixes))), ncol=1)
-	rownames(site_ns) <- unique(S$seq_prefixes)
+	site_ns <- as.matrix(rep(0, length(unique(S$timepoint_per_sequence))), 
+	    ncol=1)
+	rownames(site_ns) <- unique(S$timepoint_per_sequence)
 
-	for (i in 1:length(S$seq_prefixes))
-	    site_ns[S$seq_prefixes[i]] <- site_ns[S$seq_prefixes[i]] + 
+	for (i in 1:length(S$timepoint_per_sequence))
+	    site_ns[S$timepoint_per_sequence[i]] <- site_ns[S$timepoint_per_sequence[i]] + 
 	        S$sequence_multiplicity[i]
 
     } else {
 	tps_mult <- NULL
-	site_ns <- as.matrix(table(S$seq_prefixes), ncol=1)
+	site_ns <- as.matrix(table(S$timepoint_per_sequence), ncol=1)
     }
 
     # slice through alignment, one column (selected site) at a time
@@ -42,11 +43,9 @@ compute.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
 	    i==1, # only label axes for first selected site
 	    min_variant_count=min_variant_count, 
 	    conf_int=conf_int, 
-	    aa_colors=aa_colors, 
-	    col_min, 
-	    tf_loss_cutoff, 
+	    col_min=col_min, 
 	    is_time_in_weeks=is_time_in_weeks,
-	    site_num=i)
+	    site_num=i, color_lut)
 
 }
 
