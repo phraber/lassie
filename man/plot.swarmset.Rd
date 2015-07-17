@@ -4,14 +4,17 @@
 \alias{plot.swarmset}
 \title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
-\method{plot}{swarmset}(x, sort = F, stacks_per_line = NULL, ...)
+\method{plot}{swarmset}(x, sort_stacks = F, stacks_per_line = NULL,
+  dotify = F, ...)
 }
 \arguments{
 \item{x}{A swarmset object populated with working_swarm.}
 
-\item{sort}{If true, reorder sites from left to right.}
+\item{sort_stacks}{If true, reorder sites from left to right.}
 
 \item{stacks_per_line}{If NULL, this is set to the number of selected sites; otherwise, it limits plot width.}
+
+\item{dotify}{If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.}
 
 \item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').}
 }
