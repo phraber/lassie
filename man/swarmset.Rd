@@ -2,7 +2,7 @@
 % Please edit documentation in R/swarmset.R
 \name{swarmset}
 \alias{swarmset}
-\title{Analyze longitudinal protein sequences for variants among selected sites.}
+\title{Select sequences to represent mutations in selected sites.}
 \usage{
 swarmset(ST, maxtol_deletion = NULL, maxtol_insertion = NULL,
   included_clone_names = NULL, excluded_clone_names = NULL,
@@ -20,7 +20,8 @@ swarmset(ST, maxtol_deletion = NULL, maxtol_insertion = NULL,
 \item{excluded_clone_names}{List of excluded clone names.}
 
 \item{min_counts}{Variants that occur less often than this number in the
-entire alignment are not included in swarms.}
+entire alignment are not included in swarms.  The default value (2) catches
+all recurrent mutations.}
 }
 \value{
 A swarmset object with selected sequences in a slot called

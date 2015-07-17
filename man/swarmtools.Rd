@@ -2,7 +2,7 @@
 % Please edit documentation in R/swarmtools.R
 \name{swarmtools}
 \alias{swarmtools}
-\title{Analyze sites a protein sequence alignment for loss of the reference form.}
+\title{Identify sites under putative immune selection.}
 \usage{
 swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
   tf_index = NULL, tf_name = NULL, timepoints_parser = NULL,
@@ -38,7 +38,15 @@ swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
 swarmtools object
 }
 \description{
-Analyze sites a protein sequence alignment for loss of the reference form.
+Given a serially sampled protein sequence alignment, this will list sites where loss of transmitted-founder (TF) form exceeds a cutoff value within a given sample timepoint.
+}
+\details{
+The sample timepoints should be part of the sequence names and it should be possible to extract them by splitting sequence names with a particular separator and taking one of the resulting fields as the timepoint label.  TF loss is computed among sequences that have the same timepoint label.  By default, the timepoint label is in the first dot-delimited field.  However, you can specify alternatives using lassie::create.timepoint.parser().
+
+You should provide at least the name of an alignment file or an alignment matrix (via seqinr::as.alignment.matrix())
+already in memory, and specify a percentage value (0-100) for tf_loss_cutoff.  Without these, no sites will be returned.
+This is not an error state, as the returned swarmtools object could be passed to lassie::set.alignment.file() and
+lassie::set.tf.loss.cutoff().
 }
 \examples{
 \dontrun{
