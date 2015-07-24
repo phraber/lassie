@@ -18,6 +18,8 @@
 #' grey lines and labels that appear in the plots.
 #' @param color_lut_type Optional string for color lookup table, currently only
 #' implemented for amino acids as 'aa', 'charge' and 'taylor'.
+#' @param annotate_env If true, will name bnAbs in associated sites.
+#' @param number_sites If true, prefix each the site name above each panel with the panel number.
 #'
 #' @return NULL if no plot made, 1 if plot was made
 #' @examples
@@ -35,7 +37,7 @@
 #'
 #' @export
 report.variant.frequencies <- function(S, min_variant_count=2, conf_int=F, 
-    col_min=10, is_time_in_weeks=T, color_lut_type='charge') {
+    col_min=10, is_time_in_weeks=T, color_lut_type='charge', annotate_env=F, number_sites=F) {
 
     if (class(S) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to compute.variant.frequencies()")
@@ -53,7 +55,9 @@ report.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
                                 conf_int,#=conf_int, 
 				col_min,#=col_min,
                                 is_time_in_weeks,#=is_time_in_weeks, 
-				color_lut_type)
+				color_lut_type, 
+				annotate_env, 
+				number_sites)
 
     return ( 1 )
 }

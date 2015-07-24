@@ -5,7 +5,8 @@
 \title{Summarize and plot the frequency dynamics per site.}
 \usage{
 report.variant.frequencies(S, min_variant_count = 2, conf_int = F,
-  col_min = 10, is_time_in_weeks = T, color_lut_type = "charge")
+  col_min = 10, is_time_in_weeks = T, color_lut_type = "charge",
+  annotate_env = F, number_sites = F)
 }
 \arguments{
 \item{S}{swarmtools object, with list of selected sites.}
@@ -25,6 +26,10 @@ grey lines and labels that appear in the plots.}
 
 \item{color_lut_type}{Optional string for color lookup table, currently only
 implemented for amino acids as 'aa', 'charge' and 'taylor'.}
+
+\item{annotate_env}{If true, will name bnAbs in associated sites.}
+
+\item{number_sites}{If true, prefix each the site name above each panel with the panel number.}
 }
 \value{
 NULL if no plot made, 1 if plot was made

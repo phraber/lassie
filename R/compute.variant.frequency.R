@@ -1,6 +1,6 @@
 #' @keywords internal
 compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes, 
-    min_variant_count, conf_int, col_min, is_time_in_weeks, site_num, lut) {
+    min_variant_count, conf_int, col_min, is_time_in_weeks, site_num, lut, annotate_env) {
 
     if (class(S) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to compute.variant.frequency()")
@@ -88,7 +88,8 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult, label_axes,
 
 	    plot.variant.frequency(site_freqs, site_counts, site_ns, 
 		site_name, label_axes, conf_int, S$tf_loss_cutoff,
-		is_time_in_weeks=is_time_in_weeks, site_num=site_num, lut)
+		is_time_in_weeks=is_time_in_weeks, site_num=site_num, lut=lut, 
+		annotate_env=annotate_env)
 
 	}
     }

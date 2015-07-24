@@ -1,7 +1,7 @@
 #' @keywords internal
 plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced, 
     site_name, label_axes, conf_int, tf_loss_cutoff, 
-    is_time_in_weeks, site_num = NULL, lut) {
+    is_time_in_weeks, site_num, lut, annotate_env) {
 
     x_values <- as.numeric(gsub("^[A-Za-z]*", "", rownames(site_freqs)))
     my_xlim <- c(0, max(x_values))
@@ -14,22 +14,24 @@ plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced,
 # each panel uses different color scheme, by column-ordering criterion
     my_colors = aa.col[tolower(colnames(site_freqs)), lut]
 
+    Ymax = floor(max(x_values) / ifelse(is_time_in_weeks, 52, 356.25))
+
     plot(0, 0, type='n', xlab='', ylab='', xlim=my_xlim, ylim=c(-2,102), frame.plot=F)
-    abline(h=c(0:5*20), lwd=1/2, col=my_grey, lty=1)
+    abline(h=c(0:5 * 20), lwd=1/2, col=my_grey, lty=1)
 #    abline(h=c(0:4*25), lwd=1/2, col=my_grey, lty=1)
 
 # TO DO: specify or set upper bound on number of years of follow-up
 
     if (is_time_in_weeks) {
-	abline(v=c(0:4*52), lwd=1/2, col=my_grey, lty=1)
+	abline(v=c(0:Ymax * 52), lwd=1/2, col=my_grey, lty=1)
+
 	if (label_axes)
-	    mtext(paste0("Y",c(0:4)), 1, at=c(0:4)*52, line=0/4, cex=8/12, 
-		col=my_grey)
+	    mtext(paste0("Y",c(0:Ymax)), 1, at=c(0:Ymax) * 52, line=0, cex=8/12, col=my_grey)
     } else {
-	abline(v=c(0:4*365.25), lwd=1/2, col=my_grey, lty=1)
+	abline(v=c(0:Ymax * 365.25), lwd=1/2, col=my_grey, lty=1)
+
 	if (label_axes)
-           mtext(paste0("Y",c(0:4)), 1, at=c(0:4)*365.25, line=0/4, cex=8/12, 
-	       col=my_grey)
+           mtext(paste0("Y",c(0:Ymax)), 1, at=c(0:Ymax) * 365.25, line=0, cex=8/12, col=my_grey)
     }
 
     #TO DO: optionally add H line for tf_loss_cutoff
@@ -38,8 +40,7 @@ plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced,
 
     if (label_axes) {
 
-        mtext(c("20%", "60%", "100%"), 2, at=c(1,3,5)*20, line=0/4, cex=8/12, 
-	    col=my_grey)
+        mtext(c("20%", "60%", "100%"), 2, at=c(1,3,5)*20, line=0, cex=8/12, col=my_grey)
 
 #        mtext(c("0%", "40%", "80%"), 2, at=c(0,2,4)*20, line=0/4, cex=8/12, col=my_grey)
 #        mtext(c("0%", "50%", "100%"), 2, at=c(0,2,4)*25, line=0/4, cex=8/12, col=my_grey)
@@ -118,8 +119,55 @@ plot.variant.frequency <- function(site_freqs, site_counts, n_sequenced,
           side=1, outer=F, cex=8/12, col=my_colors, at=my_xpos,
           line=-1/8)#, family='Courier')
 
-    mtext(site_name, side=3, line=0, adj=1/2, cex=8/12)#, family='Courier')
 
-    if (!is.null(site_num))
-        mtext(paste0(site_num, "."), side=3, line=0, adj=0/2, cex=8/12)#, family='Courier')
+    if (!is.null(site_num)) {
+	if (annotate_env) {
+            mtext(paste0(site_num, ". ", site_name), side=3, line=0, adj=0/2, cex=8/12)
+        } else {
+            mtext(paste0(site_num, ". ", site_name), side=3, line=0, adj=1/2, cex=8/12)
+        }
+    } else {
+	if (annotate_env) {
+	    mtext(site_name, side=3, line=0, adj=0/2, cex=8/12)#, family='Courier')
+        } else {
+	    mtext(site_name, side=3, line=0, adj=1/2, cex=8/12)#, family='Courier')
+        }
+    }
+
+    if (annotate_env) {
+	HXB2.position <- as.numeric(gsub("^[A-Z]", "", gsub("[a-z]$", "",
+	    unlist(strsplit(site_name, " "))[[1]])))
+
+	my.features = NULL
+
+	if (any(env.features[HXB2.position, ])) {
+
+	    my.features <- colnames(env.features)[which(env.features[HXB2.position, ])]
+
+	    if (!is.null(my.features))
+		mtext(paste(sort(my.features), collapse=","), font=2,
+		    side=3, line=1/4, adj=1, padj=0, cex=6/12, family='Courier')
+	}# else {
+
+	    my.features.L = NULL
+	    my.features.R = NULL
+
+	    if (any(env.features[HXB2.position-1, ]))
+	        my.features.L <- 
+		    colnames(env.features)[which(env.features[HXB2.position-1, ])]
+	    if (any(env.features[HXB2.position+1, ]))
+	        my.features.R <- 
+		    colnames(env.features)[which(env.features[HXB2.position+1, ])]
+
+	    my.features = unique(c(my.features.L, my.features.R))
+
+	    if (!is.null(my.features))
+		mtext(paste(sort(my.features), collapse=","), font=1,
+		    side=3, line=0, adj=1, padj=1, cex=6/12, family='Courier', col='grey35')
+#	}
+
+#	if (!is.null(my.features))
+#	    legend('top', my.features, col=rep('transparent', length(my.features)), 
+#		pch=rep(1, length(my.features)), bty='n')
+    }
 }

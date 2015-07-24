@@ -1,6 +1,6 @@
 #' @keywords internal
 compute.variant.frequencies <- function(S, min_variant_count, conf_int, 
-    col_min, is_time_in_weeks, color_lut) {
+    col_min, is_time_in_weeks, color_lut_type, annotate_env, number_sites) {
 
     #  iterate over selected_sites, calling compute.variant.frequency per site
 
@@ -36,7 +36,11 @@ compute.variant.frequencies <- function(S, min_variant_count, conf_int,
     }
 
     # slice through alignment, one column (selected site) at a time
-    for (i in 1:length(S$selected_sites$aln))
+    for (i in 1:length(S$selected_sites$aln)) {
+
+        my.sitenum <- NULL
+	if (number_sites) my.sitenum = i
+
 	compute.variant.frequency(S, S$selected_sites$aln[i], 
 	    site_ns, 
 	    tps_mult, 
@@ -45,7 +49,9 @@ compute.variant.frequencies <- function(S, min_variant_count, conf_int,
 	    conf_int=conf_int, 
 	    col_min=col_min, 
 	    is_time_in_weeks=is_time_in_weeks,
-	    site_num=i, color_lut)
-
+	    site_num=my.sitenum, 
+	    lut=color_lut_type,
+	    annotate_env=annotate_env)
+    }
 }
 
