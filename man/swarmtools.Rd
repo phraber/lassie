@@ -5,7 +5,7 @@
 \title{Identify sites under putative immune selection.}
 \usage{
 swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
-  tf_index = NULL, tf_name = NULL, timepoints_parser = NULL,
+  tf_index = 1, tf_name = NULL, timepoints_parser = NULL,
   refseq_lut_file = NULL, refseq_lut = NULL, refseq_name = "HXB2",
   tf_loss_cutoff = NULL, included_sites = NULL, excluded_sites = NULL)
 }
