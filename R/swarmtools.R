@@ -36,7 +36,7 @@ swarmtools <- function(
     aas_aln=NULL,
     aas_file=NULL, 
     alignment_format="fasta", 
-    tf_index=NULL,
+    tf_index=1,
     tf_name=NULL,
     timepoints_parser=NULL,
     refseq_lut_file=NULL,
