@@ -42,11 +42,11 @@ plot.swarmtools <- function(x, ...) {
     if (!is.null(dots$oma))
 	oma = dots$oma
 
-    mar=c(8/4, 8/4, 1/4, 1/4)
+    mar=c(6/4, 8/4, 1/4, 1/4)
     if (!is.null(dots$mar))
 	mar = dots$mar
 
-    mgp=c(6/4, 1/4, 1/5)
+    mgp=c(7/4, 1/4, 1/5)
     if (!is.null(dots$mgp))
 	mgp = dots$mgp
 
@@ -77,6 +77,8 @@ plot.swarmtools <- function(x, ...) {
 	    mar=mar,
 	    mgp=mgp,
 	    ps=ps,
+	    xlab=xlab, 
+	    ylab=ylab,
 	    cex.axis=cex*10/12, 
 	    cex.lab=cex*9/12,
 	    lend=1, ljoin=1, tcl=-1/5, 
@@ -117,7 +119,7 @@ plot.swarmtools <- function(x, ...) {
 	axis(1, at=0:4*25, labels=0:4*25, line=1/16, padj=0, xaxt='s', las=1, 
 	    cex.axis=cex*10/12, cex.lab=cex*12/12, mgp=c(5/4, 1/8, 1/10), tcl=tcl)
 
-	mtext(xlab, 1, line=2, cex=cex*11/12)
-	mtext(ylab, 2, line=2, cex=cex*11/12)
+#	mtext(xlab, 1, line=2, cex=cex*11/12)
+#	mtext(ylab, 2, line=2, cex=cex*11/12)
     }
 }
