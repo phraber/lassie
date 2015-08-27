@@ -7,6 +7,8 @@ Longitudinal Antigenic Swarm Selection from Intrahost Evolution
 
 An R package of tools to select sites and sequences that represent variation in a longitudinally sampled protein alignment.
 
+For a quick start, plase read the tutorial file (https://githib.com/phraber/lassie/tutorial.pdf), which contains the vignette.
+
 #### Installation and Getting Started:
 1. Download and install pandoc precompiled or from source - http://pandoc.org/installing.html
 1. Start Rstudio, available via http://www.rstudio.com
@@ -16,5 +18,7 @@ An R package of tools to select sites and sequences that represent variation in 
 1. Type "devtools::build_vignettes('lassie')"
 1. Type "library(lassie)"
 1. Type "vignette('lassie')"
+
+We are working to include the pre-built vignette with a distribution bundle that does not require all steps listed above.
 
 #### Following these instructions will install the required package 'seqinr' and other optional packages.
