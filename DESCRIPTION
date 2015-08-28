@@ -8,7 +8,6 @@ License: GPL-2
 LazyData: true
 Imports: seqinr
 Suggests: knitr,
-    testthat,
     devtools,
     binom
 VignetteBuilder: knitr
