@@ -7,9 +7,8 @@ Longitudinal Antigenic Swarm Selection from Intrahost Evolution
 
 An R package of tools to select sites and sequences that represent variation in a longitudinally sampled protein alignment.
 
-For a quick start, please read the tutorial file (https://github.com/phraber/lassie/blob/master/tutorial.pdf), which contains the vignette.
-
 #### Installation and Getting Started:
+
 1. Start R, by whatever method you choose.
 1. Type "install.packages('devtools')".
 1. If prompted to compile a required package from source, you can safely decline without ill effects.
@@ -18,6 +17,4 @@ For a quick start, please read the tutorial file (https://github.com/phraber/las
 
 If the you cannot view the vignette, it is available in PDF format here - https://github.com/phraber/lassie/blob/master/tutorial.pdf
 
-##### To list all functions provided in this package, type 
-"library(help=lassie)" from within R.
-#### To list all functions provided in this package:
+##### To list all functions and example data provided by this package, type "library(help=lassie)" from within R.
