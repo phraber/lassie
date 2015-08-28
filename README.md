@@ -10,15 +10,17 @@ An R package of tools to select sites and sequences that represent variation in 
 For a quick start, please read the tutorial file (https://github.com/phraber/lassie/blob/master/tutorial.pdf), which contains the vignette.
 
 #### Installation and Getting Started:
-1. Download and install pandoc precompiled or from source - http://pandoc.org/installing.html
-1. Start Rstudio, available via http://www.rstudio.com
-1. Type "install.packages('devtools', 'rmarkdown')"
-1. If prompted to compile a needed package from source, you can probably decline without ill effects.
+1. Start R, by whatever method you choose.
+1. Type "install.packages('devtools')".
+1. If prompted to compile a required package from source, you can safely decline without ill effects.
 1. Type "devtools::install_github('phraber/lassie').
-1. Type "devtools::build_vignettes('lassie')"
-1. Type "library(lassie)"
-1. Type "vignette('lassie')"
+1. Type "vignette('lassie')".
 
-We are working to include the pre-built vignette with a distribution bundle that does not require all steps listed above.
+If the you cannot view the vignette, it is available in PDF format here - https://github.com/phraber/lassie/blob/master/tutorial.pdf
 
-#### Following these instructions will install the required package 'seqinr' and other optional packages.
+#### To list all functions provided in this package:
+1. Start R, by whatever method you choose.
+1. Type "library(lassie)".
+1. Type "ls('package:lassie')".
+
+
