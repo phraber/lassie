@@ -6,7 +6,8 @@
 \usage{
 report.variant.frequencies(S, min_variant_count = 2, conf_int = F,
   col_min = 10, is_time_in_weeks = T, color_lut_type = "charge",
-  annotate_env = F, number_sites = F)
+  annotate_env = F, number_sites = F, T_max = NULL, barplot = F,
+  stacked = T, barplot_width = 4/5, hide_tf = F, ...)
 }
 \arguments{
 \item{S}{swarmtools object, with list of selected sites.}
@@ -15,8 +16,7 @@ report.variant.frequencies(S, min_variant_count = 2, conf_int = F,
 number of times across the entire alignment.}
 
 \item{conf_int}{If true, 95\% confidence intervals will be computed on
-frequencies from sample counts using the binomial distribution.  Requires
-package(binom).}
+frequencies from sample counts using the binomial distribution.  Requires package(binom).}
 
 \item{col_min}{Only show variants that ever exceed this minimum value.}
 
@@ -30,6 +30,19 @@ implemented for amino acids as 'aa', 'charge' and 'taylor'.}
 \item{annotate_env}{If true, will name bnAbs in associated sites.}
 
 \item{number_sites}{If true, prefix each the site name above each panel with the panel number.}
+
+\item{T_max}{If defined, limits the upper bound on the x (time) axis.  Units are given by the
+is_time_in_weeks value, i.e. days if false.}
+
+\item{barplot}{If true, plots histograms per timepoint, rather than lines and dots.}
+
+\item{stacked}{If this and barplot are true, plots stacked histograms per timepoint.}
+
+\item{barplot_width}{If barplot is true, this specifies its proportionate width per timepoint.}
+
+\item{hide_tf}{If true, omits the first timepoint frequency, generally 100\% TF virus.}
+
+\item{...}{Other options passed to plotting functions.}
 }
 \value{
 NULL if no plot made, 1 if plot was made

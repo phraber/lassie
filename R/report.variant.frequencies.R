@@ -10,8 +10,7 @@
 #' @param min_variant_count Disregard mutations that appear fewer than this 
 #' number of times across the entire alignment.
 #' @param conf_int If true, 95\% confidence intervals will be computed on 
-#' frequencies from sample counts using the binomial distribution.  Requires 
-#' package(binom).
+#' frequencies from sample counts using the binomial distribution.  Requires package(binom).
 #' @param col_min Only show variants that ever exceed this minimum value.
 #' @param is_time_in_weeks If true, labels plot x-axis accordingly.  
 #' Otherwise, time units are assumed to be days.  This influences the annual 
@@ -20,8 +19,15 @@
 #' implemented for amino acids as 'aa', 'charge' and 'taylor'.
 #' @param annotate_env If true, will name bnAbs in associated sites.
 #' @param number_sites If true, prefix each the site name above each panel with the panel number.
-#'
+#' @param T_max If defined, limits the upper bound on the x (time) axis.  Units are given by the 
+#' is_time_in_weeks value, i.e. days if false.
+#' @param barplot If true, plots histograms per timepoint, rather than lines and dots.
+#' @param stacked If this and barplot are true, plots stacked histograms per timepoint.
+#' @param barplot_width If barplot is true, this specifies its proportionate width per timepoint.
+#' @param hide_tf If true, omits the first timepoint frequency, generally 100\% TF virus.
+#' @param ... Other options passed to plotting functions.
 #' @return NULL if no plot made, 1 if plot was made
+#'
 #' @examples
 #' \dontrun{
 #' A <- lassie::swarmtools(aas_file=system.file("extdata", "CH505-gp160.fasta",
@@ -36,11 +42,14 @@
 #' }
 #'
 #' @export
+
 report.variant.frequencies <- function(S, min_variant_count=2, conf_int=F, 
-    col_min=10, is_time_in_weeks=T, color_lut_type='charge', annotate_env=F, number_sites=F) {
+    col_min=10, is_time_in_weeks=T, color_lut_type='charge', annotate_env=F, 
+    number_sites=F, T_max=NULL,
+    barplot=F, stacked=T, barplot_width=4/5, hide_tf=F, ...) {
 
     if (class(S) != "swarmtools")
-        stop("ERROR: Please pass a swarmtools object to compute.variant.frequencies()")
+        stop("ERROR: Please pass a swarmtools object to report.variant.frequencies()")
 
     if (is.null(S$tf_loss_cutoff))
        return ( NULL )
@@ -57,7 +66,8 @@ report.variant.frequencies <- function(S, min_variant_count=2, conf_int=F,
                                 is_time_in_weeks,#=is_time_in_weeks, 
 				color_lut_type, 
 				annotate_env, 
-				number_sites)
+				number_sites, T_max,
+				barplot, stacked, barplot_width, hide_tf, ...)
 
     return ( 1 )
 }

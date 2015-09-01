@@ -1,6 +1,7 @@
 #' @keywords internal
 compute.variant.frequencies <- function(S, min_variant_count, conf_int, 
-    col_min, is_time_in_weeks, color_lut_type, annotate_env, number_sites) {
+    col_min, is_time_in_weeks, color_lut_type, annotate_env, number_sites, 
+    Tmax, do_barplot, stack_barplot, barplot_width, is_tf_hidden, ...) {
 
     #  iterate over selected_sites, calling compute.variant.frequency per site
 
@@ -51,7 +52,7 @@ compute.variant.frequencies <- function(S, min_variant_count, conf_int,
 	    is_time_in_weeks=is_time_in_weeks,
 	    site_num=my.sitenum, 
 	    lut=color_lut_type,
-	    annotate_env=annotate_env)
+	    annotate_env=annotate_env, Tmax,
+	    do_barplot, stack_barplot, barplot_width, is_tf_hidden, ...)
     }
 }
-
