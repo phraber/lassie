@@ -219,10 +219,10 @@ plot.variant.frequency <- function(site.freqs, site.counts, n_sequenced,
                 colnames(env.features)[which(env.features[HXB2.position, ])]
 
             if (!is.null(my.features))
-                mtext(paste(sort(ifelse(length(my.features > 2),
-			    sample(my.features, 2), my.features)), collapse=","), 
-                    font=2,
-                      side=3, line=1/4, adj=1, padj=0, cex=6/12, 
+                mtext(paste(sort(ifelse(length(my.features) > 2,
+			    sample(my.features, 2), my.features)), 
+			collapse=","), 
+                    font=2, side=3, line=1/4, adj=1, padj=0, cex=6/12, 
                       family='Courier')
         }
 
@@ -240,10 +240,11 @@ plot.variant.frequency <- function(site.freqs, site.counts, n_sequenced,
         my.features = unique(c(my.features.L, my.features.R))
 
         if (!is.null(my.features))
-            mtext(paste(sort(ifelse(length(my.features > 2),
-			sample(my.features, 2), my.features)), collapse=","), font=1,
-                  side=3, line=0, adj=1, padj=1, cex=6/12, 
-                  family='Courier', col='grey35')
+            mtext(paste(sort(ifelse(length(my.features) > 2,
+			    sample(my.features, 2), my.features)), 
+		    collapse=","), 
+		font=1, side=3, line=0, adj=1, padj=1, cex=6/12, 
+                family='Courier', col='grey35')
 
     }
   }
