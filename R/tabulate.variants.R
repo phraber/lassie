@@ -57,7 +57,7 @@ tabulate.variants <- function(seqs, sequence_multiplicity,
         for (aa in 1:nrow(variant_counts))
             variant_counts[aa, which(variant_counts[aa, ] < min_counts)] <- 0
 
-    for (other_aa in c("X", "Z", "*", "#", ".")) # excluding '.' should result
+    for (other_aa in c("X", "Z", "B", "*", "#", ".")) # excluding '.' should result
                                       # in the TF being included automatically?
         if (other_aa %in% aa_alphabet)
             variant_counts[other_aa, which(variant_counts[other_aa, ] > 0)] <-0
