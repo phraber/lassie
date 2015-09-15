@@ -1,4 +1,10 @@
 #' @keywords internal
+
+### This function is called by compute.variant.frequencies, which in
+### turn is invoked by report.variant.frequencies, i.e. when making
+### time-series plots of sites.  By calling compute.tf.area, it
+### replicates some by features of the function select.sites()
+
 compute.variant.frequency <- function(S, site, site_ns, tps_mult, 
                                       label_axes, min_variant_count, 
                                       conf_int, col_min, is_time_in_weeks,
@@ -11,6 +17,7 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult,
 
     site_counts <- table(S$timepoint_per_sequence, S$aas_aln[, site], 
 	exclude=c("Z", "X", "%", "*", "#"))
+
     site_totals <- apply(site_counts, 2, sum)
 
     # exclude rare variants on second pass
@@ -26,7 +33,9 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult,
 
     # reorder columns
     when_up <- sapply(1:ncol(site_freqs), function(i) 
-	min(which(site_freqs[, i] > 0)))
+	min(which(site_freqs[, i] > 0)))  
+    ### here the criterion is simply when the variant is first non-zero.
+      # can we use compute.whenup instead?
 
     tf_area <- compute.tf.area(t(site_freqs))
     names(tf_area) <- colnames(site_freqs)

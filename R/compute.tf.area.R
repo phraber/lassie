@@ -1,5 +1,7 @@
 #' @keywords internal
-compute.tf.area <- function(tf_loss_matrix, invert=FALSE) {
+
+### why does this require the sequences be ordered by timepoint?
+compute.tf.area <- function(tf_loss_matrix, invert=F) {
 
     my_tpis = as.numeric(gsub("^[A-Z]", "", colnames(tf_loss_matrix), 
 	ignore.case=T))

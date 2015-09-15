@@ -18,7 +18,10 @@ select.sites <- function(S) {
         length(which(S$included_sites %in% S$excluded_sites)) > 0)
             stop("select.sites ERROR: please reconsider including and excluding the same site/s")
 
+
+
     S$when_up <- compute.whenup(S$tf_loss, 10) # could make 10% min a variable
+    ## and/or test for tf_cutoff below this 10 percent setting
     S$tf_area <- compute.tf.area(S$tf_loss)
     site_frame <- data.frame(S$peak_tf_loss, S$when_up, S$tf_area)
     colnames(site_frame) = c("peak_tf_loss", "when_up", "tf_area")

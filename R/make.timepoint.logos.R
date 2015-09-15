@@ -44,7 +44,7 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
         names(x$working_swarm$seq_concatamer) <- rownames(x$aln_concatamer)
 
         x$working_swarm$dot_concatamer <- dotify.matrix(x$aln_concatamer,
-            x$aln_concatamer[x$tf_index, ], as_logical=FALSE)
+            x$aln_concatamer[x$tf_index, ], as_logical=F)
         names(x$working_swarm$dot_concatamer) <- rownames(x$aln_concatamer)
 
         x$working_swarm$dotseq_concatamer <- sapply(1:nrow(x$working_swarm$dot_concatamer), 

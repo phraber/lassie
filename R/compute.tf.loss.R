@@ -1,4 +1,7 @@
 #' @keywords internal
+
+### TO DO: reorder columns numerically by sample time-point
+###  cf. compute.n.seqs()
 compute.tf.loss <- function(is_tf, n_seqs_per_timepoint=NULL) {
 
     tf_freqs <- matrix(NA, ncol=length(n_seqs_per_timepoint), nrow=ncol(is_tf))

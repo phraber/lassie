@@ -21,7 +21,7 @@ dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 	rownames(out_matrix) <- rownames(aln_mat)
 #	colnames(out_matrix) <- colnames(aln_mat)
 # NB: this changes concatemerized column names; 
-#     use as_logical=FALSE for dot_concatamer 
+#     use as_logical=F for dot_concatamer 
 
 	colnames(out_matrix) <- sapply(1:ncol(aln_mat), function(i) 
 	    paste0(tfseq_vector[i], i))

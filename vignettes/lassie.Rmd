@@ -48,7 +48,7 @@ The SwarmTools object must have a list of selected sites, which happens only
 when it was created using a single `tf_loss_cutoff` value.
 Let's just go with the defaults.
 
-    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=F)
+    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=FALSE)
 
 # All Together Now
 

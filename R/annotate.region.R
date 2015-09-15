@@ -3,7 +3,7 @@ annotate.region <- function(tf_loss_cutoff=NULL,
     refseq_lut=NULL, 
     ptid=NULL,
     region=NULL,
-    show_marginal_annotation=FALSE,
+    show_marginal_annotation=F,
     y_lim=NULL) {
 
 #x, notes=NULL, y_lim=NULL) {

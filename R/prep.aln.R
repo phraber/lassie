@@ -26,9 +26,24 @@ prep.aln <- function(S) {
     if (!is.null(S$aas_aln)) {
 
  	S$original_seqnames <- rownames(S$aas_aln)
+
 	S$timepoint_per_sequence <- parse.timepoints(rownames(S$aas_aln),
 	    uniquify=F, timepoints_parser=S$timepoints_parser)
-	S$n_per_timepoint <- table(S$timepoint_per_sequence)
+
+#	if (!is.null(S$timepoint_per_sequence)) {
+#	    timepoint_order <- order(as.numeric(gsub("^[A-Za-z]", "", 
+#	                       unique(S$timepoint_per_sequence))))
+
+#	    if (!is.null(timepoint_order)) {
+	        
+	        S$n_per_timepoint <- table(sort(S$timepoint_per_sequence))
+
+	        ## order n_per_timepoint by numeric value/s --- NEED TO TEST
+#	        S$n_per_timepont = n_per_timepoint[timepoint_order]
+ #   	    names(S$n_per_timepoint) = names(n_per_timepoint)[timepoint_order]
+#	    }
+	#}
+
 	S <- set.tf(S)
     }
 

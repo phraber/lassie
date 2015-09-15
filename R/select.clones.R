@@ -4,7 +4,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
     sequence_multiplicity, timepoints_parser) {
 
     dot_concatamer <- dotify.matrix(aln_concatamer, 
-	aln_concatamer[tf_index, ], as_logical=FALSE)
+	aln_concatamer[tf_index, ], as_logical=F)
 
     hd_to_tf_concatamer <- sapply(1:nrow(dot_concatamer), function(i) 
 	length(which(dot_concatamer[i,] != ".")) )
@@ -15,7 +15,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
     names(seq_allcolumns) <- rownames(aln_allcolumns)
 
     dot_allcolumns <- dotify.matrix(aln_allcolumns, 
-	aln_allcolumns[tf_index, ], as_logical=FALSE)
+	aln_allcolumns[tf_index, ], as_logical=F)
 
     n_stops <- sapply(1:nrow(dot_allcolumns), function(i) 
 	length(which(dot_allcolumns[i,]=="Z" | dot_allcolumns[i,]=="*" | 
@@ -195,7 +195,7 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 					working_swarm$is_included), 
 					working_swarm)
 
-				    hds <- compute_hd_matrix(seqs_a, seqs_b)
+				    hds <- compute.hd.matrix(seqs_a, seqs_b)
 				    mean_hds <- apply(hds, 1, mean)
 
 				    table_min_mean_hds <- 
