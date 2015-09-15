@@ -48,7 +48,7 @@ The SwarmTools object must have a list of selected sites, which happens only
 when it was created using a single `tf_loss_cutoff` value.
 Let's just go with the defaults.
 
-    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=F)
+    eg.swarmset <- swarmset(eg.swarmtools, is_verbose=FALSE)
 
 # All Together Now
 
@@ -63,22 +63,11 @@ Got that?  Here's the whole workflow:
     eg.swarmset <- swarmset(eg.swarmtools)
     summary(eg.swarmset)
     print(eg.swarmset)
+    plot(eg.swarmset)
 ```
-
-***
-
-# Advanced Graphics
 
 For some fun advanced plotting routines, try running
 `lassie::report.variant.frequencies(eg.swarmtools)` and
 `lassie::make.timepoint.logos(eg.swarmset)`.
-
-If you have `weblogo` installed and in your system search path,
-running `plot(eg.swarmset)` will make a logo plot to summarize variant
-frequency per site in the selected set.  The return value of this
-function is a fully-qualified path to the output file name.  Note that
-when the R session terminates, this file may be deleted.
-
-![](swarmset.png)
 
 ***
