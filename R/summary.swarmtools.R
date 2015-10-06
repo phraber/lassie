@@ -19,9 +19,14 @@ summary.swarmtools <- function(object, ...) {
     if (class(object) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to summary.swarmtools()")
 
-    my_summary <- data.frame(object$tf_loss_cutoff, nrow(object$selected_sites), 
-	round(100*nrow(object$selected_sites)/ncol(object$aas_aln), 2))
-
+    if (is.null(object$selected_sites)) {
+        object$selected_sites <- NA
+        my_summary <- data.frame(object$tf_loss_cutoff, NA, NA)
+    } else {
+        my_summary <- data.frame(object$tf_loss_cutoff, 
+	    nrow(object$selected_sites),
+	    round(100*nrow(object$selected_sites)/ncol(object$aas_aln), 2))
+    }
 #    rownames(my_summary) <- paste("TF Loss >=", object$tf_loss_cutoff, "%")
     colnames(my_summary) <-c("%TF Loss at least", "selected sites, n", 
 	"selected sites, %")
