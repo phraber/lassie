@@ -52,7 +52,7 @@ create.timepoint.parser <- function(field.sep, field.num) {
 	if (do.tests) {
 
             # could test for errors here
-	    if (length(which(!grepl(field.sep, in.vec, fixed=T))) > 0)
+	    if (any(!grepl(field.sep, in.vec, fixed=T)))
 	        stop(paste0("ERROR parsing timepoints: are sequence names delimited by this character '", 
 		    field.sep, "'?\nThese names are missing it:\n",
 		    paste(in.vec[which(!grepl(field.sep, in.vec, fixed=T))], 
@@ -66,7 +66,7 @@ create.timepoint.parser <- function(field.sep, field.num) {
 	    n.fields <- sapply(1:length(testing.matches), function(i)
 		1 + length(testing.matches[[i]]))
 
-	    if (length(which(n.fields < field.num)) > 0)
+	    if (any(n.fields < field.num))
 	        stop(paste(
 		"ERROR parsing timepoints: too few fields in some names:\n", 
 			paste(in.vec[which(n.fields < field.num)], 

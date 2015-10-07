@@ -28,7 +28,6 @@ Render a logo plot of concatamer forms of clones in working_swarm
 Other swarmset.methods: \code{\link{make.timepoint.logos}};
   \code{\link{print.swarmset}};
   \code{\link{resample.swarmset}};
-  \code{\link{select.sequences}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

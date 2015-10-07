@@ -15,7 +15,7 @@ select.sites <- function(S) {
 	return ( S )
 
     if (!is.null(S$included_sites) & !is.null(S$excluded_sites) & 
-        length(which(S$included_sites %in% S$excluded_sites)) > 0)
+        any(S$included_sites %in% S$excluded_sites))
             stop("select.sites ERROR: please reconsider including and excluding the same site/s")
 
 

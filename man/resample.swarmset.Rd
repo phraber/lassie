@@ -20,7 +20,6 @@ Randomly sample as many sequences as are in the given working swarmset, using th
 Other swarmset.methods: \code{\link{make.timepoint.logos}};
   \code{\link{plot.swarmset}};
   \code{\link{print.swarmset}};
-  \code{\link{select.sequences}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

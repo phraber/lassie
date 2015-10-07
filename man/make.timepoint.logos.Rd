@@ -46,7 +46,6 @@ system(paste(paste("open", logo.files), collapse=';')
 Other swarmset.methods: \code{\link{plot.swarmset}};
   \code{\link{print.swarmset}};
   \code{\link{resample.swarmset}};
-  \code{\link{select.sequences}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 

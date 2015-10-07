@@ -15,7 +15,7 @@ parse.timepoints <- function(seq_names=NULL, uniquify=T, timepoints_parser) {
 	timepoint_per_sequence <- timepoints_parser(seq_names)
     }
 
-    if (length(which(is.null(timepoint_per_sequence))) > 0)
+    if (any(is.null(timepoint_per_sequence)))
 	paste("ERROR in parse.timepoints(): Some names not parsed\n",
 	    paste(seq_names[which(is.null(timepoint_per_sequence))], 
 		collapse=','), '\n')

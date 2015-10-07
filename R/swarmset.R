@@ -53,7 +53,7 @@ swarmset <- function(ST,
 
     if (!is.null(included_clone_names)) {
 
-	if (length(which(!included_clone_names %in% ST$original_seqnames)) > 0)
+	if (any(!included_clone_names %in% ST$original_seqnames))
 	    stop(paste(
      "ERROR in swarmset()! Unidentified clone/s named for inclusion: ",
 	        which(!included_clone_names %in% ST$original_seqnames)))
@@ -64,7 +64,7 @@ swarmset <- function(ST,
 
     if (!is.null(excluded_clone_names)) {
 
-	if (length(which(!excluded_clone_names %in% ST$original_seqnames)) > 0)
+	if (any(!excluded_clone_names %in% ST$original_seqnames))
 	    stop(paste(
      "ERROR in swarmset()! Unidentified clone/s named for exclusion: ",
 	        which(!excluded_clone_names %in% ST$original_seqnames)))
@@ -79,7 +79,7 @@ swarmset <- function(ST,
 
     longest_deletion <- longest.deletion.per.sequence(ST$aas_aln)
 
-    if (length(which(longest_deletion > maxtol_deletion) > 0))
+    if (any(longest_deletion > maxtol_deletion))
 	is_excluded[which(longest_deletion > maxtol_deletion)] = T
 
     if (is.null(maxtol_insertion))
@@ -87,7 +87,7 @@ swarmset <- function(ST,
 
     longest_insertion <- longest.insertion.per.sequence(ST$aas_aln)
 
-    if (length(which(longest_insertion > maxtol_insertion) > 0)) {
+    if (any(longest_insertion > maxtol_insertion)) {
 
 	is_excluded[which(longest_insertion > maxtol_insertion)] = T
 
@@ -97,11 +97,11 @@ swarmset <- function(ST,
 		    " aas"))
     }
 
-    if (length(which(is_included) > 0))
+    if (any(is_included))
 	message(paste("Including", 
 	    paste(names(which(is_included)), collapse=",")))
 
-    if (length(which(is_excluded) > 0))
+    if (any(is_excluded))
 	message(paste("Excluding", 
 	    paste(names(which(is_excluded)), collapse=",")))
 
