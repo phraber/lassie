@@ -20,7 +20,6 @@ List concatamers of selected sites for all working_swarm sequences in swarmset.
 Other swarmset.methods: \code{\link{make.timepoint.logos}};
   \code{\link{plot.swarmset}};
   \code{\link{resample.swarmset}};
-  \code{\link{select.sequences}};
   \code{\link{summary.swarmset}}; \code{\link{swarmset}}
 }
 
