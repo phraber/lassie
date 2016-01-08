@@ -1,12 +1,28 @@
+To modify weblogo, first download the weblogo code, then modify it.
+
+0. WebLogo requires Python 2.6, 2.7, 3.2, 3.3 or 3.4 and the python array
+   package 'numpy' (http://www.scipy.org/Download)
+
+1. Download the weblogo code from https://github.com/WebLogo/weblogo/releases
+   To install, run "python setup.py install" or "./setup.py install".
+
+2. Modify the weblogo code.
+   To do this, see the instructions below (patch two files and rerun setup.py).
+   
+
+DETAILS
+
 I changed two python files in weblogo-3.4/weblogolib, as described below.
 
 The changes are summarized as diff output files in weblogolib.
 To use them, simply change to that directory and edit the files using patch:
   patch __init.py__ __init.py__-DIFF
   patch colorscheme.py colorscheme.py-DIFF
+NB: Either type the full path to the DIFF file or copy it into the
+  same directory as the weblogolib source before running patch.
 
 Note that you have to rebuild the library after modifying it; i.e. 
-  (sudo?) weblogo-3.4/setup.py build
+  (sudo?) weblogo-3.4/setup.py install
 
 I also changed template.eps but do not recall now whether the change is beneficial.
 
