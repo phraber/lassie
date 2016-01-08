@@ -26,10 +26,19 @@ add.clone <- function(new_clone, WS, criterion=NULL) {
 	    message(paste("   ", criterion, 
 	    sprintf("%-12s", rownames(WS$aln_concatamer)[new_clone]), 
 	        '\t', seqinr::c2s(WS$aln_concatamer[new_clone, ])))
+
+	    WS$message = append(WS$message, paste("   ", criterion, 
+	    sprintf("%-12s", rownames(WS$aln_concatamer)[new_clone]), 
+	        '\t', seqinr::c2s(WS$aln_concatamer[new_clone, ])))
+
         } else {
 
-	    message(paste("   ", criterion, sprintf("%-12s", 
-		new_clone),
+	    message(paste("   ", criterion, 
+		    sprintf("%-12s", new_clone),
+		'\t', seqinr::c2s(WS$dot_concatamer[new_clone, ])))
+
+	    WS$message = append(WS$message, paste("   ", criterion, 
+		    sprintf("%-12s", new_clone),
 		'\t', seqinr::c2s(WS$dot_concatamer[new_clone, ])))
         }
 
@@ -41,6 +50,10 @@ add.clone <- function(new_clone, WS, criterion=NULL) {
 
 #    if (omit_singletons) #{
     message(paste0("Number of mutations to be represented is now ", 
+	length(which(c(WS$variant_counts) > 0))))
+
+    WS$message <- append(WS$message,
+	paste0("Number of mutations to be represented is now ", 
 	length(which(c(WS$variant_counts) > 0))))
 
     WS

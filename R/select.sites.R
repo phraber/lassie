@@ -25,7 +25,8 @@ select.sites <- function(S) {
     S$tf_area <- compute.tf.area(S$tf_loss)
     site_frame <- data.frame(S$peak_tf_loss, S$when_up, S$tf_area)
     colnames(site_frame) = c("peak_tf_loss", "when_up", "tf_area")
-
+    if (nrow(S$refseq_lut) != nrow(site_frame))
+        stop("ERROR: refseq_lut does not have enough rows")
     new_site_frame <- cbind(S$refseq_lut[1:nrow(site_frame), ], site_frame)
     rownames(new_site_frame) <- rownames(S$tf_loss)
 

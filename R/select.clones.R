@@ -1,7 +1,7 @@
 #' @keywords internal
 select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
     is_included, is_also_included, is_excluded, min_counts, 
-    sequence_multiplicity, timepoints_parser) {
+    sequence_multiplicity, timepoints_parser, message) {
 
     dot_concatamer <- dotify.matrix(aln_concatamer, 
 	aln_concatamer[tf_index, ], as_logical=F)
@@ -66,7 +66,8 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 		     is_viable = is_viable,
                      variant_counts = variant_table,
                      initial_variant_counts = variant_table,
-		     initial_n_variants = 0)
+		     initial_n_variants = 0,
+		     message = message)
 
     working_swarm$initial_n_variants = 
         length(which(c(working_swarm$initial_variant_counts) > 0))
@@ -92,6 +93,11 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 
 	message(paste0("t=", curr_t, ", n=", 
 		    length(t_rows), " viable clones"))
+
+	working_swarm$message = append(working_swarm$message, 
+	    paste0("t=", curr_t, ", n=", 
+		length(t_rows), " viable clones"))
+
 	if (length(t_rows) == 1) t_rows <- rep(t_rows, 2) # note kludge 
                                                    # so table() calls will work
 
@@ -127,11 +133,29 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 		next
 
             # take first the most abundant variant from supply for site
-	    available_variants <- list.available.variants(working_swarm, site)
+#	    available_variants <- list.available.variants(working_swarm, site)
+# pth revised this on 01-05-2016 to preserve the message output
+# 
+   	     available_variants <- NULL
+    
+             if (!any(working_swarm$variant_counts[, site] > 0)) {
+		 next
+	     } else {
 
-# sh/could this be more efficient where no available variants are present?
-	    if (is.null(available_variants) | length(available_variants) == 0)
-		next
+		 available_variants = names(sort(which(working_swarm$variant_counts[, site] > 0),
+			 decreasing=T))
+
+		 message(paste0("  Checking for mutations in column", 
+			 sprintf("%3s", which(colnames(working_swarm$dot_concatamer) == site)),
+        		 ":", sprintf("%5s", site), "[", seqinr::c2s(available_variants), "]"))
+
+		 working_swarm$message = append(working_swarm$message, paste0("  Checking for mutations in column", 
+			 sprintf("%3s", which(colnames(working_swarm$dot_concatamer) == site)),
+			 ":", sprintf("%5s", site), "[", seqinr::c2s(available_variants), "]"))
+	     }
+
+#	    if (is.null(available_variants) | length(available_variants) == 0)
+#		next
 
 	    for (site_variant in available_variants) {
 
@@ -229,8 +253,14 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 				    } else {
 
 				        for (i in 1:length(table_allcolumns))
-					    cat(paste(table_allcolumns[[i]], 
+
+					  message(paste(table_allcolumns[[i]], 
 					    names(table_allcolumns)[i]), '\n')
+					
+					  working_swarm$message = append(working_swarm$message, 
+					      paste(table_allcolumns[[i]], 
+						  names(table_allcolumns)[i]), 
+					      '\n')
 
                                         ### could include both/all
 				        err_message=paste0("No clear choice! ",

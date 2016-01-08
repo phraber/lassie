@@ -35,6 +35,6 @@ set.alignment.file <- function(S, f, alignment_format="fasta") {
         S <- prep.aln(S)
     }
     # if the alignment file has already been set, the above logic
-    # sames time by not repeating prep.aln needlessly
+    # saves time by not repeating prep.aln needlessly
     return ( S )
 }

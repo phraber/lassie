@@ -43,6 +43,13 @@ swarmset <- function(ST,
 # is no longer necessary to pass around ST$selected_sites or the
 # swarmtools object until summarizing results
 
+    message = NULL
+
+    if (is.null(ST)) { # attempt to continue without errors if swarmtools object not fully populated, for interactive (shiny gui) use
+       ST$aas_aln = NULL
+       ST$original_seqnames = NULL
+    }
+
     is_included = init.clone.list(ST$aas_aln)
 # this list is maintained separately from that above to add entries 
 # only when iterating for the timepoint of the also_included clones
@@ -95,22 +102,37 @@ swarmset <- function(ST,
 		    length(which(longest_insertion > maxtol_insertion)),
 		    " sequences with insertions over ", maxtol_insertion, 
 		    " aas"))
+	message = append(message, 
+	    paste0("Excluding ", 
+		length(which(longest_insertion > maxtol_insertion)),
+		" sequences with insertions over ", maxtol_insertion, 
+		" aas"))
     }
 
     if (any(is_included))
 	message(paste("Including", 
 	    paste(names(which(is_included)), collapse=",")))
 
+    if (any(is_included))
+	message = append(message, 
+	    paste("Including", 
+	    paste(names(which(is_included)), collapse=",")))
+
     if (any(is_excluded))
 	message(paste("Excluding", 
 	    paste(names(which(is_excluded)), collapse=",")))
+
+    if (any(is_excluded))
+	message = append(message, 
+	    paste("Excluding", paste(names(which(is_excluded)), collapse=",")))
 
     aln_concatamer <- concatamerize(ST$aas_aln, ST$selected_sites$aln)
 
     working_swarm <- select.clones(ST$aas_aln, ST$tf_index, 
 	aln_concatamer, is_included, is_also_included, 
 	is_excluded, min_counts, 
-	ST$sequence_multiplicity, ST$timepoints_parser)
+	ST$sequence_multiplicity, ST$timepoints_parser, 
+	message)
 
     retval <- list(
 	working_swarm=working_swarm,
@@ -134,4 +156,3 @@ swarmset <- function(ST,
 
     retval
 }
-

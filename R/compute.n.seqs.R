@@ -3,7 +3,11 @@
 ###  cf. compute.tf.loss()
 ### NB: order is implied by timepoint_per_sequence?
 compute.n.seqs <- function(is_tf=NULL, timepoint_per_sequence=NULL) {
-    
+
+    # pth 01072016 survive on-the-fly parsing
+#    if (is.null(is_tf) | is.null(timepoint_per_sequence))
+#	return ( 0 )
+
     ns_per_timepoint <- rep(NA, length(timepoint_per_sequence))
 
 # cf. tf_freqs: for each timepoint (columns), set non-tf frequency per
