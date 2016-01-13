@@ -1,1 +1,0 @@
-Please see logo-mods/README.txt for a summary of changes to weblogo-3.4.
