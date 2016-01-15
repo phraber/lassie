@@ -52,7 +52,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	paste0(" --ylabel '", y_label, "'"))
 
     if (hide_xlabels) {
-        system(paste0("weblogo",
+        system(paste0("/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/weblogo",
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
@@ -71,7 +71,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 
 	fine_print <- ""
 
-        system(paste0("weblogo",
+        system(paste0("/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/weblogo",
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
