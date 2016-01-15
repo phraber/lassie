@@ -4,6 +4,10 @@ set.refseq <- function(S) {
     if (class(S) != "swarmtools")
         stop("ERROR: Please pass a swarmtools object to prep.aln()")
 
+# 01142016
+# CONSIDER INTERACTIVE USE - will changing alignments with different
+# refseq_name get updated here?
+
     if (is.null(S$refseq_row) & 
 	!is.null(S$refseq_name) & 
 	S$refseq_name %in% rownames(S$aas_aln))

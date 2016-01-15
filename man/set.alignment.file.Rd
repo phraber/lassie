@@ -4,12 +4,14 @@
 \alias{set.alignment.file}
 \title{Defines alignment file but does not read it, then call prep.aln.}
 \usage{
-set.alignment.file(S, f, alignment_format = "fasta")
+set.alignment.file(S, f, pngs2o = NULL, alignment_format = "fasta")
 }
 \arguments{
 \item{S}{swarmtools object}
 
 \item{f}{alignment file}
+
+\item{pngs2o}{option to indicate whether or not to mark PNG Ns as O.}
 
 \item{alignment_format}{Format of alignment file/s; must be one of these: \code{"fasta"}, \code{"clustal"}, \code{"phylip"}, \code{"msf"}, or \code{"mase"}.}
 }

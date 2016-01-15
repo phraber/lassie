@@ -18,6 +18,7 @@
 #' @param refseq_lut_file Reference sequence LUT file
 #' @param refseq_lut Reference sequence lookup table
 #' @param refseq_name Reference sequence name
+#' @param pngs2o Switch to mark asparagines (N) in PNG motifs as O.
 #' @param tf_loss_cutoff Threshold value (or vector of values) for including a site
 #' @param included_sites List of included sites
 #' @param excluded_sites List of excluded sites
@@ -42,6 +43,7 @@ swarmtools <- function(
     refseq_lut_file=NULL,
     refseq_lut=NULL,
     refseq_name="HXB2",
+    pngs2o=F,
     tf_loss_cutoff=NULL, # include sites with tf_loss at or above (>=) cutoff
     included_sites=NULL,
     excluded_sites=NULL) {
@@ -51,6 +53,7 @@ swarmtools <- function(
 
     retval <- list(aas_aln=NULL,
 	aas_file=NULL, # this gets set below and triggers prep.aln
+	pngs2o=pngs2o,
 	alignment_format=alignment_format,
 	n_per_timepoint=NULL,
 	timepoints_parser=timepoints_parser,

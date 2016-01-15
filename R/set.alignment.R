@@ -16,25 +16,36 @@ set.alignment <- function(S, a, f) {
 #    if (!is.null(f)) {
 
     if (is.null(a) & !is.null(f))
-	if (!file.exists(f))
+        if (!file.exists(f))
             stop(paste0("ERROR: Specified file '", f, "' does not exist."))
 
     if (!is.null(a)) { 
-	if (!is.null(S$aas_aln))
-	    if (a != S$aas_aln)
-		warning("WARNING: Changing alignment.\n")
+        if (!is.null(S$aas_aln)) {
+            if (a != S$aas_aln) {
 
-	S$aas_aln <- a
+# pth - 01142016
+#                warning("WARNING: Changing alignment.\n")
+
+                S$refseq_lut = NULL
+#                S$refseq_name = NULL
+            }
+        }
+
+        S$aas_aln <- a
 
     } else if (!is.null(f)) {
-	if (!is.null(S$aas_file))
-	    if (f != S$aas_file)
-		warning("WARNING: Changing alignment.\n")
+        if (!is.null(S$aas_file)) {
+            if (f != S$aas_file) {
 
-	S$aas_file = f
+# pth - 01142016
+#                warning("WARNING: Changing alignment.\n")
+                S$refseq_lut = NULL
+#                S$refseq_name = NULL
+            }
+        }
+
+        S$aas_file = f
     }
 
-    S <- prep.aln(S)
-
-    S
+    return ( prep.aln(S) )
 }

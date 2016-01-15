@@ -4,10 +4,12 @@
 #'
 #' @param S swarmtools object
 #' @param f alignment file
+#' @param pngs2o option to indicate whether or not to mark PNG Ns as O.
 #' @param alignment_format Format of alignment file/s; must be one of these: \code{"fasta"}, \code{"clustal"}, \code{"phylip"}, \code{"msf"}, or \code{"mase"}.
 #' @return swarmtools object with defined aas_aln, refseq_lut, and tf_loss if possible
 #' @export
-set.alignment.file <- function(S, f, alignment_format="fasta") {
+set.alignment.file <- function(S, f, pngs2o=NULL, 
+                               alignment_format="fasta") {
 
     ### NB: May need to sanitize S and f
     if (class(S) != "swarmtools")
@@ -19,22 +21,23 @@ set.alignment.file <- function(S, f, alignment_format="fasta") {
     if (!file.exists(f))
         stop(paste0("ERROR: Specified file '", f, "' does not exist."))
 
+    S$aas_file = f
+
+    if (!alignment_format %in% c("fasta", "clustal", "phylip", "msf", "mase"))
+        stop("ERROR: Unsupported file format.")
+
     S$alignment_format = alignment_format
 
-    if (is.null(S$aas_file)) {
+    if (!is.null(pngs2o))
+	if (is.logical(pngs2o))
+	    S$pngs2o = pngs2o
 
-	S$aas_file = f
-        S <- prep.aln(S)
-
-    } else if (f != S$aas_file) {
-
-	if (!is.null(S$aas_aln))
-	    warning("WARNING: Changing alignment.\n")
-
-	S$aas_file = f
-        S <- prep.aln(S)
+    if (f != S$aas_file) {
+	S$aas_aln = NULL
+	S$refseq_lutd_aln = NULL
     }
-    # if the alignment file has already been set, the above logic
-    # saves time by not repeating prep.aln needlessly
+
+    S <- prep.aln(S)
+
     return ( S )
 }

@@ -7,7 +7,8 @@
 swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
   tf_index = 1, tf_name = NULL, timepoints_parser = NULL,
   refseq_lut_file = NULL, refseq_lut = NULL, refseq_name = "HXB2",
-  tf_loss_cutoff = NULL, included_sites = NULL, excluded_sites = NULL)
+  pngs2o = F, tf_loss_cutoff = NULL, included_sites = NULL,
+  excluded_sites = NULL)
 }
 \arguments{
 \item{aas_aln}{Alignment matrix.}
@@ -27,6 +28,8 @@ swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
 \item{refseq_lut}{Reference sequence lookup table}
 
 \item{refseq_name}{Reference sequence name}
+
+\item{pngs2o}{Switch to mark asparagines (N) in PNG motifs as O.}
 
 \item{tf_loss_cutoff}{Threshold value (or vector of values) for including a site}
 

@@ -4,6 +4,8 @@
 ###  cf. compute.n.seqs()
 compute.tf.loss <- function(is_tf, n_seqs_per_timepoint=NULL) {
 
+#    if (!any(is_tf))
+
     tf_freqs <- matrix(NA, ncol=length(n_seqs_per_timepoint), nrow=ncol(is_tf))
 
     colnames(tf_freqs) <- names(n_seqs_per_timepoint)

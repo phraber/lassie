@@ -4,13 +4,10 @@
 \alias{read.alignment.file}
 \title{Read a fasta-formatted alignment file}
 \usage{
-read.alignment.file(aas_file = NULL, aas_prefix = NULL,
-  alignment_format = "fasta")
+read.alignment.file(aas_file = NULL, alignment_format = "fasta")
 }
 \arguments{
 \item{aas_file}{File containing aligned protein sequences}
-
-\item{aas_prefix}{Optional alternative to specify input alignment (see examples)}
 
 \item{alignment_format}{Format of alignment file/s; must be one of these: \code{fasta}, \code{clustal}, \code{phylip}, \code{msf}, or \code{mase}.}
 }
@@ -22,9 +19,8 @@ Read a fasta-formatted alignment file
 }
 \examples{
 \dontrun{
-Equivalent filenames, because the default format is fasta.
-aln1 <- read.alignment.file("foo.fasta")
-aln2 <- read.alignment.file(aas_prefix="foo")
+aln <- read.alignment.file(system.file("extdata", "CH505-gp160.fasta", 
+                                        package="lassie"))
 }
 }
 
