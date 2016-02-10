@@ -8,6 +8,7 @@
 #' @param dotify If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.
 #' @param stack_width Width of each stack, in pixels.
 #' @param aspect_ratio Adjusts aspect ratio (width to height) of image.
+#' @param show_sample_size If true, show number of sequences in the fineprint field.
 #' @param logo_format Specifies the output image format (default is 'pdf' but can also be 'png', 'svg', or 'jpeg').
 #'
 #' @return A vector of names of the logo plot files generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file (or these files) during run time or else lose them when the R session ends.
@@ -25,6 +26,7 @@
 #' @export
 make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
     name_prefix="logos", stratify=T, dotify=T, stack_width=18, aspect_ratio=3,
+    show_sample_size=F,
     logo_format="pdf") {
 
     if (class(x) != "swarmset")
@@ -79,6 +81,7 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
 		aspect_ratio=aspect_ratio, # was 6
 		hide_xlabels=hide_xlabels, 
 		y_label=timepoint,
+		show_sample_size=show_sample_size,
 		logo_format=logo_format)
 	}
 
@@ -97,6 +100,7 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
 	    dotify=dotify, 
 	    hide_xlabels=F, 
 	    y_label="proportion",
+	    show_sample_size=show_sample_size,
 	    stack_width=stack_width,
 	    stacks_per_line=stacks_per_line,
 	    aspect_ratio=aspect_ratio,

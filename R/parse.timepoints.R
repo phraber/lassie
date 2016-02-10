@@ -1,7 +1,6 @@
 #' @keywords internal
 parse.timepoints <- function(seq_names=NULL, uniquify=T, timepoints_parser) {
 
-
 ### THIS WILL FAIL IF THE REFSEQ IS still in the alignment
 
     if (!is.null(timepoints_parser)) {
@@ -12,7 +11,7 @@ parse.timepoints <- function(seq_names=NULL, uniquify=T, timepoints_parser) {
 	if (!is.function(timepoints_parser))
 	    stop("ERROR in parse.timepoints(): timepoints_parser is not a function")
 
-	timepoint_per_sequence <- timepoints_parser(seq_names)
+	timepoint_per_sequence <- timepoints_parser(seq_names, do.tests=T)
     }
 
     if (any(is.null(timepoint_per_sequence)))

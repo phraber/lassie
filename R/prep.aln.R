@@ -44,7 +44,8 @@ prep.aln <- function(S) {
         S$timepoint_per_sequence <- parse.timepoints(rownames(S$aas_aln),
             uniquify=F, timepoints_parser=S$timepoints_parser)
 
-        S$n_per_timepoint <- table(sort(S$timepoint_per_sequence))
+        if (!is.null(S$timepoint_per_sequence))
+            S$n_per_timepoint <- table(sort(S$timepoint_per_sequence))
 
         S <- set.tf(S)
     }

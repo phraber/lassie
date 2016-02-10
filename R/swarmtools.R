@@ -24,6 +24,7 @@
 #' @param refseq_name Reference sequence name, used for numbering, e.g. HXB2.
 #' @param pngs2o Switch to mark asparagines (N) in PNG motifs as O.
 #' @param tf_loss_cutoff Threshold value (or vector of values) for including a site
+#' @param frequency_when_up Sites are sorted by when they first reach this value.
 #' @param included_sites List of included sites
 #' @param excluded_sites List of excluded sites
 #'
@@ -49,6 +50,7 @@ swarmtools <- function(
     refseq_name="HXB2",
     pngs2o=F,
     tf_loss_cutoff=NULL, # include sites with tf_loss at or above (>=) cutoff
+    frequency_when_up=10,
     included_sites=NULL,
     excluded_sites=NULL) {
 
@@ -71,6 +73,7 @@ swarmtools <- function(
 	refseq_lut_file=NULL, # set below: refseq_lut_file
 	refseq_name=refseq_name,
 	tf_loss_cutoff=NULL, # set below: tf_loss_cutoff
+	frequency_when_up=frequency_when_up,
 	selected_sites=NULL,
         included_sites=NULL,
         excluded_sites=NULL
@@ -101,7 +104,7 @@ swarmtools <- function(
 # set.tf is called by prep.aln
 
     if (!is.null(tf_loss_cutoff))
-	retval <- set.tf.loss.cutoff(retval, tf_loss_cutoff)
+	retval <- set.tf.loss.cutoff(retval, tf_loss_cutoff, frequency_when_up)
 # select.sites is called by set.tf.loss
 
     retval

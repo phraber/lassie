@@ -2,9 +2,10 @@
 #'
 #' @param S swarmtools object
 #' @param c cutoff threshold value, from 0 to 100
+#' @param fwu sites are sorted by when they first reach this value, from 0 to 100 and <= c.
 #' @return swarmtools object with list of sites in selected_sites if possible
 #' @export
-set.tf.loss.cutoff <- function(S, c) {
+set.tf.loss.cutoff <- function(S, c, fwu=10) {
 
     if (class(S) != "swarmtools") {
 	warning("ERROR in set.tf.loss.cutoff()")
@@ -28,6 +29,11 @@ set.tf.loss.cutoff <- function(S, c) {
     }
 
     S$tf_loss_cutoff <- c
+
+    if (is.null(S$frequency_when_up))
+        S$frequency_when_up <- fwu
+    else if (S$frequency_when_up != fwu)
+        S$frequency_when_up <- fwu
 
     S <- select.sites(S)
 

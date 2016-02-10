@@ -6,7 +6,7 @@
 \usage{
 make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
   name_prefix = "logos", stratify = T, dotify = T, stack_width = 18,
-  aspect_ratio = 3, logo_format = "pdf")
+  aspect_ratio = 3, show_sample_size = F, logo_format = "pdf")
 }
 \arguments{
 \item{x}{A swarmset object populated with working_swarm.}
@@ -24,6 +24,8 @@ make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
 \item{stack_width}{Width of each stack, in pixels.}
 
 \item{aspect_ratio}{Adjusts aspect ratio (width to height) of image.}
+
+\item{show_sample_size}{If true, show number of sequences in the fineprint field.}
 
 \item{logo_format}{Specifies the output image format (default is 'pdf' but can also be 'png', 'svg', or 'jpeg').}
 }

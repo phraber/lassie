@@ -6,6 +6,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     stacks_per_line=NULL,
     aspect_ratio=1.5, 
     y_label=NULL,
+    show_sample_size=F,
 #    sequence_multiplicity=NULL,
     logo_format="pdf") {
 
@@ -51,14 +52,17 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     ylab_string = ifelse(is.null(y_label), " --ylabel 'proportion'", 
 	paste0(" --ylabel '", y_label, "'"))
 
+    fine_print = ""
+
     if (hide_xlabels) {
-        system(paste0("/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/weblogo",
+        system(paste0("weblogo",
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
 	    " --composition 'none'",
 	    " --units 'probability'",
-	    " --errorbars NO --reverse-stacks NO --fineprint ''",
+	    " --errorbars NO --reverse-stacks NO",
+            " --fineprint '", fine_print, "'",
 	    " --format ", logo_format, 
 	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
@@ -69,16 +73,14 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 
     } else {
 
-	fine_print <- ""
-
-        system(paste0("/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/weblogo",
+        system(paste0("weblogo",
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
 	    " --composition 'none'",
 	    " --units 'probability'",
-	    " --errorbars NO --reverse-stacks NO --fineprint ",
-	    "'",  fine_print, "'",
+	    " --errorbars NO --reverse-stacks NO",
+            " --fineprint '", fine_print, "'",
 	    " --format ", logo_format, 
 	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
