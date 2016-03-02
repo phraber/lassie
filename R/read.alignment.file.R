@@ -13,13 +13,19 @@
 read.alignment.file <- function(aas_file=NULL, alignment_format="fasta") {
 
     if (is.null(aas_file))
-        NULL
+        return ( NULL )
     else if (!file.exists(aas_file))
         stop(paste0("ERROR in read.alignment.file(): alignment file '", 
             aas_file, "' does not exist"))
 
-    seqinr::as.matrix.alignment(seqinr::read.alignment(aas_file, 
-	    alignment_format, forceToLower=F))
+    a = NULL
+    try(a <- seqinr::read.alignment(aas_file, alignment_format, 
+        forceToLower=F))
 
+    b = NULL
+    if (!is.null(a))
+        try(b <- seqinr::as.matrix.alignment(a))
+
+    return ( b )
     # need to respond in case of error / failure above?
 }
