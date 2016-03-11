@@ -19,6 +19,3 @@ An R package of tools to select sites and sequences that represent variation in 
 If the you cannot view the vignette, it is available in PDF format here - https://github.com/phraber/lassie/blob/master/tutorial.pdf
 
 ##### To list all functions and example data provided by this package, type "library(help=lassie)" from within R.
-
-### For help with optional weblogo installation, please consult this file:
-lassie/inst/python/weblogo-3.4-modified/logo-mods/README.txt
