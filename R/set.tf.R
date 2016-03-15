@@ -51,7 +51,8 @@ set.tf <- function(S) {
         ### go ahead and dotify matrix, compute tf loss, per timepoint, etc.
         S$is_tf <- dotify.matrix(S$aas_aln, S$aas_aln[S$tf_index, ]) 
         if (!is.null(S$n_per_timepoint))
-        S$tf_loss <- create.tf.loss.matrix(S$aas_aln, S$tf_index, S$n_per_timepoint)
+        S$tf_loss <- create.tf.loss.matrix(S$aas_aln, S$tf_index, 
+                                           S$n_per_timepoint, S$timepoint_per_sequence)
         # FIRST TO ASSUME THE SAMPLE TIMEPOINT LABELS ARE PARSED?  no
         S$peak_tf_loss <- compute.peak.tf.loss(S$tf_loss)
     }

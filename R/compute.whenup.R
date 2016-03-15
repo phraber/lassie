@@ -22,5 +22,5 @@ compute.whenup <- function(tf_loss_matrix, how.far.up = 33) {
                 colnames(tf_loss_matrix)[ min(which(tf_loss_matrix[i, ] 
                                                    >= how.far.up), na.rm=T)]
 
-    as.numeric(gsub("^[A-Z]+", "", whenup, ignore.case=T))
+    as.numeric(gsub("[A-Z]", "", whenup, ignore.case=T))
 }

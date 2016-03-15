@@ -4,12 +4,12 @@
 \alias{set.tf.loss.cutoff}
 \title{Define the threshold value, above which sites are considered selected}
 \usage{
-set.tf.loss.cutoff(S, c, fwu = 10)
+set.tf.loss.cutoff(S, cutoff, fwu = 10)
 }
 \arguments{
 \item{S}{swarmtools object}
 
-\item{c}{cutoff threshold value, from 0 to 100}
+\item{cutoff}{cutoff threshold value, from 0 to 100}
 
 \item{fwu}{sites are sorted by when they first reach this value, from 0 to 100 and <= c.}
 }

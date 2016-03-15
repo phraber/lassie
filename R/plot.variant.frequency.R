@@ -29,7 +29,7 @@ plot.variant.frequency <- function(site.freqs, site.counts, n_sequenced,
     rownames(plot.counts) = rownames(site.counts)
     colnames(plot.counts) = colnames(site.counts)
 
-    x.values <- as.numeric(gsub("^[A-Za-z]*", "", rownames(site.freqs)))
+    x.values <- as.numeric(gsub("[A-Z]", "", rownames(site.freqs), ignore.case=T))
     x.max = ifelse(is.null(max.time), max(x.values), max.time)
     x.min = ifelse(is_tf_hidden, min(x.values[-tf_index]), min(x.values))
 
@@ -102,7 +102,7 @@ plot.variant.frequency <- function(site.freqs, site.counts, n_sequenced,
     abline(h=c(0:4 * 25), lwd=1/2, col=panel.grey, lty=1)
 
     # update this because we may have edited the data matrix above
-    x.values <- as.numeric(gsub("^[A-Za-z]*", "", rownames(plot.freqs)))
+    x.values <- as.numeric(gsub("[A-Z]", "", rownames(plot.freqs), ignore.case=T))
     x.mult <- ifelse(is_time_in_weeks, 52, 365.25)
     floormax.time.inYears = floor(max(x.values) / x.mult)
 

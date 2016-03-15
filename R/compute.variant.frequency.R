@@ -16,14 +16,22 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult,
         stop("ERROR: Please pass a swarmtools object to compute.variant.frequency()")
 
     site_counts <- table(S$timepoint_per_sequence, S$aas_aln[, site], 
-	exclude=c("Z", "X", "%", "*", "#"))
+                         exclude=c("Z", "X", "%", "*", "#"))
+
+    row.order <- order(as.numeric(gsub("[A-Z]", "", rownames(site_counts), ignore.case=T)))
+    site_counts = site_counts[row.order, ]
 
     site_totals <- apply(site_counts, 2, sum)
 
     # exclude rare variants on second pass
     site_counts <- table(S$timepoint_per_sequence, S$aas_aln[, site], 
-	exclude=c("Z", "X", "%", "*", "#", 
-	    colnames(site_counts)[which(site_totals < min_variant_count)]))
+                         exclude=c("Z", "X", "%", "*", "#", 
+                                   colnames(site_counts)[which(site_totals < min_variant_count)]))
+
+    row.order <- order(as.numeric(gsub("[A-Z]", "", rownames(site_counts), ignore.case=T)))
+    site_counts = site_counts[row.order, ]
+
+    site_ns <- site_ns[row.order] 
 
     site_freqs <- 100 * sapply(1:ncol(site_counts), function(i)
  	round(site_counts[, i] / site_ns, 4))

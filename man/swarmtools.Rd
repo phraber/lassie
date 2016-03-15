@@ -48,9 +48,11 @@ Given a serially sampled protein sequence alignment, this will list sites where 
 \details{
 The sample timepoints should be part of the sequence names and it should be possible to extract them by splitting sequence names with a particular separator and taking one of the resulting fields as the timepoint label.  TF loss is computed among sequences that have the same timepoint label.  By default, the timepoint label is in the first dot-delimited field.  However, you can specify alternatives using lassie::create.timepoint.parser() to specify how fields are separated and which field to use, then passing the returned function to swarmtools using the 'timepoints_parser' option.
 
-Timepoint labels can be in any units and are assumed to indicate time elapsed since infection.  A mixture of different units is not advised.  The values are used primarily when plotting frequency dynamics:
-lassie::plot.variant.frequency(is_time_in_weeks=F)
-After parsing the right field, any leading character (e.g. "d123" or "w56") will be stripped and the remainder converted to a numeric value (123 and 56).
+Timepoint labels can be in any units and are assumed to indicate time elapsed since infection.  
+A mixture of different units is not advised.  
+The values are used primarily when reordering sites and plotting frequency dynamics:
+lassie::report.variant.frequencies()
+After parsing the correct field, any leading character (e.g. "d123" or "56dpi") will be stripped and the remainder converted to a numeric value (123 and 56).
 
 You should provide at least the name of an alignment file or an alignment matrix (via seqinr::as.alignment.matrix()) 
 already in memory, and specify a percentage value (0-100) for tf_loss_cutoff.  Without these, no sites will be returned.
