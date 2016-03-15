@@ -8,23 +8,25 @@ set.refseq <- function(S) {
 # CONSIDER INTERACTIVE USE - will changing alignments with different
 # refseq_name get updated here?
 
-    if (is.null(S$refseq_row) & 
-	!is.null(S$refseq_name) & 
-	S$refseq_name %in% rownames(S$aas_aln))
-            S$refseq_row <- get.refseq.row(S$aas_aln, S$refseq_name)
+    if (is.null(S$refseq_row) & !is.null(S$refseq_name) & 
+        S$refseq_name %in% rownames(S$aas_aln))
+        S$refseq_row <- get.refseq.row(S$aas_aln, S$refseq_name)
 
     ### create lut and excise refseq from alignment if it's in there
     if (!is.null(S$refseq_row)) {
 
-	S <- create.refseq.lut(S, S$aas_aln[S$refseq_row, ])
+        S <- create.refseq.lut(S, S$aas_aln[S$refseq_row, ])
 
-	if (!is.null(S$refseq_name) & 
-	    S$refseq_name == rownames(S$aas_aln)[S$refseq_row])
-	        S$aas_aln <- excise.refseq(S$refseq_row, S$aas_aln)
-                ### HERE WE EXCISE REFSEQ from ALIGNMENT
-    } else if (!is.null(S$tf_index) & is.null(S$refseq_name)) {
-	S$refseq_lut <- create.refseq.lut(S, S$aas_aln[S$tf_index, ])
-	S$refseq_name <- rownames(S$aas_aln)[S$tf_index]
+        ### HERE WE EXCISE REFSEQ from ALIGNMENT
+        if (!is.null(S$refseq_name) & 
+            S$refseq_name == rownames(S$aas_aln)[S$refseq_row])
+            S$aas_aln <- excise.refseq(S$refseq_row, S$aas_aln)
+
+    } else if (!is.null(S$tf_index)) { 
+        # & is.null(S$refseq_name)
+        # this was never executed with HXB2 default
+        S <- create.refseq.lut(S, S$aas_aln[S$tf_index, ])
+        S$refseq_name <- rownames(S$aas_aln)[S$tf_index]
     }
 
     # more caution here seems needed so as not to delete rows by
