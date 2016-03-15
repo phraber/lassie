@@ -15,6 +15,18 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     if (!logo_format %in% c('png', 'eps', 'pdf', 'svg', 'jpeg'))
 	stop('ERROR in make.logoplot(): Invalid logo_format value')
 
+
+    my.weblogo <- NULL
+    my.weblogo = try(system.file("python/weblogo-3.4-modified", "weblogo", package="lassie", mustWork=T))
+
+    if (is.null(my.weblogo))
+	my.weblogo = Sys.which("weblogo")
+
+    if (my.weblogo == "") {
+        message("ERROR: Cannot find 'weblogo' - please confirm that it is installed on this system.")
+	return ( NULL )
+    }
+
     # x-axis labels
     site_string <- paste(gsub("^[A-Z-]", "", rownames(selected_sites)), 
 	collapse=",")
@@ -54,8 +66,10 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 
     fine_print = ""
 
+    result = 0
+
     if (hide_xlabels) {
-        system(paste0("weblogo",
+        result = try(system2(my.weblogo, args=c(
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
@@ -68,12 +82,11 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	    ylab_string,
 	    " --xlabel ''", 
 	    " --annotate '", site_string, "'",
-	    " -c charge < ", 
-	    fasta_file, " > ", out_file))
-
+	    " -c charge"), stdin = fasta_file, 
+		stdout = out_file))
     } else {
 
-        system(paste0("weblogo",
+        result = try(system2(my.weblogo, args=c(
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
@@ -84,14 +97,19 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	    " --format ", logo_format, 
 	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
-#	    " --xlabel '", paste(my_region, "site'"),
-# TO DO: Pass xlabel and ylabel values
 	    " --xlabel ''",
 	    " --annotate '", site_string, "'",
-	    " -c charge < ", 
-	    fasta_file, " > ", out_file))
+	    " -c charge"), 
+	    stdin = fasta_file, 
+	    stdout=out_file))
+
+#	    " --xlabel '", paste(my_region, "site'"),
+# TO DO: Pass xlabel and ylabel values
 
     }
+
+    if (result != 0) 
+	message(result)
 
     return ( out_file )
 }
