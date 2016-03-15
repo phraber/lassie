@@ -83,7 +83,8 @@ select.clones <- function(aln_allcolumns, tf_index, aln_concatamer,
 # PROPOSED SOLUTION is to replace dot_concatamer[tf] with seq_concatamer[tf]
 
     all_timepoints <- sort(unique(working_swarm$seq_times))
-    numeric.order <- order(as.numeric(gsub("[A-Z]", "", names(n_seqs_per_timepoint), ignore.case=T)))
+    numeric.order <- order(as.numeric(gsub("[A-Z]", "", names(all_timepoints), 
+    		  ignore.case=T)))
     all_timepoints = all_timepoints[numeric.order]
 
     for (curr_t in all_timepoints) {
