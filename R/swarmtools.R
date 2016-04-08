@@ -50,7 +50,7 @@ swarmtools <- function(
     refseq_lut_file=NULL,
     refseq_lut=NULL,
     refseq_name="HXB2",
-    pngs2o=F,
+    pngs2o=T,
     tf_loss_cutoff=NULL, # include sites with tf_loss at or above (>=) cutoff
     frequency_when_up=10,
     included_sites=NULL,

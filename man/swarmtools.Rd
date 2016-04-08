@@ -7,7 +7,7 @@
 swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
   tf_index = 1, tf_name = NULL, timepoints_parser = NULL,
   refseq_lut_file = NULL, refseq_lut = NULL, refseq_name = "HXB2",
-  pngs2o = F, tf_loss_cutoff = NULL, frequency_when_up = 10,
+  pngs2o = T, tf_loss_cutoff = NULL, frequency_when_up = 10,
   included_sites = NULL, excluded_sites = NULL)
 }
 \arguments{
