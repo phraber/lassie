@@ -19,3 +19,8 @@ An R package of tools to select sites and sequences that represent variation in 
 If the you cannot view the vignette, it is available in PDF format here - https://github.com/phraber/lassie/blob/master/tutorial.pdf
 
 ##### To list all functions and example data provided by this package, type "library(help=lassie)" from within R.
+
+###See Also
+Check out the new shiny interface, which runs this code interactively:  
+
+https://github.com/phraber/meta-lass/
