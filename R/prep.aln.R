@@ -35,7 +35,7 @@ prep.aln <- function(S) {
     if (!is.null(S$aas_aln)) {
 
 ### verify alignment is protein not dna 
-	if (!is_protein(S$aas_aln))
+	if (!is.protein(S$aas_aln))
 	    stop("Please verify that the input alignment consists of amino acids, not nucleotides, and translate if necessary.")
 
          S$original_seqnames <- rownames(S$aas_aln)
