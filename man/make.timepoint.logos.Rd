@@ -46,7 +46,8 @@ system(paste(paste("open", logo.files), collapse=';')
 
 }
 \seealso{
-Other swarmset.methods: \code{\link{export.swarmset}},
+Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+  \code{\link{export.swarmset}},
   \code{\link{plot.swarmset}},
   \code{\link{print.swarmset}},
   \code{\link{resample.swarmset}},

@@ -25,7 +25,8 @@ An explicit path to the file generated, located in a directory removed at the en
 Render a logo plot of concatamer forms of clones in working_swarm
 }
 \seealso{
-Other swarmset.methods: \code{\link{export.swarmset}},
+Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+  \code{\link{export.swarmset}},
   \code{\link{make.timepoint.logos}},
   \code{\link{print.swarmset}},
   \code{\link{resample.swarmset}},
