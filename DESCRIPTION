@@ -1,7 +1,7 @@
 Package: lassie
 Title: Tools to select sites and sequences that represent variation in a
     longitudinally sampled protein alignment
-Version: 1.1
+Version: 1.2
 Authors@R: person("Peter", "Hraber", email="peterhraber@gmail.com", role=c("aut", "cre", "cph"))
 Description: LASSIE is an acronym for "longitudinal antigenic sites and
     sequences from intrahost evolution" or "longitudinal antigenic swarm selection
@@ -26,6 +26,7 @@ Imports:
 Suggests:
     knitr,
     devtools,
-    binom
+    binom,
+    testthat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
