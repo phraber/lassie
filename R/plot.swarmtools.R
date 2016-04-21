@@ -54,6 +54,10 @@ plot.swarmtools <- function(x, ...) {
     if (!is.null(dots$ps))
 	ps = dots$ps
 
+    col=1
+    if (!is.null(dots$col))
+	col = dots$col
+
     ylim=rev(c(-0.03, 1.01))
     if (!is.null(dots$ylim))
 	ylim=dots$ylim
@@ -76,6 +80,7 @@ plot.swarmtools <- function(x, ...) {
 	    oma=oma, 
 	    mar=mar,
 	    mgp=mgp,
+	    col=col,
 	    ps=ps,
 	    xlab=xlab, 
 	    ylab=ylab,
