@@ -1,6 +1,4 @@
-#!/opt/local/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python
-
-# -------------------------------- WebLogo --------------------------------
+#!/usr/bin/env python
 
 #  Copyright (c) 2003-2004 The Regents of the University of California.
 #  Copyright (c) 2005 Gavin E. Crooks
@@ -38,39 +36,16 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 #  POSSIBILITY OF SUCH DAMAGE. 
 
-""" WebLogo is a tool for creating sequence logos from biological sequence
-alignments.  It can be run on the command line, as a standalone webserver, as a
-CGI webapp, or as a python library.
+import cgi
+import cgitb; cgitb.enable()
+import weblogolib
 
-For help on the command line interface run
-    ./weblogo.py --help
+if __name__=="__main__" :
 
-To build a simple logo run
-    ./weblogo.py  < cap.fa > logo0.eps
-    
-To run as a standalone webserver at localhost:8080 
-    ./weblogo.py --serve
-
-
-"""
-import weblogolib._cli
-
-# Standard python voodoo for CLI
-if __name__ == "__main__":
-    ## Code Profiling. Uncomment these lines
-    #import hotshot, hotshot.stats
-    #prof = hotshot.Profile("stones.prof")
-    #prof.runcall(main)
-    #prof.close()
-    #stats = hotshot.stats.load("stones.prof")
-    #stats.strip_dirs()
-    #stats.sort_stats('cumulative', 'calls')
-    #stats.print_stats(40)
-    #sys.exit()
-
-    weblogolib._cli.main()
-    
-
+    # Set path to ghostscript here, if can't set it in webserver configuration
+    # import os
+    # os.environ["COREBIOPATH"]="/opt/local/bin/:/home/three/local/bin"
+    weblogolib.cgi(__file__)
 
 
 
