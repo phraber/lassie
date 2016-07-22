@@ -208,7 +208,7 @@ plot.variant.frequency <- function(site.freqs, site.counts, n_sequenced,
     # add env/mAb functional annotation if specified
     if (annotate_env) {
 
-        HXB2.position <- as.numeric(gsub("^[A-Z]", "", gsub("[a-z]$", "",
+        HXB2.position <- as.numeric(gsub("^[A-Za-z]", "", gsub("[a-z]$", "",
                                     unlist(strsplit(site_name, " "))[[1]])))
 
         my.features = NULL

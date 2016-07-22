@@ -28,7 +28,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     }
 
     # x-axis labels
-    site_string <- paste(gsub("^[A-Z-]", "", rownames(selected_sites)), 
+    site_string <- paste(gsub("^[A-Za-z-]", "", rownames(selected_sites)), 
 	collapse=",")
 
     if (is.null(stacks_per_line))
