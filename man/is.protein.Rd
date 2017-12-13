@@ -12,4 +12,3 @@ verify that the input alignment consists of amino acids, using relative frequenc
 this logic is adapted from Will Fischer's pixel routine... but were did he get it?
 }
 \keyword{internal}
-

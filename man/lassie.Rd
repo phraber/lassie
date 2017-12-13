@@ -47,9 +47,9 @@ glycoprotein, to characterize affinity maturation which leads to a
 broadly neutralizing antibody response. To review the tutorial, run
 \code{vignette(package="lassie")}
 }
+
 \seealso{
 \code{\link{swarmtools}}
 
 \code{\link{swarmset}}
 }
-

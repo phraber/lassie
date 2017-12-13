@@ -14,4 +14,3 @@ vgrepl(patterns, x)
 \description{
 Returns Boolean vector of length equal to the input vector that indicates which patterns match the string.
 }
-

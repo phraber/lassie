@@ -20,4 +20,3 @@ Update parser function, which extracts timepoint labels from sequence names.
 \seealso{
 \code{\link{create.timepoint.parser}}
 }
-

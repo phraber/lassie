@@ -19,4 +19,3 @@ swarmtools object with list of sites in selected_sites if possible
 \description{
 Define the threshold value, above which sites are considered selected
 }
-

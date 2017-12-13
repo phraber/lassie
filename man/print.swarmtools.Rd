@@ -14,4 +14,3 @@
 \description{
 Print a table of the selected sites.
 }
-

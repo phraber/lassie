@@ -8,16 +8,16 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     y_label=NULL,
     show_sample_size=F,
 #    sequence_multiplicity=NULL,
-    logo_format="pdf") {
+    logo_format="pdf", 
+    color_option = color_option) {
 
     my_region <- ''
 
     if (!logo_format %in% c('png', 'eps', 'pdf', 'svg', 'jpeg'))
 	stop('ERROR in make.logoplot(): Invalid logo_format value')
 
-
     my.weblogo <- NULL
-    my.weblogo = try(system.file("python/weblogo-3.4-modified", "weblogo", package="lassie", mustWork=T))
+    my.weblogo = try(system.file("python/weblogo-3.4", "weblogo", package="lassie", mustWork=T))
 
     if (is.null(my.weblogo))
 	my.weblogo = Sys.which("weblogo")
@@ -71,6 +71,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
     if (hide_xlabels) {
         result = try(system2(my.weblogo, args=c(
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
+	    " --scale-width NO",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
 	    " --composition 'none'",
@@ -81,13 +82,13 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
 	    " --xlabel ''", 
-	    " --annotate '", site_string, "'",
-	    " -c charge"), stdin = fasta_file, 
-		stdout = out_file))
+	    " --annotate '", site_string, "'", color_option), 
+	    stdin = fasta_file, stdout = out_file))
     } else {
 
         result = try(system2(my.weblogo, args=c(
 	    " --alphabet 'ACDEFGHIKLMNOPQRSTUVWYBJZX*-#.'",
+	    " --scale-width NO",
 	    " --stack-width ", stack_width,
 	    " --aspect-ratio ", aspect_ratio,
 	    " --composition 'none'",
@@ -98,10 +99,8 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	    " --stacks-per-line ", stacks_per_line,
 	    ylab_string,
 	    " --xlabel ''",
-	    " --annotate '", site_string, "'",
-	    " -c charge"), 
-	    stdin = fasta_file, 
-	    stdout=out_file))
+	    " --annotate '", site_string, "'", color_option), 
+	    stdin = fasta_file, stdout=out_file))
 
 #	    " --xlabel '", paste(my_region, "site'"),
 # TO DO: Pass xlabel and ylabel values

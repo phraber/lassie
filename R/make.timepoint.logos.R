@@ -1,4 +1,10 @@
 #' Render a logo plot of concatamer forms of clones in working_swarm
+#' If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
+#' red:
+#' 2 D
+#' magenta:
+#' blue:
+#' 2 NYO
 #'
 #' @param x A swarmset object populated with working_swarm.
 #' @param sort_stacks If true, reorder sites from left to right.
@@ -10,6 +16,8 @@
 #' @param aspect_ratio Adjusts aspect ratio (width to height) of image.
 #' @param show_sample_size If true, show number of sequences in the fineprint field.
 #' @param logo_format Specifies the output image format (default is 'pdf' but can also be 'png', 'svg', or 'jpeg').
+#' @param colors_file Use this option to specify different color options per site, manually.  File format is as defined by ANALYZEALIGNS (see Details).  Site numbers refer to (alignment slice, HXB2, alignment... TBD).
+#' @param color_scheme Defines how to color the amino acids in each site.  Default is 'charge' but could also be 'monochrome', 'classic', 'hydrophobicity', or 'chemistry').  Ignored if a valid file is given for the 'colors_file' option.
 #'
 #' @return A vector of names of the logo plot files generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file (or these files) during run time or else lose them when the R session ends.
 #'
@@ -26,8 +34,7 @@
 #' @export
 make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
     name_prefix="logos", stratify=T, dotify=T, stack_width=18, aspect_ratio=3,
-    show_sample_size=F,
-    logo_format="pdf") {
+    show_sample_size=F, logo_format="pdf", colors_file=NULL, color_scheme='charge') {
 
     if (class(x) != "swarmset")
 	stop("ERROR in make.timepoint.logos(): Invalid swarmset object")
@@ -52,7 +59,24 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
         x$working_swarm$dotseq_concatamer <- sapply(1:nrow(x$working_swarm$dot_concatamer), 
 	    function(i) seqinr::c2s(x$working_swarm$dot_concatamer[i,]) )
         names(x$working_swarm$dotseq_concatamer) <- rownames(x$working_swarm$dot_concatamer)
+
+        new.site.order <- order(x$selected_sites$aln)
+
+        ### NB: if colors_file is provided, need to reorder sites 
+#	if (!is.null(colors_file) & file.exists(colors_file))
+#            if (any(site.order != new.site.order))
+#		warning("Site order in the alignment slice has changed.  Because you are specifying colors by site, please confirm the ordering is correct.")
     }
+
+    if (!is.null(colors_file) & file.exists(colors_file))
+        colors_file = rewrite.custom.colors(x, colors_file)
+
+    # provide a safe fall-back option
+    if (is.null(color_scheme) | !color_scheme %in% c('monochrome', 'charge', 'classic', 'hydrophobicity', 'chemistry'))
+	color_scheme = 'monochrome'
+
+    color_option = ifelse(!is.null(colors_file) & file.exists(colors_file), 
+	paste(" -g", colors_file), paste(" -c", color_scheme))
 
     if (stratify) {
 
@@ -82,7 +106,8 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
 		hide_xlabels=hide_xlabels, 
 		y_label=timepoint,
 		show_sample_size=show_sample_size,
-		logo_format=logo_format)
+		logo_format=logo_format, 
+		color_option=color_option)
 	}
 
 	return ( outfiles )
@@ -104,7 +129,8 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
 	    stack_width=stack_width,
 	    stacks_per_line=stacks_per_line,
 	    aspect_ratio=aspect_ratio,
-	    logo_format=logo_format) )
+	    logo_format=logo_format,
+	    color_option=color_option) )
     }
 }
 

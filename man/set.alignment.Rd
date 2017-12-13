@@ -17,4 +17,3 @@ set.alignment(S, a, f)
 Reading the alignment file is done by prep.aln for control of excise.refseq status.
 }
 \keyword{internal}
-

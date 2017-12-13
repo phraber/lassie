@@ -28,7 +28,10 @@ prep.aln <- function(S) {
 	else
             S <- set.refseq(S)
     }
-
+    
+    if (S$exclude_vloops)
+        S <- exclude.vloop.sites(S)
+    
 #    if (!is.null(S$refseq_name) & is.null(S$refseq_row))
 #        S <- set.refseq(S)
 

@@ -27,4 +27,3 @@ lassie::pngs2o(letters)
 lassie::pngs2o("no png sites here")
 
 }
-

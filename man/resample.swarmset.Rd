@@ -17,7 +17,7 @@ Randomly sample as many sequences as are in the given working swarmset, using th
 \seealso{
 \code{\link{swarmset}}
 
-Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{export.swarmset}},
   \code{\link{make.timepoint.logos}},
   \code{\link{plot.swarmset}},
@@ -25,4 +25,3 @@ Other swarmset.methods: \code{\link{export.fasta.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
-

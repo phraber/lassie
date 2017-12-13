@@ -8,7 +8,7 @@ swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
   tf_index = 1, tf_name = NULL, timepoints_parser = NULL,
   refseq_lut_file = NULL, refseq_lut = NULL, refseq_name = "HXB2",
   pngs2o = T, tf_loss_cutoff = NULL, frequency_when_up = 10,
-  included_sites = NULL, excluded_sites = NULL)
+  exclude_vloops = F, included_sites = NULL, excluded_sites = NULL)
 }
 \arguments{
 \item{aas_aln}{Alignment matrix.}
@@ -31,13 +31,15 @@ swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
 
 \item{pngs2o}{Switch to mark asparagines (N) in PNG motifs as O.}
 
-\item{tf_loss_cutoff}{Threshold value (or vector of values) for including a site}
+\item{tf_loss_cutoff}{Threshold value (or vector of values) for including a site.}
 
 \item{frequency_when_up}{Sites are sorted by when they first reach this value.}
 
-\item{included_sites}{List of included sites}
+\item{exclude_vloops}{Automagically add hypervariable loop sites to list of excluded sites.}
 
-\item{excluded_sites}{List of excluded sites}
+\item{included_sites}{List of included sites.}
+
+\item{excluded_sites}{List of excluded sites.}
 }
 \value{
 swarmtools object
@@ -66,4 +68,3 @@ lassie::set.tf.loss.cutoff().
   B <- lassie::swarmset(A)
 }
 }
-

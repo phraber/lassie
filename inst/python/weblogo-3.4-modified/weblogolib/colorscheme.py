@@ -29,8 +29,8 @@ Classes:
     ColorScheme -- A color scheme
     ColorGroup  
     
-    
 Generic
+    charge
     monochrome
 
 Nucleotides
@@ -40,7 +40,6 @@ Nucleotides
 Amino Acid
     hydrophobicity
     chemistry
-    charge
     taylor
 
 Status : Beta - Needs documentation.
@@ -102,7 +101,11 @@ class ColorGroup(object) :
 
 
          
-monochrome = ColorScheme([]) # This list intentionally left blank
+monochrome = ColorScheme([
+    ColorGroup( "-*#",     "grey",   "unknown"), # pth
+    ColorGroup( ".",     "white",   "transmitted"), # pth
+    ColorGroup( "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "black",  "hydrophobic") ],
+    alphabet = seq.generic_alphabet)
                
 # From makelogo
 nucleotide = ColorScheme([

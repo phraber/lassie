@@ -10,4 +10,3 @@ set.tf(S)
 Accessor method to update tf-derived variables (tf_loss, is_tf, peak_tf_loss) when set.
 }
 \keyword{internal}
-

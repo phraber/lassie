@@ -21,4 +21,3 @@ Generate a closure function to parse timepoint labels from sequence names.
 tp <- create.timepoint.parser(field.sep=".", field.num=1)
 tp <- create.timepoint.parser(field.sep="_", field.num=2)
 }
-

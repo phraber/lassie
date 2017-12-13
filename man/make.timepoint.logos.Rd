@@ -2,11 +2,18 @@
 % Please edit documentation in R/make.timepoint.logos.R
 \name{make.timepoint.logos}
 \alias{make.timepoint.logos}
-\title{Render a logo plot of concatamer forms of clones in working_swarm}
+\title{Render a logo plot of concatamer forms of clones in working_swarm
+If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
+red:
+2 D
+magenta:
+blue:
+2 NYO}
 \usage{
 make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
   name_prefix = "logos", stratify = T, dotify = T, stack_width = 18,
-  aspect_ratio = 3, show_sample_size = F, logo_format = "pdf")
+  aspect_ratio = 3, show_sample_size = F, logo_format = "pdf",
+  colors_file = NULL, color_scheme = "charge")
 }
 \arguments{
 \item{x}{A swarmset object populated with working_swarm.}
@@ -28,12 +35,22 @@ make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
 \item{show_sample_size}{If true, show number of sequences in the fineprint field.}
 
 \item{logo_format}{Specifies the output image format (default is 'pdf' but can also be 'png', 'svg', or 'jpeg').}
+
+\item{colors_file}{Use this option to specify different color options per site, manually.  File format is as defined by ANALYZEALIGNS (see Details).  Site numbers refer to (alignment slice, HXB2, alignment... TBD).}
+
+\item{color_scheme}{Defines how to color the amino acids in each site.  Default is 'charge' but could also be 'monochrome', 'classic', 'hydrophobicity', or 'chemistry').  Ignored if a valid file is given for the 'colors_file' option.}
 }
 \value{
 A vector of names of the logo plot files generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file (or these files) during run time or else lose them when the R session ends.
 }
 \description{
 Render a logo plot of concatamer forms of clones in working_swarm
+If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
+red:
+2 D
+magenta:
+blue:
+2 NYO
 }
 \examples{
 \dontrun{
@@ -46,7 +63,7 @@ system(paste(paste("open", logo.files), collapse=';')
 
 }
 \seealso{
-Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{export.swarmset}},
   \code{\link{plot.swarmset}},
   \code{\link{print.swarmset}},
@@ -54,4 +71,3 @@ Other swarmset.methods: \code{\link{export.fasta.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
-

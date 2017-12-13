@@ -16,7 +16,7 @@
 List names of sequences in working_swarm of swarmset.
 }
 \seealso{
-Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{export.swarmset}},
   \code{\link{make.timepoint.logos}},
   \code{\link{plot.swarmset}},
@@ -24,4 +24,3 @@ Other swarmset.methods: \code{\link{export.fasta.swarmset}},
   \code{\link{resample.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
-

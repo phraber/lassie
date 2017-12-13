@@ -17,7 +17,7 @@ Output full-length sequence text for all selected sequences in swarmset.
 \seealso{
 \code{\link{swarmset}}
 
-Other swarmset.methods: \code{\link{export.fasta.swarmset}},
+Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{make.timepoint.logos}},
   \code{\link{plot.swarmset}},
   \code{\link{print.swarmset}},
@@ -25,4 +25,3 @@ Other swarmset.methods: \code{\link{export.fasta.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
-

@@ -25,10 +25,11 @@
 #' @param refseq_lut Reference sequence lookup table.  Optional, this could help to apply reference sequence numbering from a separate alignment that does not contain the reference sequence.
 #' @param refseq_name Reference sequence name, used for numbering, e.g. HXB2.
 #' @param pngs2o Switch to mark asparagines (N) in PNG motifs as O.
-#' @param tf_loss_cutoff Threshold value (or vector of values) for including a site
+#' @param tf_loss_cutoff Threshold value (or vector of values) for including a site.
 #' @param frequency_when_up Sites are sorted by when they first reach this value.
-#' @param included_sites List of included sites
-#' @param excluded_sites List of excluded sites
+#' @param included_sites List of included sites.
+#' @param excluded_sites List of excluded sites.
+#' @param exclude_vloops Automagically add hypervariable loop sites to list of excluded sites.
 #'
 #' @return swarmtools object
 #'
@@ -53,6 +54,7 @@ swarmtools <- function(
     pngs2o=T,
     tf_loss_cutoff=NULL, # include sites with tf_loss at or above (>=) cutoff
     frequency_when_up=10,
+    exclude_vloops=F,
     included_sites=NULL,
     excluded_sites=NULL) {
 
@@ -78,7 +80,8 @@ swarmtools <- function(
 	frequency_when_up=frequency_when_up,
 	selected_sites=NULL,
         included_sites=NULL,
-        excluded_sites=NULL
+        excluded_sites=NULL,
+        exclude_vloops=exclude_vloops
     )
 
     class(retval) <- "swarmtools"
@@ -100,10 +103,10 @@ swarmtools <- function(
     if (!is.null(aas_file) | !is.null(aas_aln))
 	retval <- set.alignment(retval, aas_aln, aas_file)
 
-# prep.aln is called by set.alignment#.file
-# set.refseq is called by prep.aln
-# excise.refseq is called by set.refseq
-# set.tf is called by prep.aln
+# set.alignment calls prep.aln
+# prep.aln calls set.refseq
+# set.refseq calls excise.refseq
+# prep.aln calls set.tf
 
     if (!is.null(tf_loss_cutoff))
 	retval <- set.tf.loss.cutoff(retval, tf_loss_cutoff, frequency_when_up)

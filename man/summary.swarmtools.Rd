@@ -17,4 +17,3 @@ A data frame of selected sites, with one row per ?
 \description{
 Summarize selected sites.
 }
-

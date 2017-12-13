@@ -21,4 +21,3 @@ swarmtools object with defined aas_aln, refseq_lut, and tf_loss if possible
 \description{
 Reading the alignment file is done by prep.aln for control of excise.refseq status.
 }
-

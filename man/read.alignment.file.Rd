@@ -23,4 +23,3 @@ aln <- read.alignment.file(system.file("extdata", "CH505-gp160.fasta",
                                         package="lassie"))
 }
 }
-
