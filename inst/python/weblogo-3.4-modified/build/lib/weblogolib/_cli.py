@@ -611,6 +611,13 @@ def _build_option_parser() :
         default= defaults.default_color,
         help="Symbol color if not otherwise specified.")
 
+    color_grp.add_option( "-g", "--custom-color-group-file",
+        dest="color_group_file",
+        action="store",
+        type="file_in",
+        metavar="FILENAME",
+        default=None,
+        help="File specifying custom color groups.")
 
     # ========================== Advanced options =========================   
                 

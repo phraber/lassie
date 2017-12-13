@@ -17,7 +17,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 	stop('ERROR in make.logoplot(): Invalid logo_format value')
 
     my.weblogo <- NULL
-    my.weblogo = try(system.file("python/weblogo-3.4", "weblogo", package="lassie", mustWork=T))
+    my.weblogo = try(system.file("python/weblogo-3.4-modified", "weblogo", package="lassie", mustWork=T))
 
     if (is.null(my.weblogo))
 	my.weblogo = Sys.which("weblogo")

@@ -1,5 +1,5 @@
 #' Render a logo plot of concatamer forms of clones in working_swarm
-#' If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
+#' If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental - now refseq sites):
 #' red:
 #' 2 D
 #' magenta:
