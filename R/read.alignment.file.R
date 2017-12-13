@@ -19,10 +19,11 @@ read.alignment.file <- function(aas_file=NULL, alignment_format="fasta") {
             aas_file, "' does not exist"))
 
     a = NULL
-    try(a <- seqinr::read.alignment(aas_file, alignment_format, 
-        forceToLower=F))
+    try(a <- seqinr::read.alignment(aas_file, alignment_format, forceToLower=F))
 
     if (!is.null(a)) {
+
+        a$seq <- sapply(1:length(a$seq), function(i) toupper(a$seq)[i])
 
         if (length(table(nchar(a$seq))) > 1) {
 
