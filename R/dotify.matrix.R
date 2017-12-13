@@ -2,7 +2,15 @@
 dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 
     ## compare each sequence to tf (T, F, NA)
-    if ( length(tfseq_vector) != ncol(aln_mat) )
+    if (is.null(aln_mat))
+        stop("ERROR in dotify.matrix(): aln_mat is null.")
+    if (ncol(aln_mat) == 0)
+        stop("ERROR in dotify.matrix(): aln_mat has 0 columns.")
+    
+    if (is.null(tfseq_vector))
+	stop("ERROR in dotify.matrix(): tfseq_vector is null.")
+
+    if (length(tfseq_vector) != ncol(aln_mat) )
 	stop("ERROR in dotify.matrix(): TF sequence length does not equal the number of columns in alignment_matrix.  To fix this please ensure the TF sequence is the same width as the alignment you provided.")
 
     if (as_logical) {
@@ -11,11 +19,10 @@ dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 
 	for (i in 1:ncol(aln_mat)) {
 
-            out_matrix[which(aln_mat[ ,i] != tfseq_vector[i]), i] <- F
-            out_matrix[which(aln_mat[ ,i] == tfseq_vector[i]), i] <- T
-	    out_matrix[which(aln_mat[ ,i] %in% c("X", "Z", "*", "#") &&
- # CONSTANTS - consider using a named vector for non-aa symbols
-                    aln_mat[ ,i] != tfseq_vector[i]), i] <- NA
+            try(out_matrix[which(aln_mat[ ,i] != tfseq_vector[i]), i] <- F)
+            try(out_matrix[which(aln_mat[ ,i] == tfseq_vector[i]), i] <- T)
+	    try(out_matrix[which(aln_mat[ ,i] %in% c("X", "Z", "*", "#") &
+                    aln_mat[ ,i] != tfseq_vector[i]), i] <- NA)
 	}
 
 	rownames(out_matrix) <- rownames(aln_mat)
@@ -31,7 +38,8 @@ dotify.matrix <- function(aln_mat, tfseq_vector, as_logical=TRUE) {
 	out_matrix = aln_mat
 
 	for (i in 1:ncol(aln_mat))
-            out_matrix[which(aln_mat[ ,i] == tfseq_vector[i]), i] = "."
+	    if (any(aln_mat[, i] == tfseq_vector[i]))
+                out_matrix[which(aln_mat[ , i] == tfseq_vector[i]), i] = "."
     }    
 
     out_matrix
