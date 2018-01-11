@@ -14,9 +14,17 @@ rewrite.custom.colors <- function(x, old_file) {
     if (!is.null(colors_input))
        colors_in <- colors_input$V1
 
+# lacking in input file syntax, $V1 is the entire expected entry per row
+
+# suppress listing sites not listed among selected sites, because to do so can clash with valid renumbered site colors
+    selected_rows = rep(F, length(colors_in))
+
     for (i in 1:length(colors_in)) {
 
-        if (grepl("^[0-9]+ [A-Za-z]+$", colors_in[i])) {
+	if (grepl(":", colors_in[i])) {
+	    # row should be a color name
+	    selected_rows[i] = T
+        } else if (grepl("^[0-9]+ [A-Za-z]+$", colors_in[i])) {
             this_line = unlist(strsplit(colors_in[i], " "))
             if (length(this_line) >= 2) {
                 old_site = as.numeric(this_line[1])
@@ -27,15 +35,18 @@ rewrite.custom.colors <- function(x, old_file) {
                     new_site = min(sort(unique(which(x$selected_sites$l == old_site &
                                                      x$selected_sites$r == old_site))))
                     colors_in[i] = paste(new_site, paste0(this_line[2:length(this_line)]))
+		    selected_rows[i] = T
                 } else if (any(x$selected_sites$l == old_site | x$selected_sites$r == old_site)) {
                     new_site = min(sort(unique(which(x$selected_sites$l == old_site |
 	                                                 x$selected_sites$r == old_site))))
                     colors_in[i] = paste(new_site, paste0(this_line[2:length(this_line)]))
+		    selected_rows[i] = T
                 }
             }
         }
     }
-    try(write.table(colors_in, file=new_file, quote=F, sep="", col.names=F, row.names=F))
+    colors_out = colors_in[which(selected_rows)]
+    try(write.table(colors_out, file=new_file, quote=F, sep="", col.names=F, row.names=F))
     return (new_file)
 }
 
