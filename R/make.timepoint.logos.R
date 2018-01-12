@@ -68,15 +68,19 @@ make.timepoint.logos <- function(x, sort_stacks=F, stacks_per_line=NULL,
 #		warning("Site order in the alignment slice has changed.  Because you are specifying colors by site, please confirm the ordering is correct.")
     }
 
-    if (!is.null(colors_file) & file.exists(colors_file))
-        colors_file = rewrite.custom.colors(x, colors_file)
+    if (!is.null(colors_file))
+	if (file.exists(colors_file))
+            colors_file = rewrite.custom.colors(x, colors_file)
 
     # provide a safe fall-back option
     if (is.null(color_scheme) | !color_scheme %in% c('monochrome', 'charge', 'classic', 'hydrophobicity', 'chemistry'))
 	color_scheme = 'monochrome'
 
-    color_option = ifelse(!is.null(colors_file) & file.exists(colors_file), 
-	paste(" -g", colors_file), paste(" -c", color_scheme))
+    color_option = paste(" -c", color_scheme)
+
+    if (!is.null(colors_file))
+	if (file.exists(colors_file)) 
+	    color_option = paste(" -g", colors_file)
 
     if (stratify) {
 
