@@ -2,13 +2,7 @@
 % Please edit documentation in R/make.timepoint.logos.R
 \name{make.timepoint.logos}
 \alias{make.timepoint.logos}
-\title{Render a logo plot of concatamer forms of clones in working_swarm
-If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
-red:
-2 D
-magenta:
-blue:
-2 NYO}
+\title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
 make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
   name_prefix = "logos", stratify = T, dotify = T, stack_width = 18,
@@ -44,8 +38,7 @@ make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
 A vector of names of the logo plot files generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file (or these files) during run time or else lose them when the R session ends.
 }
 \description{
-Render a logo plot of concatamer forms of clones in working_swarm
-If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental):
+If you use the 'colors_file' option, here is an example input file (note that numbers refer to alignment slice - experimental - now refseq sites):
 red:
 2 D
 magenta:

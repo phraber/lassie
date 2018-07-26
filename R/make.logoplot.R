@@ -13,7 +13,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 
     my_region <- ''
 
-    if (!logo_format %in% c('png', 'eps', 'pdf', 'svg', 'jpeg'))
+    if (!logo_format %in% c('png', 'png_print', 'eps', 'pdf', 'svg', 'jpeg'))
 	stop('ERROR in make.logoplot(): Invalid logo_format value')
 
     my.weblogo <- NULL
