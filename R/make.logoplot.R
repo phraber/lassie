@@ -45,8 +45,9 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 #	nrow(selected_sites), "sites-", 
 #	length(which(working_swarm$is_included)), "clones")
 
-      out_file = tempfile(pattern=prefix, 
-	  fileext=paste0('.', logo_format))
+    file_suffix = gsub("_print$", "", logo_format)
+    out_file = tempfile(pattern=prefix, 
+	  fileext=paste0('.', file_suffix))
 
     fasta_file = tempfile(pattern=prefix, fileext='.fasta')
 
