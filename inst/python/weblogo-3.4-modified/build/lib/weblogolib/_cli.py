@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7
+#!/usr/bin/env python
 
 # -------------------------------- WebLogo --------------------------------
 
@@ -44,9 +44,9 @@ from __future__ import absolute_import, print_function
 
 import os
 import sys
+import re    # HY 2015 FEB
 from optparse import OptionGroup
 from string import Template
-
 from corebio import seq_io
 from corebio.seq import Seq, SeqList, nucleic_alphabet
 from corebio.utils import *
@@ -257,11 +257,48 @@ def _build_logoformat( logodata, opts) :
                 raise ValueError(
                      "error: option --color: invalid value: '%s'" % color )          
                  
+        ##HY April 17
+        #color_scheme.groups.append(ColorGroup('.', 'white', ''))	# removed symbols
+        #color_scheme.groups.append(ColorGroup('-', 'grey', ''))		# grey gaps
+
         args["color_scheme"] = color_scheme
  
  
     if opts.annotate:
         args["annotate"] = opts.annotate.split(',')
+
+    #HY 2015 FEB
+    if opts.color_group_file:
+        color_scheme = ColorScheme()
+        color_specified = {}    # key: seq position + base, value: color number.  eg. { '5A':'1', '6C':'1', '10G':'2'}
+        ccode=-1;  # to make ccode start 0
+        for line in opts.color_group_file :    
+            if line.isspace() : continue
+            l = line.lstrip().rstrip()
+            if l[-1] ==':' :   
+                try :
+                    ccode += 1
+                    color_scheme.groups.append(ColorGroup(str(ccode), l[:-1], ''))
+                except ValueError : 
+                    raise ValueError(
+                         "error: option custom color group: invalid value: '%s'" % l[:-1] )   
+            else :
+                ptn = re.compile('\d+\s+[ACDEFGHIKLMNOPQRSTUVWYBJZX\*\-\#\.]+', re.IGNORECASE)
+                if (not ptn.match(l)): continue
+                s=l.split()
+                for x in s[1]:
+                    color_specified[s[0]+x]=str(ccode)
+        #HY 25, Feb
+        color_scheme.groups.append(ColorGroup('.', 'white', ''))	# removed symbols
+        color_scheme.groups.append(ColorGroup('-', 'grey', ''))		# grey gaps
+ 
+        args["color_scheme"] = color_scheme
+        args["color_specified"] = color_specified
+    #HY 2015 FEB end
+
+
+
+
 
 
     logooptions = LogoOptions()
@@ -611,6 +648,7 @@ def _build_option_parser() :
         default= defaults.default_color,
         help="Symbol color if not otherwise specified.")
 
+    #HY 2015 Feb.
     color_grp.add_option( "-g", "--custom-color-group-file",
         dest="color_group_file",
         action="store",
@@ -618,6 +656,7 @@ def _build_option_parser() :
         metavar="FILENAME",
         default=None,
         help="File specifying custom color groups.")
+    #HY 2015 Feb. end
 
     # ========================== Advanced options =========================   
                 
