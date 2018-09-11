@@ -13,7 +13,7 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 
     my_region <- ''
 
-    if (!logo_format %in% c('png', 'eps', 'pdf', 'svg', 'jpeg'))
+    if (!logo_format %in% c('png', 'png_print', 'eps', 'pdf', 'svg', 'jpeg'))
 	stop('ERROR in make.logoplot(): Invalid logo_format value')
 
     my.weblogo <- NULL
@@ -45,8 +45,9 @@ make.logoplot <- function(selected_sites, working_swarm, included,
 #	nrow(selected_sites), "sites-", 
 #	length(which(working_swarm$is_included)), "clones")
 
-      out_file = tempfile(pattern=prefix, 
-	  fileext=paste0('.', logo_format))
+    file_suffix = gsub("_print$", "", logo_format)
+    out_file = tempfile(pattern=prefix, 
+	  fileext=paste0('.', file_suffix))
 
     fasta_file = tempfile(pattern=prefix, fileext='.fasta')
 

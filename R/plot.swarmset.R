@@ -4,7 +4,7 @@
 #' @param sort_stacks If true, reorder sites from left to right.
 #' @param stacks_per_line If NULL, this is set to the number of selected sites; otherwise, it limits plot width.
 #' @param dotify If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.
-#' @param ... can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').
+#' @param ... can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png_print' (600dpi resolution) but can also be 'png' (96dpi), 'pdf', 'svg', or 'jpeg').
 #'
 #' @return An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else lose it when the R session ends.
 #'
@@ -14,7 +14,7 @@ plot.swarmset <- function(x, sort_stacks=F, stacks_per_line=NULL, dotify=F, ...)
 
     dots <- list(...)
 
-    format = "png"
+    format = "png_print"
     if (!is.null(dots$format))
         format = dots$format
 

@@ -16,7 +16,7 @@
 
 \item{dotify}{If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.}
 
-\item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png' but can also be 'pdf', 'svg', or 'jpeg').}
+\item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png_print' (600dpi resolution) but can also be 'png' (96dpi), 'pdf', 'svg', or 'jpeg').}
 }
 \value{
 An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else lose it when the R session ends.
