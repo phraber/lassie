@@ -17,6 +17,6 @@ compute.tf.area <- function(tf_loss_matrix, invert=F) {
             tf_area[i] = sum((100-tf_loss_matrix[i,]) * deltaT, na.rm=T)
         }
     }
-
+    ### 20180816 to do: normalize against cumulative duration
     tf_area
 }
