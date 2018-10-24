@@ -4,11 +4,12 @@
 \alias{swarmtools}
 \title{Identify sites under putative immune selection.}
 \usage{
-swarmtools(aas_aln = NULL, aas_file = NULL, alignment_format = "fasta",
-  tf_index = 1, tf_name = NULL, timepoints_parser = NULL,
-  refseq_lut_file = NULL, refseq_lut = NULL, refseq_name = "HXB2",
-  pngs2o = T, tf_loss_cutoff = NULL, frequency_when_up = 10,
-  exclude_vloops = F, included_sites = NULL, excluded_sites = NULL)
+swarmtools(aas_aln = NULL, aas_file = NULL,
+  alignment_format = "fasta", tf_index = 1, tf_name = NULL,
+  timepoints_parser = NULL, refseq_lut_file = NULL,
+  refseq_lut = NULL, refseq_name = "HXB2", pngs2o = T,
+  tf_loss_cutoff = NULL, frequency_when_up = 10, exclude_vloops = F,
+  included_sites = NULL, excluded_sites = NULL)
 }
 \arguments{
 \item{aas_aln}{Alignment matrix.}

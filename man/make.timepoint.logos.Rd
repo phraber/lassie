@@ -5,9 +5,9 @@
 \title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
 make.timepoint.logos(x, sort_stacks = F, stacks_per_line = NULL,
-  name_prefix = "logos", stratify = T, dotify = T, stack_width = 18,
-  aspect_ratio = 3, show_sample_size = F, logo_format = "pdf",
-  colors_file = NULL, color_scheme = "charge")
+  name_prefix = "logos", stratify = T, dotify = T,
+  stack_width = 18, aspect_ratio = 3, show_sample_size = F,
+  logo_format = "pdf", colors_file = NULL, color_scheme = "charge")
 }
 \arguments{
 \item{x}{A swarmset object populated with working_swarm.}
@@ -64,3 +64,4 @@ Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
+\concept{swarmset methods}

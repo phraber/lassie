@@ -35,3 +35,4 @@ Other swarmset methods: \code{\link{export.fasta.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
+\concept{swarmset methods}

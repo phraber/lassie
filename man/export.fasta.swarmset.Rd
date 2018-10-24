@@ -25,3 +25,4 @@ Other swarmset methods: \code{\link{export.swarmset}},
   \code{\link{summary.swarmset}}, \code{\link{swarmset}},
   \code{\link{tabulate.swarmset}}
 }
+\concept{swarmset methods}
