@@ -16,4 +16,3 @@
     summary(eg.swarmset)
     print(eg.swarmset)
     plot(eg.swarmset)
-
