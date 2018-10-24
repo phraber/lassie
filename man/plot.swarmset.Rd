@@ -5,7 +5,7 @@
 \title{Render a logo plot of concatamer forms of clones in working_swarm}
 \usage{
 \method{plot}{swarmset}(x, sort_stacks = F, stacks_per_line = NULL,
-  dotify = F, ...)
+  dotify = F, color_scheme = "charge", ...)
 }
 \arguments{
 \item{x}{A swarmset object populated with working_swarm.}
@@ -15,6 +15,8 @@
 \item{stacks_per_line}{If NULL, this is set to the number of selected sites; otherwise, it limits plot width.}
 
 \item{dotify}{If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.}
+
+\item{color_scheme}{Defines how to color the amino acids in each site.  Default is 'charge' but could also be 'monochrome', 'classic', 'hydrophobicity', or 'chemistry').}
 
 \item{...}{can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png_print' (600dpi resolution) but can also be 'png' (96dpi), 'pdf', 'svg', or 'jpeg').}
 }
