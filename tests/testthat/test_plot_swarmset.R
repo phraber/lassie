@@ -9,6 +9,6 @@ test_that("plot.swarmset creates image file output", {
             aas_file=system.file("extdata",
                                  "CH505-gp160.fasta",
                                  package="lassie")))
-    file_path <- lassie::plot.swarmset(ss)
+    file_path <- lassie:::plot.swarmset(ss)
     expect_true(file.exists(file_path))
 })
