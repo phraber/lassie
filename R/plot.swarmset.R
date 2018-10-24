@@ -4,13 +4,15 @@
 #' @param sort_stacks If true, reorder sites from left to right.
 #' @param stacks_per_line If NULL, this is set to the number of selected sites; otherwise, it limits plot width.
 #' @param dotify If true, one amino-acid state per site will be left blank to indicate frequency of the TF form.
+#' @param color_scheme Defines how to color the amino acids in each site.  Default is 'charge' but could also be 'monochrome', 'classic', 'hydrophobicity', or 'chemistry').
 #' @param ... can include "aspect_ratio" to adjust Aspect ratio (width to height) of image and "format" to specify the output image format (default is 'png_print' (600dpi resolution) but can also be 'png' (96dpi), 'pdf', 'svg', or 'jpeg').
 #'
 #' @return An explicit path to the file generated, located in a directory removed at the end of the R session.  NB: You will need to copy this file during run time or else lose it when the R session ends.
 #'
 #' @family swarmset methods
 #' @export
-plot.swarmset <- function(x, sort_stacks=F, stacks_per_line=NULL, dotify=F, ...) {
+plot.swarmset <- function(x, sort_stacks=F, stacks_per_line=NULL, dotify=F,
+                          color_scheme='charge', ...) {
 
     dots <- list(...)
 
@@ -45,13 +47,20 @@ plot.swarmset <- function(x, sort_stacks=F, stacks_per_line=NULL, dotify=F, ...)
         names(x$working_swarm$dotseq_concatamer) <- rownames(x$working_swarm$dot_concatamer)
     }
 
+    # provide a safe fall-back option
+    if (is.null(color_scheme) | !color_scheme %in% c('monochrome', 'charge', 'classic', 'hydrophobicity', 'chemistry'))
+        color_scheme = 'monochrome'
+
+    color_option = paste(" -c", color_scheme)
+
     outfile <- make.logoplot(x$selected_sites,
 	    x$working_swarm,
 	    which(x$working_swarm$is_included),
 	    paste0("swarmset-n", length(which(x$working_swarm$is_included))),
 	    stacks_per_line = stacks_per_line,
 	    dotify=dotify, aspect_ratio=aspect_ratio,
-	    logo_format=format)
+	    logo_format=format,
+	    color_option=color_option)
 
 #    if (format=="png") {
 #        require(png, quietly=T)
