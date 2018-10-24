@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# The zip file provided by https://api.github.com/repos/... (and used by
+# devtools::install_github) doesn't provide executable files, even if the
+# originals were.  This should ensure that weblogo is executable.
+chmod +x inst/python/weblogo-3.4-modified/weblogo
