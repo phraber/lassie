@@ -29,7 +29,7 @@ compute.variant.frequency <- function(S, site, site_ns, tps_mult,
                                    colnames(site_counts)[which(site_totals < min_variant_count)]))
 
     row.order <- order(as.numeric(gsub("[A-Z]", "", rownames(site_counts), ignore.case=T)))
-    site_counts = site_counts[row.order, ]
+    site_counts = site_counts[row.order, , drop = FALSE]
 
     site_ns <- site_ns[row.order] 
 
